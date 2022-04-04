@@ -1,0 +1,38 @@
+.jumbotron-background-2 {
+    background-image: url(/gambar/kantor-franchise.png);
+    background-size: cover;
+    height: 1024px;
+    text-align: center;
+}
+/* Akhir Persebaran Perusahaan */
+
+.profile_perusahaan1 img {
+    border-radius: 0px 0px 0px 0px;
+}
+
+.profile_perusahaan1 {
+    margin-top: 60px;
+    text-align: left;
+}
+
+.profile_perusahaan1 p {
+    font-size: 29px;
+}
+
+.text-franchise {
+    text-align: center;
+}
+
+/* Desktop */
+@media (min-width: 1400px) {
+    .jumbotron-background-2 {
+        background-image: url("/gambar/kantor-franchise.png");
+        background-size: cover;
+        height: 1024px;
+        margin-top: -75px;
+        text-align: center;
+    }
+    .text-franchise {
+        text-align: left;
+    }
+}

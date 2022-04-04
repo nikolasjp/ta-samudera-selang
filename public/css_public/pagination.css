@@ -1,0 +1,141 @@
+.card-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+}
+
+.card1 {
+    width: 250px;
+}
+
+.card {
+    position: relative;
+    background: #fff;
+    max-width: 325px;
+    width: 325px;
+    height: auto;
+    margin: 25px;
+    box-shadow: 0 5px 25px rgb(1 1 1 / 20%);
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.card_produk {
+    align-items: center;
+}
+
+.card-image {
+    align-items: center;
+    max-height: 200px;
+}
+
+.card-info h3 {
+    font-size: 1.8em;
+    font-weight: 800;
+    margin-bottom: 5px;
+}
+
+.card-info p {
+    font-size: 1em;
+    margin-bottom: 5px;
+}
+
+.pagination {
+    justify-content: center;
+    text-align: center;
+    user-select: none;
+}
+
+.pagination li {
+    display: inline-block;
+    box-shadow: 0 5px 25px rgb(1 1 1 / 10%);
+}
+
+.pagination li a {
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    font-size: 1.2em;
+    line-height: 25px;
+}
+
+.previous-page,
+.next-page {
+    background: #0ab1ce;
+    width: 80px;
+    border-radius: 45px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.previous-page:hover {
+    transform: translateX(-5px);
+}
+
+.next-page:hover {
+    transform: translateX(5px);
+}
+
+.current-page,
+.dots {
+    background: #ccc;
+    width: 45px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+/* CSS Pagination Produk */
+.card-content1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 30px;
+}
+
+.pagination1 {
+    justify-content: center;
+    text-align: center;
+    user-select: none;
+}
+
+.pagination1 li {
+    display: inline-block;
+
+    box-shadow: 0 5px 25px rgb(1 1 1 / 10%);
+}
+
+.pagination1 li a {
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    font-size: 1.2em;
+    line-height: 25px;
+}
+
+.previous-pagee,
+.next-pagee {
+    background: #0ab1ce;
+    width: 80px;
+    border-radius: 45px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.previous-page1:hover {
+    transform: translateX(-5px);
+}
+
+.next-page1:hover {
+    transform: translateX(5px);
+}
+
+.current-page1,
+.dots1 {
+    background: #ccc;
+    width: 45px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+/* Akhir CSS Pagination Produk */

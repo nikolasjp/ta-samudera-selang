@@ -19,7 +19,6 @@
     <!-- My CSS -->
     <link rel="stylesheet" href="{{ asset('css_public/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css_public/pagination.css') }}">
-    <link rel="stylesheet" href="{{ asset('css_public/footer.css') }}">
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">

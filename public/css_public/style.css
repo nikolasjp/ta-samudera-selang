@@ -1,15 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;500;700&display=swap');
+
+html{
+    scroll-behavior: smooth;
+}
+
+body{
+    font-family: 'Roboto', sans-serif;
+}
+
+h1{
+    font-size: 32px;
+    font-weight: 500;
+}
+
+p{
+    font-size: 16px;
+    font-weight: 300;
+}
+
 /* Navbar */
 
 .nav-link {
     font-family: Roboto;
     text-align: center;
+    font-weight: 400;
 }
+
+.navbar-light .navbar-nav .active>.nav-link, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .show>.nav-link {
+    color: white !important;
+}
+
+.box{
+    z-index: -9999;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 250px;
+    background-color: #101820;
+}
+
+.p-20{
+    padding: 150px 0px 100px 0px;
+}
+
+.text-kantor-pusat{
+    font-weight: bold;
+}
+
 /* Jumbotron */
+.jumbotron{
+    margin-bottom: 0px;
+}
+
 .jumbotron .lead {
     color: #dadada;
     font-size: 30px;
     margin-left: 2px;
-    margin-top: 278px;
+    margin-top: 400px;
     text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
@@ -20,9 +67,44 @@
     text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
-.jumbotron .tombol1 {
-    border-radius: 30px;
-    margin-top: 20px;
+.btn_see_all{
+    width: 180px !important;
+    height: 42px !important;
+    background: #02468f;
+    border-radius: 16px 4px 16px 4px;
+    color: white;
+    padding: 10px;
+}
+
+.btn_see_all:hover{
+    background: rgb(0, 0, 0);
+    color: white;
+}
+
+.btn_see_produk{
+    width: 180px !important;
+    height: 42px !important;
+    background: #02468f;
+    border-radius: 16px 4px 16px 4px;
+    color: white;
+    padding: 10px;
+}
+
+.btn_see_produk:hover{
+    background: white;
+}
+
+.btn_franchise{
+    width: 140px !important;
+    height: 42px !important;
+    background: #02468f;
+    border-radius: 16px 4px 16px 4px;
+    color: white;
+    padding: 10px;
+}
+
+.btn_franchise:hover{
+    background: white;
 }
 
 .jumbotron-background-1 {
@@ -33,10 +115,11 @@
 }
 
 /* Info Perusahaan */
+
 .info-panel {
     margin-top: 30px;
-    box-shadow: 0px 0px 4px 2px rgba(208, 208, 208, 0.25);
     text-align: center;
+    color: white;
 }
 
 .info-panel img {
@@ -48,28 +131,6 @@
     margin-top: 10px;
 }
 
-/* Profile Perusahaan */
-.profile_samudera {
-    margin-bottom: 20px;
-}
-
-.profile_perusahaan {
-    margin-top: 100px;
-    text-align: center;
-}
-
-.profile_perusahaan img {
-    border-radius: 20px;
-}
-
-.profile_perusahaan h3 {
-    margin-top: 10px;
-    font-size: 30px;
-}
-
-.profile_perusahaan p {
-    font-size: 26px;
-}
 /* Persebaran Perusahaan */
 
 .card {
@@ -82,57 +143,422 @@
 }
 /* Akhir Persebaran Perusahaan */
 
+.body-profile{
+    width: 100%;
+    height: max-content;
+    background-color: white;
+    border-radius: 30px 30px 0px 0px;
+    margin-top: -40px; 
+    margin-bottom: 50px;
+    padding: 50px;
+}
+
+.body-perusahaan{
+    width: 100%;
+    height: max-content;
+    background-color: #101820;
+    padding: 50px 0px 80px 0px;
+}
+
+.nav-active {
+    background-color:#101820; 
+    transition: all 0.3s ease-out;
+  }
+
+  .nav-fixed{
+    transition: all 0.3s ease-in;
+  }
+
+  .mt-7{
+    margin-top: 7.5rem!important;
+  }
+
+/* List Produk Dashboard */
+.body-produk{
+    background-color: #02468f;
+    padding: 2px 0px 36px 0px;
+}
+
+.body-produk h1{
+    font-weight: 600;
+    color: white;
+}
+
+.container .xl{
+    padding: 0px 220px 0px 220px !important;
+}
+
+
+.card-produk {
+    margin: 20px;
+    width: 100%;
+    max-width: 250px;
+    min-width: 150px;
+    height: 200px;
+    background-color: #e6e1e1;
+    border-radius: 30px 8px 30px 8px;
+    font-size: 16px;   
+    transition: all 0.3s ease;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    overflow: hidden;
+ }
+
+ .icon {
+    margin: 0 auto;
+    width: 100%;
+    height: 100px;
+    max-width: 100px;
+    background: #ced0d3;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    transition: all 0.8s ease;
+    background-position: 0px;
+    background-size: 200px;
+ }
+
+ .card-produk-text p{
+     margin-top: 12px;
+     font-weight: 500;
+ }
+
+ .card-produk:hover .card-produk-hover{
+    bottom:0;
+  }
+
+ .card-produk-hover{
+    color: white;
+    background-color:  #0069D9;
+    position: absolute;
+    width: 100%;
+    bottom: -100%;
+    left: 0;
+    height: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: 30px 8px 30px 8px;
+    transition: all 0.5s;
+ }
+
+ /* Penyebarang kota */
+ .container-kota{
+    padding: 0px 220px 0px 220px;
+ }
+ 
+.box-kota{
+    background-image: url("/gambar/kota/background-lokasi.png");
+    background-repeat: no-repeat;
+    width: 100%;
+    height: max-content;
+    border-radius: 30px 8px 30px 8px;
+    padding: 30px;
+}
+
+.card-kota{
+    position: relative;
+    display: flex;
+    background-color: white;
+    border-radius: 30px 8px 30px 8px;
+    color: black;
+    width: 100%;
+    max-width: 300px;
+    min-width: 200px;
+    height: 150px;
+    align-items: center;
+    padding: 20px;
+    overflow: hidden;
+    opacity: 90%;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.card-kota:hover .card-produk-hover{
+    bottom: 0;
+}
+
+.card-kota-content img {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.hyper-link::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    pointer-events: auto;
+    content: "";
+}
+
+/* Hose */
+.body-hose{
+    position: relative;
+    background-color: #1C1C1C;
+    width: 100%;
+    height: max-content;
+    padding: 150px 0px 150px 0px;
+}
+
+.text-hose{
+    color: white;
+}
+
+.padding{
+    padding: 50px;
+}
+
+.card_produk_hose{
+    position: relative;
+    padding: 40px;
+    text-align: center;
+    width: 282px;
+    height: 248px;
+    background: rgba(250, 250, 250, 0.92);
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 30px 8px;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    color: black;
+    overflow: hidden;
+}
+
+.card_produk_hose:hover .card-produk-hover{
+    bottom:0;
+  }
+
+.card_produk_hose img{
+    justify-self: center;
+}
+
+/* Konsultasi */
+.box-konsultasi{
+    width: 100%;
+    height: max-content;
+    padding: 50px;
+    background: #02468f;
+    border-radius: 30px 8px 30px 8px;
+    color: white;
+}
+
+.btn-konsultasi{
+    width: 264px !important;
+    height: 49px !important;
+    background: white;
+    border-radius: 16px 4px 16px 4px;
+    color: black;
+    padding: 12px;
+}
+
+.btn-konsultasi:hover{
+    background: #0069D9;
+    color: white;
+}
+
+.profile_samudera{
+    border-radius: 30px 8px 30px 8px;
+}
+
+/* Mitra Sejati */
+.body_mitra{
+    width: 100%;
+    height: max-content;
+    padding: 50px;
+    background: #101820;
+    color: white;
+} 
+
+.text_mitra h5{
+    font-weight: 300;
+}
+
+.btn_mitra{
+    width: 180px !important;
+    height: 42px !important;
+    background: #02468f;
+    border-radius: 16px 4px 16px 4px;
+    color: white;
+    padding: 10px;
+}
+
+.btn_mitra:hover{
+    background: white !important;
+}
+
+/* Responsive HP */
+@media (max-width: 800px) {
+.img-user{
+    width: 0px;
+    height: 0px;
+    visibility: hidden !important;
+}
+
+.box-kota{
+    background-image: url("");
+    background-color: #02468f;
+}
+
+.navbar-light .navbar-toggler-icon {
+    background-image: url("/gambar/navbar.png");
+}
+
+.mobile-center{
+    text-align: center;
+    text-align: -webkit-center;
+    place-content: center;
+}
+
+.row {
+    text-align: center;
+    text-align: -webkit-center;
+    place-content: center;
+}
+
+.btn-konsultasi{
+    margin-top: 20px;
+}
+
+.top-mobile{
+    margin-top: 20px;
+}
+
+.text-hose{
+    text-align: center;
+}
+
+.card_produk_hose{
+width: 240px;
+}
+
+.navbar-light .navbar-nav .nav-link:focus, .navbar-light .navbar-nav .nav-link:hover {
+color: white !important;
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color: white !important;
+}
+.btn_franchise{
+    align-self: center;
+}
+
+.body-produk-hose{
+    background-color: #02468f;
+    width: 100%;
+    height: max-content;
+    text-align: center;
+    padding: 60px;
+    color: white;
+}
+}
+
 /* Desktop */
-@media (min-width: 1400px) {
+@media (min-width: 992px) {
     .navbar-brand,
     .nav-link {
-        text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
-        color: white !important;
+        color: rgb(211, 211, 211) !important;
     }
     .nav-link {
-        text-transform: uppercase;
-        font-family: Roboto;
-        margin-right: 30px;
+        position: relative;
+        padding-bottom: 8px;
+        cursor: pointer;
+        margin-right: 50px;
+    }
+
+    .nav-link::after{
+      position: absolute;
+      bottom: 0;
+      margin-left: auto;
+      margin-right: auto;
+      left: 0;
+      right: 0;
+      content: "";
+      width: 0;
+      height: 3px;
+      background-color: var(--primary);
+      transition: width 0.4s ease-out;
+      border-radius: 30px;
     }
 
     .nav-link:hover::after {
-        content: "";
-        display: block;
-        border-bottom: 3px solid #3366ff;
-        width: 50%;
-        margin: auto;
-        padding-bottom: 5px;
-        margin-bottom: -8px;
+        width: 60%;
     }
 
     .jumbotron-background-1 {
         background-image: url("/storage/gambar/background-image.png");
         background-size: cover;
-        height: 1024px;
+        height: 1110px;
         margin-top: -75px;
         text-align: left;
+        align-items: center;
     }
 
-    .tombol {
-        text-transform: uppercase;
-        border-radius: 30px;
-        width: 150px;
-    }
     /* Profile Perusahaan */
     .profile_perusahaan {
-        margin-top: 100px;
         text-align: left;
-    }
-
-    .profile_perusahaan img {
-        border-radius: 0px 150px 20px 0px;
+        align-items: center !important;
     }
 
     .profile_perusahaan h3 {
+        font-weight: 600;
         font-size: 36px;
     }
 
-    .profile_perusahaan p {
-        font-size: 29px;
+    .img-user{
+        position: absolute;
+        right: 50px;
+        bottom: 0;
     }
+
+    .body-produk-hose{
+        background-image: url("/gambar/produk/background-1.png");
+        width: 100%;
+        height: 752px;
+        text-align: center;
+        padding: 60px;
+        color: white;
+    }
+}
+
+/* Container XL */
+@media (min-width: 576px){
+    .container-xl {
+        max-width: 540px;
+    }
+    }
+
+    @media (min-width: 768px){
+        .container-xl {
+            max-width: 720px;
+        }
+        }
+    
+
+@media (min-width: 992px){
+.container-xl {
+    max-width: 960px;
+}
+}
+
+@media (min-width: 1200px){
+    .container-xl {
+        max-width: 1440px;
+        }
+    }
+
+.container-xl {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
 }

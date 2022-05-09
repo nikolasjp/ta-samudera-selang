@@ -6,10 +6,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- My Font -->
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Viga&display=swap');
-    </style>
+    <!-- Icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="../gambar/Fix/logo.png">
+
+    <!-- Scroll Reveal -->
+    <script src="https://unpkg.com/scrollreveal"></script>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -28,7 +29,7 @@
 
 <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light">
+    <nav class="navbar navbar-expand-lg navbar-light nav-fixed fixed-top">
         <div class="container">
             <a class="navbar-brand" href="/">
                 <img src="{{ asset('gambar/fix/logo.png')}}" width="49" height="49" alt="">
@@ -38,29 +39,29 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav ml-auto">
-                    <a class="nav-item nav-link active" href="/">Home<span class="sr-only">(current)</span></a>
-                    <a class="nav-item btn btn-primary tombol" href="/franchise">Franchise</a>
+                    <a class="nav-item nav-link" href="/tampil">Home<span class="sr-only">(current)</span></a>
+                    <a class="nav-item nav-link" href="/contact">Persebaran Kantor</a>
+                    <a class="nav-item btn btn_franchise active" href="/franchise">Franchise</a>
                 </div>
             </div>
         </div>
     </nav>
     <!-- Akhir Navbar -->
-
     <!-- Jumbotron -->
     <div class="jumbotron jumbotron-fluid jumbotron-background-2">
         <div class="container">
-            <p class="lead">Franchise Samudera Selang Cirebon</p>
-            <h1 class="display-4"><span>Anda ingin buka usaha fabrikasi selang hydrauic ?</span></h1>
-            <a href="" class="btn btn-primary btn-lg tombol1">Join Us</a>
+            <p class="lead tagline">Franchise Samudera Selang Cirebon</p>
+            <h1 class="display-4 tagline-core-left"><span>Anda ingin buka usaha fabrikasi selang hydrauic ?</span></h1>
+            <a href="" class="btn btn_see_produk tagline-core-right">Join Us</a>
         </div>
     </div>
     <!-- Akhir Jumbotron -->
 
     <!-- Info Perusahaan -->
     <div class="container">
-        <h1 class="text-center">Keunggulan Kami</h1>
+        <h1 class="text-center mt-5 tagline-down">Keunggulan Kami</h1>
         <div class="row justify-content-center">
-            <div class="col-lg-8 info-panel">
+            <div class="col-lg-8 info-panel-2 tagline-core-left">
                 <div class="row">
                     <!-- Info 1 -->
                     <div class="col-lg">
@@ -87,11 +88,11 @@
     <!-- Akhir Info Perusahaan -->
     <div class="container">
         <div class="row profile_perusahaan1">
-            <div class="col">
+            <div class="col tagline-core-left-delay">
                 <img src="{{ asset('gambar/franchise-il.jpg')}}" class="img-fluid" alt="profile_image">
             </div>
             <div class="col-lg-6">
-                <p class="text-franchise mt-4">Maju dan berkembang bersama Samudera Selang.
+                <p class="text-franchise mt-4 tagline-core-right-delay">Maju dan berkembang bersama Samudera Selang.
                     Jelas dan pasti qualitasnya dengan dukungan waranty product. Harga setiap product sangat kompetitif dan ditangani para ahli yg profesional di bidangnya.</p>
             </div>
         </div>
@@ -189,6 +190,64 @@
     <!-- Akhir Footer -->
 
     <!-- Optional JavaScript -->
+    <!-- Navbar Scroll -->
+    <script>
+        const navbar = document.querySelector(".nav-fixed");
+        window.onscroll = () => {
+            if (window.scrollY > 0) {
+                navbar.classList.add("nav-active");
+            } else {
+                navbar.classList.remove("nav-active");
+            }
+        };
+    </script>
+
+    <!-- Optional JavaScript -->
+
+    <!-- Scroll Reveal -->
+    <script>
+        ScrollReveal({
+            reset: true,
+            distance: "60px",
+            duration: 800,
+            delay: 4,
+            mobile: false,
+        });
+        ScrollReveal().reveal(".tagline", {
+            delay: 100
+        });
+        ScrollReveal().reveal(".tagline-core-left", {
+            delay: 200,
+            origin: "left",
+        });
+        ScrollReveal().reveal(".tagline-core-left-delay", {
+            delay: 600,
+            origin: "left",
+        });
+        ScrollReveal().reveal(".tagline-core-left-delay-1", {
+            delay: 1000,
+            origin: "left",
+        });
+        ScrollReveal().reveal(".tagline-core-right-delay", {
+            delay: 600,
+            origin: "right",
+        });
+        ScrollReveal().reveal(".tagline-core-right", {
+            delay: 300,
+            origin: "right",
+        });
+        ScrollReveal().reveal(".tagline-down", {
+            delay: 200,
+            origin: "top",
+        });
+        ScrollReveal().reveal(".tagline-down-delay", {
+            delay: 600,
+            origin: "top",
+        });
+        ScrollReveal().reveal(".tagline-delay", {
+            delay: 600,
+        });
+    </script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

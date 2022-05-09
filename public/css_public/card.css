@@ -1,0 +1,101 @@
+.card-background-1 {
+    width: auto;
+    background: url("https://raw.githubusercontent.com/NicholassJP/report-monitoring-pkm-prinsipal/main/images/icon_card_1.png")
+      0 0 no-repeat;
+    background-color: white;
+    background-size: cover;
+    background-position-x: -70px;
+    background-position-y: 50px;
+  }
+  .card-background-2 {
+    width: auto;
+    background: url("https://raw.githubusercontent.com/NicholassJP/report-monitoring-pkm-prinsipal/main/images/icon_card_2.png")
+      0 0 no-repeat;
+    background-size: cover;
+    overflow: hidden;
+    background-position-x: -50px;
+    background-position-y: 50px;
+  }
+  .card-background-3 {
+    width: auto;
+    background: url("https://raw.githubusercontent.com/NicholassJP/report-monitoring-pkm-prinsipal/main/images/icon_card_3.png")
+      0 0 no-repeat;
+    background-size: cover;
+    overflow: hidden;
+    background-position-x: -70px;
+    background-position-y: 60px;
+  }
+  .card-background-4 {
+    width: auto;
+    background: url("https://raw.githubusercontent.com/NicholassJP/report-monitoring-pkm-prinsipal/main/images/icon_card_4.png")
+      0 0 no-repeat;
+    background-size: cover;
+    overflow: hidden;
+    background-position-x: -100px;
+    background-position-y: 60px;
+  }
+
+  .w-200{
+    width: 200px !important;
+}
+
+.w-220{
+    width: 220px !important;
+}
+  
+  .right {
+    float: right;
+  }
+
+  .responsive-over {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  .card-ukuran {
+    height: 200px;
+  }
+
+  .no-button-box{
+    margin: 0px !important;
+  }
+
+  .row .ml-13{
+    margin-right: 0px !important;
+  }
+
+  .m-30{
+    margin-bottom: -30px;
+  }
+
+  .mt-0{
+    margin-top: 0px;
+  }
+
+  @media (max-width: 1440px) {
+    .card-background-1 {
+        background-position-x: -110px;
+      }
+      .card-background-2 {
+        background-position-x: -110px;
+      }
+      .card-background-3 {
+        background-position-x: -100px;
+      }
+      .card-ukuran {
+        height: 160px;
+      }
+  }
+
+  @media (max-width: 480px) {
+    .card-background-1 {
+        background-position-x: -80px;
+      }
+      .card-background-2 {
+        background-position-x: -80px;
+      }
+      .card-background-3 {
+        background-position-x: -80px;
+      }
+  }

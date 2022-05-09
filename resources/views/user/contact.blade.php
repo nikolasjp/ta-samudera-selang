@@ -6,10 +6,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- My Font -->
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Viga&display=swap');
-    </style>
+    <!-- Icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="../gambar/Fix/logo.png">
+
+    <!-- Scroll Reveal -->
+    <script src="https://unpkg.com/scrollreveal"></script>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -28,7 +29,7 @@
 
 <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light">
+    <nav class="navbar navbar-expand-lg navbar-light nav-fixed fixed-top">
         <div class="container">
             <a class="navbar-brand" href="/">
                 <img src="{{ asset('gambar/fix/logo.png')}}" width="49" height="49" alt="">
@@ -38,62 +39,38 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav ml-auto">
-                    <a class="nav-item nav-link active" href="/">Home<span class="sr-only">(current)</span></a>
-                    <a class="nav-item btn btn-primary tombol" href="/franchise">Franchise</a>
+                    <a class="nav-item nav-link" href="/tampil">Home<span class="sr-only">(current)</span></a>
+                    <a class="nav-item nav-link active" href="/contact">Persebaran Kantor</a>
+                    <a class="nav-item btn btn_franchise" href="/franchise">Franchise</a>
                 </div>
             </div>
         </div>
     </nav>
     <!-- Akhir Navbar -->
 
-    <!-- Jumbotron -->
-    <div class="jumbotron jumbotron-fluid jumbotron-background-2">
-        <div class="container">
-            <p class="lead">Franchise Samudera Selang Cirebon</p>
-            <h1 class="display-4"><span>Anda ingin buka usaha fabrikasi selang hydrauic ?</span></h1>
-            <a href="" class="btn btn-primary btn-lg tombol1">Join Us</a>
-        </div>
+    <div class="box"></div>
+    <div class="container mt-7 tagline">
+        <h1 class="mobile-center" style="font-weight: bold; color: white;">Lokasi Kami</h1>
     </div>
-    <!-- Akhir Jumbotron -->
 
-    <!-- Info Perusahaan -->
     <div class="container">
-        <h1 class="text-center">Keunggulan Kami</h1>
-        <div class="row justify-content-center">
-            <div class="col-lg-8 info-panel">
-                <div class="row">
-                    <!-- Info 1 -->
-                    <div class="col-lg">
-                        <img src="{{ asset('gambar/fabrikasi.png')}}" alt="office">
-                        <h4>Teknik Fabrikasi</h4>
-                        <p>Samudera Selang adalah ahlinya.</p>
-                    </div>
-                    <!-- Info 2 -->
-                    <div class="col-lg">
-                        <img src="{{ asset('gambar/price.png')}}" alt="worker">
-                        <h4>Kompetitif Price</h4>
-                        <p>Samudera Selang adalah sumbernya.</p>
-                    </div>
-                    <!-- Info 3 -->
-                    <div class="col-lg">
-                        <img src="{{ asset('gambar/quality.png')}}" alt="product">
-                        <h4>Quality Produk</h4>
-                        <p>Samudera Selang adalah intinya.</p>
-                    </div>
-                </div>
+        <div class="row p-20 align-items-center">
+            <div class="col-lg tagline-core-left mobile-center">
+                <h1 class="text-kantor-pusat">Kantor Pusat</h1>
+                <p>Jl. Ahmad Yani, Kalijaga, Kec. Harjamukti, Kota Cirebon, Jawa Barat 45142</p>
+                <a href="https://maps.app.goo.gl/Te2XCQQrMbDHw5968">Lokasi</a>
+            </div>
+            <div class="col-lg">
+                <img src="{{ asset('gambar/ills-kantor.jpg')}}" width="500px" style="border-radius: 40px;" alt="" class="img-fluid mt-4 tagline-core-right">
             </div>
         </div>
-    </div>
-    <!-- Akhir Info Perusahaan -->
-    <div class="container">
-        <div class="row profile_perusahaan1">
-            <div class="col">
-                <img src="{{ asset('gambar/franchise-il.jpg')}}" class="img-fluid" alt="profile_image">
+        <div class="row tagline-down-delay">
+            @foreach ($user as $user)
+            <div class="col-lg-4 mb-5 mobile-center">
+                <h3 class="text-kantor-pusat">{{$user->kota}}</h3>
+                <p>{{$user->alamat}}</p>
             </div>
-            <div class="col-lg-6">
-                <p class="text-franchise mt-4">Maju dan berkembang bersama Samudera Selang.
-                    Jelas dan pasti qualitasnya dengan dukungan waranty product. Harga setiap product sangat kompetitif dan ditangani para ahli yg profesional di bidangnya.</p>
-            </div>
+            @endforeach
         </div>
     </div>
 
@@ -105,10 +82,19 @@
             <section class="mt-5">
                 <!-- Grid row-->
                 <div class="row text-center d-flex justify-content-center pt-5">
+
                     <!-- Grid column -->
-                    <div class="col-md-4">
-                        <h6 class="text-uppercase font-weight-bold">
-                            <a class="text-white">Join Us Franchise PT. Samudera Selang</a>
+                    <div class="col-md-2">
+                        <h6 class="font-weight-bold">
+                            <a href="/contact" class="text-white">Kantor</a>
+                        </h6>
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-md-2">
+                        <h6 class="font-weight-bold">
+                            <a href="/franchise" class="text-white">Franchise</a>
                         </h6>
                     </div>
                     <!-- Grid column -->
@@ -122,43 +108,23 @@
             <!-- Section: Text -->
             <section class="mb-5">
                 <div class="row d-flex justify-content-center">
-                    <div class="col-lg-5">
+                    <div class="col-lg-8">
                         <p>
-                            Head Office :
+                            Kami ingin menjadi bagian dari mitra anda untuk maju bersama menyongsong masa depan yang lebih sukses.
                         </p>
-                        <p>
-                            Jl. A. Yani no 7 Cirebon.
-                        </p>
-                        <p>
-                            Contact Us : Tlp1 0231 - 486742
-                        </p>
-                        <p>
-                            Tlp2 0231 - 486951 | WA 081394222960
-                        </p>
-                    </div>
-                    <div class="col-lg-5">
-                        <p>
-                            Brand Office. :
-                        </p>
-                        <p>
-                            Jl. Ringroad Timur Modalan Kotagede Yogyakarta.
-                        </p>
-                        <p>
-                            Contact Us : Tlp 0274 - ??? | WA 081320568333.
-                        </p>
-                        <p>
-                            Email : samuderaselang@yahoo.co.id
-                        </p>
+                        <b>
+                            Contact Us : 081326694806
+                        </b>
                     </div>
                 </div>
             </section>
             <!-- Section: Text -->
-            <hr class="my-5" />
+
             <!-- Section: Social -->
             <b>
                 Follow Us
             </b>
-            <section class="text-center mb-4">
+            <section class="text-center mb-5">
                 <a href="" class="text-white me-4 ml-2 mt-4">
                     <i class="fab fa-facebook-f"></i>
                 </a>
@@ -174,6 +140,9 @@
                 <a href="" class="text-white me-4 ml-2 mt-4">
                     <i class="fab fa-linkedin"></i>
                 </a>
+                <a href="" class="text-white me-4 ml-2 mt-4">
+                    <i class="fab fa-github"></i>
+                </a>
             </section>
             <!-- Section: Social -->
         </div>
@@ -187,6 +156,63 @@
         <!-- Copyright -->
     </footer>
     <!-- Akhir Footer -->
+
+    <!-- Navbar Scroll -->
+    <script>
+        const navbar = document.querySelector(".nav-fixed");
+        window.onscroll = () => {
+            if (window.scrollY > 0) {
+                navbar.classList.add("nav-active");
+            } else {
+                navbar.classList.remove("nav-active");
+            }
+        };
+    </script>
+
+    <!-- Scroll Reveal -->
+    <script>
+        ScrollReveal({
+            reset: true,
+            distance: "60px",
+            duration: 800,
+            delay: 4,
+            mobile: false,
+        });
+        ScrollReveal().reveal(".tagline", {
+            delay: 100
+        });
+        ScrollReveal().reveal(".tagline-core-left", {
+            delay: 200,
+            origin: "left",
+        });
+        ScrollReveal().reveal(".tagline-core-left-delay", {
+            delay: 600,
+            origin: "left",
+        });
+        ScrollReveal().reveal(".tagline-core-left-delay-1", {
+            delay: 1000,
+            origin: "left",
+        });
+        ScrollReveal().reveal(".tagline-core-right-delay", {
+            delay: 600,
+            origin: "right",
+        });
+        ScrollReveal().reveal(".tagline-core-right", {
+            delay: 300,
+            origin: "right",
+        });
+        ScrollReveal().reveal(".tagline-down", {
+            delay: 200,
+            origin: "top",
+        });
+        ScrollReveal().reveal(".tagline-down-delay", {
+            delay: 600,
+            origin: "top",
+        });
+        ScrollReveal().reveal(".tagline-delay", {
+            delay: 600,
+        });
+    </script>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

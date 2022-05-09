@@ -6,10 +6,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- My Font -->
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Viga&display=swap');
-    </style>
+    <!-- Icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="../gambar/Fix/logo.png">
+
+    <!-- Scroll Reveal -->
+    <script src="https://unpkg.com/scrollreveal"></script>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -28,7 +29,7 @@
 
 <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light">
+    <nav class="navbar navbar-expand-lg navbar-light nav-fixed fixed-top">
         <div class="container">
             <a class="navbar-brand" href="/">
                 <img src="{{ asset('gambar/fix/logo.png')}}" width="49" height="49" alt="">
@@ -38,11 +39,11 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav ml-auto">
-                    <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
-                    <a class="nav-item nav-link" href="#profile_page">Profile</a>
-                    <a class="nav-item nav-link" href="#persebaran_page">Persebaran Kantor</a>
+                    <a class="nav-item nav-link active" href="#">Home<span class="sr-only">(current)</span></a>
+                    <a class="nav-item nav-link" href="#profile_page">About Us</a>
+                    <a class="nav-item nav-link" href="/contact">Persebaran Kantor</a>
                     <a class="nav-item nav-link" href="#produk_page">Produk</a>
-                    <a class="nav-item btn btn-primary tombol" href="/franchise">Franchise</a>
+                    <a class="nav-item btn btn_franchise" href="/franchise">Franchise</a>
                 </div>
             </div>
         </div>
@@ -52,36 +53,38 @@
     <!-- Jumbotron -->
     <div class="jumbotron jumbotron-fluid jumbotron-background-1">
         <div class="container">
-            <p class="lead">Samudera Selang Cirebon</p>
-            <h1 class="display-4"><span>Perusahaan Penjualan
-                    Sparepart & Hose Hydraulik</span></h1>
-            <a href="" class="btn btn-primary btn-lg tombol1">See Produk</a>
+            <p class="lead tagline">Samudera Selang Cirebon</p>
+            <h1 class="display-4 tagline-core-left"><span>Perusahaan Penjualan Sparepart & Hose Hydraulik</span></h1>
+            <a href="#produk" class="btn btn_see_produk tagline-core-right">See Produk</a>
         </div>
     </div>
     <!-- Akhir Jumbotron -->
 
     <!-- Info Perusahaan -->
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-8 info-panel">
-                <div class="row">
-                    <!-- Info 1 -->
-                    <div class="col-lg">
-                        <img src="{{ asset('storage/gambar/office 1.png')}}" alt="office">
-                        <h4>10+</h4>
-                        <p>Toko & Kantor</p>
-                    </div>
-                    <!-- Info 2 -->
-                    <div class="col-lg">
-                        <img src="{{ asset('storage/gambar/worker 1.png')}}" alt="worker">
-                        <h4>100+</h4>
-                        <p>Karyawan</p>
-                    </div>
-                    <!-- Info 3 -->
-                    <div class="col-lg">
-                        <img src="{{ asset('storage/gambar/delivery-box 1.png')}}" alt="product">
-                        <h4>50+</h4>
-                        <p>Product</p>
+    <div class="body-perusahaan">
+        <div class=" container">
+            <h1 class="text-center tagline" style="color: white;">Skala Kami</h1>
+            <div class="row justify-content-center">
+                <div class="col-lg-8 info-panel">
+                    <div class="row">
+                        <!-- Info 1 -->
+                        <div class="col-lg tagline-core-left">
+                            <img src="{{ asset('storage/gambar/office 1.png')}}" alt="office">
+                            <h4>10+</h4>
+                            <p>Toko & Kantor</p>
+                        </div>
+                        <!-- Info 2 -->
+                        <div class="col-lg tagline-down">
+                            <img src="{{ asset('storage/gambar/worker 1.png')}}" alt="worker">
+                            <h4>100+</h4>
+                            <p>Karyawan</p>
+                        </div>
+                        <!-- Info 3 -->
+                        <div class="col-lg tagline-core-right">
+                            <img src="{{ asset('storage/gambar/delivery-box 1.png')}}" alt="product">
+                            <h4>500+</h4>
+                            <p>Product</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -90,71 +93,205 @@
     <!-- Akhir Info Perusahaan -->
 
     <!-- Profile Perusahaan -->
-    <div class="container">
-        <div class="row profile_perusahaan">
-            <div class="col">
-                <img src="{{ asset('storage/gambar/kantor_profile.png')}}" class="img-fluid profile_samudera" alt="profile_image">
-            </div>
-            <div class="col-lg-6">
-                <h3 class="profile_samudera" id="profile_page">PROFILE SAMUDERA SELANG</h3>
-                <p>PT. Samudera Selang yang berpusat di kota Cirebon Jawa Barat adalah perusahaan yang bergerak di bidang Import dan supply kebutuhan sparepart untuk pertambangan, industri minyak dan gas serta otomotif.</p>
+    <div class="body-profile" id="profile_page">
+        <div class="container">
+            <div class="row align-items-center profile_perusahaan mt-5">
+                <div class="col tagline-down">
+                    <img src="{{ asset('storage/gambar/kantor_profile.png')}}" class="img-fluid profile_samudera" alt="profile_image">
+                </div>
+                <div class="col-lg-6 mt-2 mobile-center">
+                    <h1 class="tagline-core-left">Profile Samudera Selang</h1>
+                    <p id="produk_page" class="tagline-core-left-delay">PT. Samudera Selang yang berpusat di kota Cirebon Jawa Barat adalah perusahaan yang bergerak di bidang Import dan supply kebutuhan sparepart untuk pertambangan, industri minyak dan gas serta otomotif.</p>
+                    <p class="tagline-core-left-delay">Untuk meningkatkan pelayanan yang maksimal, kami hadir diberbagai kota antara lain Cirebon, Tegal, Semarang, Jogya, Cilacap, Tasikmalaya, Purwokerto, Klaten dengan didukung SDM yang mumpuni serta pelayanan 24 jam, dengan dukungan produk bergaransi.
+                    </p>
+                    <a class="tagline-delay" href="">Lihat Selangkapnya</a>
+                </div>
             </div>
         </div>
     </div>
     <!-- Akhir Profile Perusahaan -->
 
-    <!-- Persebaran Kantor -->
-    <!-- Dropdown & Radio Text -->
-    <div class="container mt-5">
-        <div class="col">
-            <h1 class="margin_produk text-center" id="persebaran_page">PERSEBARAN KANTOR</h1>
-        </div>
-        <div class="card-content" style="display: none">
-            <div class="card-deck">
-                @foreach ($user as $user)
-                <div class="card" data-role="test">
-                    <img class="card-img-top" src="{{ asset('storage/' . $user->img) }}" alt="kantor_cirebon">
-                    <div class="card-body">
-                        <h5 class="card-title">{{$user->kota}}</h5>
-                        <p class="card-text">{{$user->alamat}}</p>
+    <!-- Menyediakan Apa yang Dibutuhkan -->
+    <div class="body-produk">
+        <div class="container-xl mt-5">
+            <h1 class="text-center tagline">Kami Menyediakan yang Anda Butuhkan</h1>
+            <div class="row mobile-center">
+                <!-- Hose Hydaulic -->
+                <div class="col-lg tagline-core-left">
+                    <div class="card-produk">
+                        <div class="icon">
+                            <img src="{{ asset('/gambar/card/hose.png')}}" width="64px" alt="product">
+                        </div>
+                        <div class="card-produk-text">
+                            <p>Hydraulic Hose</p>
+                        </div>
+                        <div class="card-produk-hover text-center">
+                            <h5>Hydraulic Hose</h5>
+                            <p class="mt-3">Adalah selang hydraulic dengan tekanan tinggi maupun rendah.</p>
+                            <p>30 Produk</p>
+                            <a href="/produk_hose" class="hyper-link"></a>
+                        </div>
                     </div>
                 </div>
-                @endforeach
-            </div>
-        </div>
-        <div class="pagination">
-        </div>
-    </div>
-    <!-- Akhir Dari Dropdown & Radio Text -->
-    <!-- Akhir Persebaran Kantor -->
-
-    <!-- Product -->
-    <div class="container mt-5">
-        <div class="row">
-            <div class="col text-center">
-                <h1 class="margin_produk" id="produk_page">PRODUK YANG DITAWARKAN</h1>
-            </div>
-        </div>
-        <div class="card-content1" style="display: none">
-            <div class="card-deck" data-role="card-content1">
-                @foreach ($user1 as $user1)
-                <div class="card card1 card_produk">
-                    <img class="card-image" src="{{ asset('storage/' . $user1->img_produk) }}" alt="$user1->img">
-                    <div class="card-body">
-                        <h5 class="nama_produk1">{{$user1->nama_produk}}</h5>
+                <!-- Industrial Hose -->
+                <div class="col-lg tagline-core-right">
+                    <div class="card-produk">
+                        <div class="icon">
+                            <img src="{{ asset('/gambar/card/excavator.png')}}" width="64px" alt="excavator">
+                        </div>
+                        <div class="card-produk-text">
+                            <p>Industrial Hose</p>
+                        </div>
+                        <div class="card-produk-hover text-center">
+                            <h5>Industrial Hose</h5>
+                            <p class="mt-3">Adalah produk pipa flexible yang mana diaplikasikan untuk rem angin, rem oli serta sambungan pipa.</p>
+                            <p>30 Produk</p>
+                            <a href="/produk_industrial" class="hyper-link"></a>
+                        </div>
                     </div>
                 </div>
-                @endforeach
+                <!-- PIPA NOZEL / INJECTION & NAPLE -->
+                <div class="col-lg tagline-core-left-delay">
+                    <div class="card-produk">
+                        <div class="icon">
+                            <img src="{{ asset('/gambar/card/forklift.png')}}" width="64px" alt="forklift">
+                        </div>
+                        <div class="card-produk-text">
+                            <p>Pipa Nozel / Injection</p>
+                        </div>
+                        <div class="card-produk-hover text-center">
+                            <h5>Pipa Nozel / Injection</h5>
+                            <p class="mt-3">Adalah produk pipa untuk diaplikasikan pada unit engine berbahan solar.</p>
+                            <p>30 Produk</p>
+                            <a href="/produk_pipa_nozel" class="hyper-link"></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Felxible Stainless -->
+                <div class="col-lg tagline-core-right-delay">
+                    <div class="card-produk">
+                        <div class="icon">
+                            <img src="{{ asset('/gambar/card/excavator-2.png')}}" width="64px" alt="excavator-2">
+                        </div>
+                        <div class="card-produk-text">
+                            <p>Felxible Stainless</p>
+                        </div>
+                        <div class="card-produk-hover text-center">
+                            <h5>Felxible Stainless</h5>
+                            <p class="mt-3">Adalah salah satu produk kami dengan system pembikinan pressing, welding and holding.</p>
+                            <p>30 Produk</p>
+                            <a href="/produk_felxible" class="hyper-link"></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Assesoris Heavy Duty -->
+                <div class="col-lg tagline-core-left-delay-1">
+                    <div class="card-produk">
+                        <div class="icon">
+                            <img src="{{ asset('/gambar/card/mechanical-arm.png')}}" width="64px" alt="mechanical-arm">
+                        </div>
+                        <div class="card-produk-text">
+                            <p>Assesoris Heavy Duty</p>
+                        </div>
+                        <div class="card-produk-hover text-center">
+                            <h5>Assesoris Heavy Duty</h5>
+                            <p class="mt-3">Adalah serangkaian produk import untuk melengkapi penanggan sekalian untuk melakukan pembelanjaan</p>
+                            <p>30 Produk</p>
+                            <a href="/produk_assesoris" class="hyper-link"></a>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="pagination1">
         </div>
     </div>
 
-    <!-- Akhir Product -->
+    <!-- Hadir di berbagai kota -->
+    <div class="container-xl mt-5 mb-5">
+        <h1 class="text-center tagline">Kami hadir diberbagai kota</h1>
+        <div class="row align-items-center mt-5">
+            <div class="col-lg-9">
+                <div class="box-kota tagline-core-left-delay">
+                    <div class="row">
+                        <!-- Cirebon -->
+                        <div class="col-lg">
+                            <div class="card-kota">
+                                <div class="card-kota-content">
+                                    <h4>Kota Cirebon</h4>
+                                    <img src="{{ asset('/gambar/kota/cirebon.png')}}" alt="cirebon">
+                                </div>
+                                <div class="card-produk-hover text-center">
+                                    <p>Jalan Ahmad Yani, Kalijaga, Harjamukti, Cirebon City, West Java 45142</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Tegal -->
+                        <div class="col-lg">
+                            <div class="card-kota top-mobile">
+                                <div class="card-kota-content">
+                                    <h4>Kota Tegal</h4>
+                                    <img src="{{ asset('/gambar/kota/tegal.png')}}" width="80px" style="white-space:nowrap;" alt="tegal">
+                                </div>
+                                <div class="card-produk-hover text-center">
+                                    <p>Jalan Raya Pantura No.130, Margadana, Kec. Margadana, Kota Tegal, Jawa Tengah 52143</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Yogyakarta  -->
+                        <div class="col-lg">
+                            <div class="card-kota top-mobile">
+                                <div class="card-kota-content">
+                                    <h4>Kota Yogyakarta</h4>
+                                    <img src="{{ asset('/gambar/kota/yogyakarta.png')}}" alt="yogyakarta">
+                                </div>
+                                <div class="card-produk-hover text-center">
+                                    <p>Jalan Nasional 3, Demen 2, Demen, Kec. Temon, Kabupaten Kulon Progo, Daerah Istimewa Yogyakarta 55654</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 top-mobile text-center tagline-core-right-delay">
+                <h5>Untuk meningkatkan pelayanan yang maksimal, kami hadir diberbagai kota antara lain</h3>
+                    <a href="/contact" class="btn btn_see_all mt-2">Lihat Semua Lokasi</a>
+            </div>
+        </div>
+    </div>
 
-    <!-- Footer -->
-    <!-- Remove the container if you want to extend the Footer to full width. -->
+    <!-- Mitra Sejati -->
+    <div class="body_mitra mobile-center">
+        <div class="container">
+            <div class="row align-items-center tagline">
+                <div class="col-lg-6">
+                    <div class="text_mitra">
+                        <h1>Mitra Sejati Kami</h1>
+                        <h5>Kepuasan Pelanggan adalah prioritas kami. Jadilah salah satu dari mereka.</h5>
+                    </div>
+                    <a href="/franchise" class="btn btn_mitra mt-2">Layanan Kami</a>
+                </div>
+                <div class="col-lg-6">
+                    <div class="row mobile-center">
+                        @foreach ($mitra as $mitra)
+                        <img class="ml-4 mt-4" src="{{ asset('/storage/'.$mitra->img_mitra)}}" alt="{{$mitra->nama_mitra}}">
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Kosultasi -->
+    <div class="container mt-5">
+        <div class="box-konsultasi tagline-down">
+            <div class="row align-items-center mobile-center">
+                <div class="col-lg-9">
+                    <h1>Konsultasi dengan ahlinya</h1>
+                    <h4>Untuk mendapat solusi terbaik tentang Selang</h4>
+                </div>
+                <div class="col-lg-3 btn btn-konsultasi top-mobile">Konsultasi Sekarang</div>
+            </div>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer class="text-center text-white" style="background-color: #3C3C3C" id="footer_page">
@@ -166,32 +303,32 @@
                 <div class="row text-center d-flex justify-content-center pt-5">
                     <!-- Grid column -->
                     <div class="col-md-2">
-                        <h6 class="text-uppercase font-weight-bold">
-                            <a href="#!" class="text-white">About us</a>
+                        <h6 class="font-weight-bold">
+                            <a href="#profile_page" class="text-white">About Us</a>
                         </h6>
                     </div>
                     <!-- Grid column -->
 
                     <!-- Grid column -->
                     <div class="col-md-2">
-                        <h6 class="text-uppercase font-weight-bold">
-                            <a href="#produk" class="text-white">Office</a>
+                        <h6 class="font-weight-bold">
+                            <a href="/contact" class="text-white">Kantor</a>
                         </h6>
                     </div>
                     <!-- Grid column -->
 
                     <!-- Grid column -->
                     <div class="col-md-2">
-                        <h6 class="text-uppercase font-weight-bold">
-                            <a href="#!" class="text-white">Products</a>
+                        <h6 class="font-weight-bold">
+                            <a href="#produk_page" class="text-white">Produk</a>
                         </h6>
                     </div>
                     <!-- Grid column -->
 
                     <!-- Grid column -->
                     <div class="col-md-2">
-                        <h6 class="text-uppercase font-weight-bold">
-                            <a href="#!" class="text-white">Franchise</a>
+                        <h6 class="font-weight-bold">
+                            <a href="/franchise" class="text-white">Franchise</a>
                         </h6>
                     </div>
                     <!-- Grid column -->
@@ -254,162 +391,68 @@
     </footer>
     <!-- Akhir Footer -->
 
+    <!-- Navbar Scroll -->
+    <script>
+        const navbar = document.querySelector(".nav-fixed");
+        window.onscroll = () => {
+            if (window.scrollY > 0) {
+                navbar.classList.add("nav-active");
+            } else {
+                navbar.classList.remove("nav-active");
+            }
+        };
+    </script>
+
     <!-- Optional JavaScript -->
+
+    <!-- Scroll Reveal -->
+    <script>
+        ScrollReveal({
+            reset: true,
+            distance: "60px",
+            duration: 800,
+            delay: 4,
+            mobile: false,
+        });
+        ScrollReveal().reveal(".tagline", {
+            delay: 100
+        });
+        ScrollReveal().reveal(".tagline-core-left", {
+            delay: 200,
+            origin: "left",
+        });
+        ScrollReveal().reveal(".tagline-core-left-delay", {
+            delay: 600,
+            origin: "left",
+        });
+        ScrollReveal().reveal(".tagline-core-left-delay-1", {
+            delay: 1000,
+            origin: "left",
+        });
+        ScrollReveal().reveal(".tagline-core-right-delay", {
+            delay: 600,
+            origin: "right",
+        });
+        ScrollReveal().reveal(".tagline-core-right", {
+            delay: 300,
+            origin: "right",
+        });
+        ScrollReveal().reveal(".tagline-down", {
+            delay: 200,
+            origin: "top",
+        });
+        ScrollReveal().reveal(".tagline-down-delay", {
+            delay: 600,
+            origin: "top",
+        });
+        ScrollReveal().reveal(".tagline-delay", {
+            delay: 600,
+        });
+    </script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <!-- JS Paginaton Kantor -->
-    <script type="text/javascript">
-        function getPageList(totalPages, page, maxLength) {
-            function range(start, end) {
-                return Array.from(Array(end - start + 1), (_, i) => i + start);
-            }
-
-            var sideWidth = maxLength < 9 ? 1 : 2;
-            var leftWidth = (maxLength - sideWidth * 2 - 3) >> 1;
-            var rightWidth = (maxLength - sideWidth * 2 - 3) >> 1;
-
-            if (totalPages <= maxLength) {
-                return range(1, totalPages);
-            }
-
-            if (page <= maxLength - sideWidth - 1 - rightWidth) {
-                return range(1, maxLength - sideWidth - 1).concat(0, range(totalPages - sideWidth + 1, totalPages));
-            }
-
-            if (page >= totalPages - sideWidth - 1 - rightWidth) {
-                return range(1, sideWidth).concat(0, range(totalPages - sideWidth - 1 - rightWidth - leftWidth, totalPages));
-            }
-
-            return range(1, sideWidth).concat(0, range(page - leftWidth, page + rightWidth), 0, range(totalPages - sideWidth + 1, totalPages));
-        }
-
-        $(function() {
-            let numberOfItems = $(".card-content .card").length;
-            let limitPerPage = 3; //How many card items visible per a page
-            let totalPages = Math.ceil(numberOfItems / limitPerPage);
-            let paginationSize = 5; //How many page elements visible in the pagination
-            let currentPage;
-
-            function showPage(whichPage) {
-                if (whichPage < 1 || whichPage > totalPages) return false;
-
-                currentPage = whichPage;
-
-                $(".card-content .card").hide().slice((currentPage - 1) * limitPerPage, currentPage * limitPerPage).show();
-
-                $(".pagination li").slice(1, -1).remove();
-
-                getPageList(totalPages, currentPage, paginationSize).forEach(item => {
-                    $("<li>").addClass("page-item").addClass(item ? "current-page" : "dots")
-                        .toggleClass("active", item === currentPage).append($("<a>").addClass("page-link")
-                            .attr({
-                                href: "javascript:void(0)"
-                            }).text(item || "...")).insertBefore(".next-page");
-                });
-
-                $(".previous-page").toggleClass("disable", currentPage === 1);
-                $(".next-page").toggleClass("disable", currentPage === totalPages);
-                return true;
-            }
-
-            $(".pagination").append(
-                $("<li>").addClass("page-item").addClass("previous-page").append($("<a>").addClass("page-link").attr({
-                    href: "javascript:void(0)"
-                }).text("Prev")),
-                $("<li>").addClass("page-item").addClass("next-page").append($("<a>").addClass("page-link").attr({
-                    href: "javascript:void(0)"
-                }).text("Next"))
-            );
-
-            $(".card-content").show();
-            showPage(1);
-
-            $(document).on("click", ".pagination li.current-page:not(.active)", function() {
-                return showPage(+$(this).text());
-            });
-
-            $(".next-page").on("click", function() {
-                return showPage(currentPage + 1);
-            });
-
-            $(".previous-page").on("click", function() {
-                return showPage(currentPage - 1);
-            });
-        });
-    </script>
-    <!-- Akhir JS Kantor -->
-
-    <!-- Awal JS Produk -->
-    <script type="text/javascript">
-        function paging() {
-            let numberOfItems = $(".card-content1 .card").length;
-            let limitPerPage = 3; //How many card items visible per a page
-            let totalPages = Math.ceil(numberOfItems / limitPerPage);
-            let paginationSize = 5; //How many page elements visible in the pagination
-            let currentPage;
-
-            function showPage(whichPage) {
-                if (whichPage < 1 || whichPage > totalPages) return false;
-
-                currentPage = whichPage;
-
-                $(".card-content1 .card").hide().slice((currentPage - 1) * limitPerPage, currentPage * limitPerPage).show();
-
-                $(".pagination1 li").slice(1, -1).remove();
-
-                getPageList(totalPages, currentPage, paginationSize).forEach(item => {
-                    $("<li>").addClass("page-item").addClass(item ? "current-page" : "dots")
-                        .toggleClass("active", item === currentPage).append($("<a>").addClass("page-link")
-                            .attr({
-                                href: "javascript:void(0)"
-                            }).text(item || "...")).insertBefore(".next-page1");
-                });
-
-                $(".previous-page1").toggleClass("disable", currentPage === 1);
-                $(".next-page1").toggleClass("disable", currentPage === totalPages);
-                return true;
-            }
-
-            $(".pagination1").append(
-                $("<li>").addClass("page-item").addClass("previous-page1").append($("<a>").addClass("page-link").attr({
-                    href: "javascript:void(0)"
-                }).text("Prev")),
-                $("<li>").addClass("page-item").addClass("next-page1").append($("<a>").addClass("page-link").attr({
-                    href: "javascript:void(0)"
-                }).text("Next"))
-            );
-
-            $(".card-content1").show();
-            showPage(1);
-
-            $(document).on("click", ".pagination1 li.current-page:not(.active)", function() {
-                return showPage(+$(this).text());
-            });
-
-            $(".next-page1").on("click", function() {
-                return showPage(currentPage + 1);
-            });
-
-            $(".previous-page1").on("click", function() {
-                return showPage(currentPage - 1);
-            });
-        };
-        $(document).ready(function() {
-            $("#searchbox").on("keyup", function() {
-                var value = $(this).val().toLowerCase();
-                $('div[data-role="card-content1"]').filter(function() {
-                    $(this).toggle($(this).find('h5').text().toLowerCase().indexOf(value) > -1)
-                });
-            });
-        });
-        paging();
-    </script>
-
-    <!-- Akhir JS Produk -->
-    <!-- JS Search -->
-
 </body>
 
 </html>

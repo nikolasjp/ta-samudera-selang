@@ -187,6 +187,52 @@
                         </div>
                     </div>
                 </div>
+                <!-- Table Checkout -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title text-center m-30">Data Table Checkout</h4>
+                                <div class="table-responsive m-t-40">
+                                    <table id="myTable" class="table table-bordered table-striped">
+                                        <thead class="thead-light">
+                                            <tr>
+                                                <th>No</th>
+                                                <th class="w-220">Nama Barang</th>
+                                                <th>Harga</th>
+                                                <th>Quantity</th>
+                                                <th>Harga Pengiriman</th>
+                                                <th>Detail Alamat</th>
+                                                <th>Total Harga</th>
+                                                <th>Status</th>
+                                                <th class="w-400">Perintah</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($checkout as $checkout)
+                                            <tr>
+                                                <td>{{$checkout->id}}</td>
+                                                <td>{{$checkout->nama_barang}}</td>
+                                                <td>{{$checkout->harga}}</td>
+                                                <td>{{$checkout->quantity}}</td>
+                                                <td>{{$checkout->harga_pengiriman}}</td>
+                                                <td>{{$checkout->detail_alamat}}</td>
+                                                <td>{{$checkout->total_harga}}</td>
+                                                <td>{{$checkout->status}}</td>
+                                                <td>
+                                                    <a href="/ubah_kantor/{{$checkout->id}}" class="btn btn-warning"> Edit </a>
+                                                    <a href="/delete/{{$checkout->id}}" onclick="return confirm('Apakah anda yakin untuk menghapus data ini ?')" class="btn btn-danger"> Hapus </a>
+                                                    <a href="/verif/{{$checkout->id}}" onclick="return confirm('Apakah anda yakin untuk memverifikasi pembayaran ini ?')" class="btn btn-primary"> Verifikasi Pembayaran</a>
+                                                </td>
+                                            </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <!-- Table Kantor -->
                 <div class="row">
                     <div class="col-12">

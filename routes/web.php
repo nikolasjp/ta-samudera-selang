@@ -1,27 +1,23 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CekOngkirController;
 use App\Http\Controllers\UserController;
 use App\Models\UserModel;
 use App\Models\UserModelProduk;
 use Illuminate\Support\Facades\Route;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
 // Admin Cabang
 Route::get('/dashboard_admin', [AdminController::class, 'dashboard_admin']);
 Route::post('/add_barang', [AdminController::class, 'add_barang']);
 Route::get('/delete_barang/{id}', [AdminController::class, 'delete_barang']);
 Route::post('/edit_barang/{id}', [AdminController::class, 'edit_barang']);
+
+// Raja Ongkir
+Route::get('/beli_hose/{id_produk}', [CekOngkirController::class, 'index']);
+Route::get('/province/{id}/cities', [CekOngkirController::class, 'getCities']);
+Route::post('/test_ongkir/{id_produk}', [CekOngkirController::class, 'submit']);
+Route::post('/apply', [CekOngkirController::class, 'submit']);
 
 // Website Samudera
 Route::get('/produk_hose', [UserController::class, 'produk_hose']);
@@ -32,7 +28,12 @@ Route::get('/produk_industrial', [UserController::class, 'produk_industrial']);
 Route::get('/tambah_artikel', [UserController::class, 'tambah_artikel']);
 Route::post('/add_artikel', [UserController::class, 'add_artikel']);
 
-Route::get('/', [UserController::class, 'tampil']);
+// Login Register
+Route::get('/login', [UserController::class, 'login']);
+Route::post('/login_user', [UserController::class, 'login_user']);
+Route::get('/register_user', [UserController::class, 'register_user']);
+
+Route::get('/', [UserController::class, 'login']);
 Route::get('/contact', [UserController::class, 'contact']);
 Route::get('/admin', [UserController::class, 'admin']);
 Route::get('/franchise', [UserController::class, 'franchise']);
@@ -56,3 +57,4 @@ Route::get('/delete/{id}', [UserController::class, 'delete']);
 Route::get('/delete_produk/{id}', [UserController::class, 'delete_produk']);
 Route::get('/delete_mitra/{id}', [UserController::class, 'delete_mitra']);
 Route::get('/delete_artikel/{id}', [UserController::class, 'delete_artikel']);
+Route::get('/verif/{id}', [UserController::class, 'verifikasi']);

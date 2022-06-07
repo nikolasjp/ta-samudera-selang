@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DetailPembelianModel;
+use App\Models\LoginModel;
 use App\Models\ProdukDetailModel;
 use Illuminate\Support\File;
 use App\Models\UserModel;
@@ -21,7 +23,8 @@ class UserController extends Controller
         $user1 = UserModelProduk::all();
         $produk_detail = ProdukDetailModel::all();
         $mitra = MitraModel::all();
-        return view('admin_website.admin', ['user' => $user, 'mitra' => $mitra, 'produk_detail' => $produk_detail], ['user1' => $user1]);
+        $checkout = DetailPembelianModel::all();
+        return view('admin_website.admin', ['user' => $user, 'mitra' => $mitra, 'produk_detail' => $produk_detail, 'checkout' => $checkout], ['user1' => $user1]);
     }
 
     public function tampil()
@@ -94,6 +97,17 @@ class UserController extends Controller
         UserModel::create($validateData);
         return redirect('/admin');
     }
+
+    //Checkout
+    public function verifikasi($id)
+    {
+        $checkout = DetailPembelianModel::find($id);
+        $checkout->update([
+            'status' => 'TERBAYAR'
+        ]);
+        return redirect('/admin');
+    }
+
     // Kantor
     public function ubah_kantor($id)
     {
@@ -250,5 +264,37 @@ class UserController extends Controller
 
         ProdukDetailModel::create($validateData);
         return redirect('/admin');
+    }
+
+    // Login
+    public function login()
+    {
+        return view('user.login');
+    }
+
+    public function login_user(Request $request)
+    {
+        $data = LoginModel::where([
+            'nama' => $request->nama,
+            'password' => $request->password,
+        ])->get();
+        if (count($data) == 1) {
+            $mitra = MitraModel::all();
+            return view('user.tampil', ['mitra' => $mitra]);
+        } else {
+            return redirect('/');
+        }
+    }
+
+    public function register_user(Request $request)
+    {
+        $validateData = $request->validate([
+            'nama' => 'required',
+            'email' => 'required',
+            'password' => 'required'
+        ]);
+
+        LoginModel::create($validateData);
+        return redirect('/');
     }
 }

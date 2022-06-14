@@ -138,6 +138,7 @@ border-color: #136fd1;
 }
 
 .btn_franchise:hover{
+    color: black !important;
     background: white;
 }
 

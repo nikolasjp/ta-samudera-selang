@@ -29,7 +29,7 @@ class CheckoutController extends Controller
     public function submit(Request $request, $id_produk)
     {
         $data = $request->session()->all();
-        if (count($data) >= 1) {
+        if (count($data) >= 4) {
             $produk_hose = UserModelProduk::find($id_produk);
 
             $cost = RajaOngkir::ongkosKirim([

@@ -77,7 +77,7 @@
                                                     <i class="fa-solid fa-minus"></i>
                                                 </button>
                                             </span>
-                                            <input type="text" id="quantity" name="quantity" class="form-control input-number" value="0" min="1" max="100">
+                                            <input type="text" id="quantity" name="quantity" class="form-control input-number" value="0" min="1" max="100" required>
                                             <span class="input-group-btn">
                                                 <button type="button" class="quantity-right-plus btn btn-primary btn-number" data-type="plus" data-field="">
                                                     <i class="fa-solid fa-plus"></i>
@@ -90,7 +90,7 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="">Provinsi Asal</label>
-                                            <select name="province_origin" class="form-control">
+                                            <select name="province_origin" class="form-control" required>
                                                 <option value=""> -- Provinsi -- </option>
                                                 @foreach ($provinces as $province=>$value)
                                                 <option value="{{$province}}">{{$value}}</option>
@@ -102,7 +102,7 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="">Kota Asal</label>
-                                            <select name="city_origin" class="form-control">
+                                            <select name="city_origin" class="form-control" required>
                                                 <option>--Kota--</option>
                                             </select>
                                         </div>
@@ -111,7 +111,7 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="">Provinsi Tujuan</label>
-                                            <select name="province_destination" class="form-control">
+                                            <select name="province_destination" class="form-control" required>
                                                 <option value=""> -- Provinsi -- </option>
                                                 @foreach ($provinces as $province=>$value)
                                                 <option value="{{$province}}">{{$value}}</option>
@@ -123,7 +123,7 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="">Kota Tujuan</label>
-                                            <select name="city_destination" class="form-control">
+                                            <select name="city_destination" class="form-control" required>
                                                 <option>--Kota--</option>
                                             </select>
                                         </div>
@@ -132,7 +132,7 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="">Ekspedisi</label>
-                                            <select name="courier" class="form-control">
+                                            <select name="courier" class="form-control" required>
                                                 <option value=""> -- Kurir -- </option>
                                                 @foreach ($couriers as $courier=>$value)
                                                 <option value="{{$courier}}">{{$value}}</option>
@@ -141,10 +141,14 @@
                                         </div>
                                     </div>
 
+                                    @if(Session::has("gagal"))
+                                    <p style="color:red;margin:0;"> {{Session::get("gagal")}}</p>
+                                    @endif
+
                                 </div>
                                 <div class="form-group">
                                     <label for="">Alamat</label>
-                                    <textarea class="form-control" name="detail_alamat" id="" rows="3"></textarea>
+                                    <textarea class="form-control" name="detail_alamat" id="" rows="3" required></textarea>
                                 </div>
                                 <button style="margin-top: 12px;" type="submit" class="btn btn_franchise">Beli Produk</button>
                             </form>

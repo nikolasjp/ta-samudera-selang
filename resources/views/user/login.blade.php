@@ -22,19 +22,25 @@
 			<form action="/register_user" method="GET">
 				<h1>Create Account</h1>
 				<span>use your account for registration</span>
-				<input type="text" name="nama" placeholder="Nama Lengkap" />
-				<input type="email" name="email" placeholder="Email" />
-				<input type="password" name="password" placeholder="Password" />
-				<button onclick="return confirm('Apakah anda yakin untuk mambuat akun ini ?')">Sign Up</button>
+				<input type="text" name="nama" placeholder="Nama Lengkap" required />
+				<input type="email" name="email" placeholder="Email" required />
+				<input type="password" name="password" placeholder="Password" required />
+				<button>Sign Up</button>
 			</form>
 		</div>
 		<div class="form-container sign-in-container">
 			<form action="/login_user" method="POST">
 				@csrf
+				@if(Session::has("gagal_regis"))
+				<p style="color:red;margin:0;margin-bottom:20px;"> {{Session::get("gagal_regis")}}</p>
+				@endif
 				<h1>Sign in</h1>
 				<span>use your account</span>
-				<input type="text" name="nama" placeholder="Nama" />
-				<input type="password" name="password" placeholder="Password" />
+				<input type="text" name="nama" placeholder="Nama" required />
+				<input type="password" name="password" placeholder="Password" required />
+				@if(Session::has("gagal"))
+				<p style="color:red;margin:0;"> {{Session::get("gagal")}}</p>
+				@endif
 				<a href="#">Forgot your password?</a>
 				<button>Sign In</button>
 			</form>

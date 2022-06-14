@@ -3,7 +3,7 @@
 @include('layout_user.head')
 
 <body>
-    @include('layout_user.navbar')
+    @include('layout_user.navbar_login')
     <!-- Jumbotron -->
     <div class="jumbotron jumbotron-fluid jumbotron-background-1">
         <div class="container">

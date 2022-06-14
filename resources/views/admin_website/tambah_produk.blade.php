@@ -1,28 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <!-- Tell the browser to be responsive to screen width -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="../gambar/Fix/logo.png">
-    <title>Admin Samudera Selang</title>
-    <!-- Bootstrap Core CSS -->
-    <link href="../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('../assets/plugins/bootstrap/css/bootstrap.min.css') }}">
-    <!-- Apex Chart -->
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-    <!-- You can change the theme colors from here -->
-    <link href="css/colors/blue.css" id="theme" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/colors/blue.css') }}">
-    <link rel="stylesheet" href="{{ asset('css_public/card.css') }}">
-</head>
+@include('layout_admin.head')
 
 <body class="fix-header card-no-border">
     <div class="preloader">
@@ -31,89 +10,8 @@
         </svg>
     </div>
     <div id="main-wrapper">
-        <header class="topbar">
-            <nav class="navbar top-navbar navbar-expand-md navbar-light">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="index.html">
-                        <!-- Logo icon --><b>
-                            <img src="../gambar/fix/logo.png" alt="homepage" style="width: 40px;" class="dark-logo" />
-                            <!-- Light Logo icon -->
-                            <img src="../assets/images/logo-light-icon.png" alt="homepage" class="light-logo" />
-                        </b>
-                        <!--End Logo icon -->
-                        <!-- Logo text --><span>
-                            Samudera Selang
-                        </span>
-                    </a>
-                </div>
-                <div class="navbar-collapse justify-content-right">
-                    <ul class="navbar-nav my-lg-0">
-                        <li class="nav-item dropdown float-right">
-                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../assets/images/avatar1.png" alt="user" class="profile-pic" /></a>
-                            <div class="dropdown-menu dropdown-menu-right scale-up">
-                                <ul class="dropdown-user">
-                                    <li>
-                                        <div class="dw-user-box">
-                                            <div class="u-img"><img src="../assets/images/avatar1.png" alt="user"></div>
-                                            <div class="u-text">
-                                                <h4>Nicholass Jeffensen</h4>
-                                                <p class="text-muted">Manager</p><a href="pages-profile.html" class="btn btn-rounded btn-danger btn-sm"><i class="fa fa-power-off"></i> Logout</a>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </header>
-        <aside class="left-sidebar" style="position: fixed;">
-            <!-- Sidebar scroll-->
-            <div class="scroll-sidebar">
-                <!-- User profile -->
-                <div class="user-profile">
-                    <!-- User profile image -->
-                    <div class="profile-img"> <img src="../assets/images/avatar1.png" alt="user" />
-                        <!-- this is blinking heartbit-->
-                        <div class="notify setpos"> <span class="heartbit"></span> <span class="point"></span> </div>
-                    </div>
-                    <!-- User profile text-->
-                    <div class="profile-text">
-                        <h5>Nicholass Jeffensen</h5>
-                        <p class="text-muted">Manager</p>
-                    </div>
-                </div>
-                <!-- End User profile text-->
-                <!-- Sidebar navigation-->
-                <nav class="sidebar-nav">
-                    <ul id="sidebarnav">
-                        <li class="nav-devider"></li>
-                        <!-- Admin Cabang -->
-                        <li class="nav-small-cap">Admin Cabang</li>
-                        <li> <a class="waves-effect waves-dark" href="dashboard_admin" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Dashboard</span></a>
-                        <li> <a class="waves-effect waves-dark" href="tambah_barang" aria-expanded="false"><i class="mdi mdi-dropbox"></i><span class="hide-menu">Tambah Barang</span></a>
-                        </li>
-                        </li>
-
-                        <!-- Admin Company Profile -->
-                        <li class="nav-small-cap">Admin Company Profile</li>
-                        <li> <a class="waves-effect waves-dark" href="admin" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Dashboard</span></a>
-                        </li>
-                        <li> <a class="waves-effect waves-dark" href="tambah_kantor" aria-expanded="false"><i class="mdi mdi-map-marker-multiple"></i><span class="hide-menu">Tambah Kantor</span></a>
-                        </li>
-                        <li> <a class="waves-effect waves-dark" href="tambah_produk" aria-expanded="false"><i class="mdi mdi-dropbox"></i><span class="hide-menu">Tambah Produk</span></a>
-                        </li>
-                        <li> <a class="waves-effect waves-dark" href="tambah_mitra" aria-expanded="false"><i class="mdi mdi-dropbox"></i><span class="hide-menu">Tambah Mitra</span></a>
-                        </li>
-                        <li> <a class="waves-effect waves-dark" href="tambah_artikel" aria-expanded="false"><i class="mdi mdi-dropbox"></i><span class="hide-menu">Tambah Artikel</span></a>
-                        </li>
-                    </ul>
-                </nav>
-                <!-- End Sidebar navigation -->
-            </div>
-            <!-- End Sidebar scroll-->
-        </aside>
+        @include('layout_admin.header')
+        @include('layout_admin.sidebar')
         <div class="page-wrapper">
             <div class="row page-titles">
                 <div class="col-md-12 align-self-center">
@@ -144,6 +42,14 @@
                                 <div class="form-group">
                                     <label>Nama Produk</label>
                                     <input type="text" name="nama_produk" class="form-control" placeholder="Masukan Nama Lengkap Produk" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Harga Produk</label>
+                                    <input type="text" name="harga" class="form-control" placeholder="Masukan Harga Produk" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Berat Produk</label>
+                                    <input type="number" name="berat" class="form-control" placeholder="Masukan Berat Produk" required>
                                 </div>
                                 <div class="form-group">
                                     <label>Keterangan Produk</label>

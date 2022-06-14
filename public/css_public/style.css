@@ -100,6 +100,21 @@ p{
     max-width: 15.333333%;
 }
 
+.profile-pic{
+    width: 40px;
+    border-radius: 100%;
+}
+
+.navbar-expand-lg .navbar-nav .dropdown-menu-right {
+    right: 255px;
+    left: auto;
+}
+
+.dropdown-user{
+    margin: 0;
+    padding: 10px;
+}
+
 .btn-primary{
 background-color: #136fd1;
 border-color: #136fd1;
@@ -563,7 +578,6 @@ color: white !important;
     .beli_tab{
         background-image: url("/gambar/produk/background-2.png");
         width: 100%;
-        height: 800px;
         padding: 60px;
         color: white;
     }

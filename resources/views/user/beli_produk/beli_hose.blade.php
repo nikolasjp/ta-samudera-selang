@@ -141,14 +141,12 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label for="">Berat (g)</label>
-                                            <input type="number" name="weight" id="" class="form-control" value="1000">
-                                        </div>
-                                    </div>
-                                    <button style="margin-top: 12px;" type="submit" class="btn btn_franchise">Cek Harga Ongkir</button>
                                 </div>
+                                <div class="form-group">
+                                    <label for="">Alamat</label>
+                                    <textarea class="form-control" name="detail_alamat" id="" rows="3"></textarea>
+                                </div>
+                                <button style="margin-top: 12px;" type="submit" class="btn btn_franchise">Beli Produk</button>
                             </form>
                         </div>
                     </div>

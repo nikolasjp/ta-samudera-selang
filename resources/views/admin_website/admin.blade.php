@@ -1,28 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <!-- Tell the browser to be responsive to screen width -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="../gambar/Fix/logo.png">
-    <title>Admin Samudera Selang</title>
-    <!-- Bootstrap Core CSS -->
-    <link href="../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('../assets/plugins/bootstrap/css/bootstrap.min.css') }}">
-    <!-- Apex Chart -->
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-    <!-- You can change the theme colors from here -->
-    <link href="css/colors/blue.css" id="theme" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/colors/blue.css') }}">
-    <link rel="stylesheet" href="{{ asset('css_public/card.css') }}">
-</head>
+@include('layout_admin.head')
 
 <body class="fix-header card-no-border">
     <div class="preloader">
@@ -31,89 +10,8 @@
         </svg>
     </div>
     <div id="main-wrapper">
-        <header class="topbar">
-            <nav class="navbar top-navbar navbar-expand-md navbar-light">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="index.html">
-                        <!-- Logo icon --><b>
-                            <img src="../gambar/fix/logo.png" alt="homepage" style="width: 40px;" class="dark-logo" />
-                            <!-- Light Logo icon -->
-                            <img src="../assets/images/logo-light-icon.png" alt="homepage" class="light-logo" />
-                        </b>
-                        <!--End Logo icon -->
-                        <!-- Logo text --><span>
-                            Samudera Selang
-                        </span>
-                    </a>
-                </div>
-                <div class="navbar-collapse justify-content-right">
-                    <ul class="navbar-nav my-lg-0">
-                        <li class="nav-item dropdown float-right">
-                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../assets/images/avatar1.png" alt="user" class="profile-pic" /></a>
-                            <div class="dropdown-menu dropdown-menu-right scale-up">
-                                <ul class="dropdown-user">
-                                    <li>
-                                        <div class="dw-user-box">
-                                            <div class="u-img"><img src="../assets/images/avatar1.png" alt="user"></div>
-                                            <div class="u-text">
-                                                <h4>Nicholass Jeffensen</h4>
-                                                <p class="text-muted">Manager</p><a href="pages-profile.html" class="btn btn-rounded btn-danger btn-sm"><i class="fa fa-power-off"></i> Logout</a>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </header>
-        <aside class="left-sidebar" style="position: fixed;">
-            <!-- Sidebar scroll-->
-            <div class="scroll-sidebar">
-                <!-- User profile -->
-                <div class="user-profile">
-                    <!-- User profile image -->
-                    <div class="profile-img"> <img src="../assets/images/avatar1.png" alt="user" />
-                        <!-- this is blinking heartbit-->
-                        <div class="notify setpos"> <span class="heartbit"></span> <span class="point"></span> </div>
-                    </div>
-                    <!-- User profile text-->
-                    <div class="profile-text">
-                        <h5>Nicholass Jeffensen</h5>
-                        <p class="text-muted">Manager</p>
-                    </div>
-                </div>
-                <!-- End User profile text-->
-                <!-- Sidebar navigation-->
-                <nav class="sidebar-nav">
-                    <ul id="sidebarnav">
-                        <li class="nav-devider"></li>
-                        <!-- Admin Cabang -->
-                        <li class="nav-small-cap">Admin Cabang</li>
-                        <li> <a class="waves-effect waves-dark" href="dashboard_admin" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Dashboard</span></a>
-                        <li> <a class="waves-effect waves-dark" href="tambah_barang" aria-expanded="false"><i class="mdi mdi-dropbox"></i><span class="hide-menu">Tambah Barang</span></a>
-                        </li>
-                        </li>
-
-                        <!-- Admin Company Profile -->
-                        <li class="nav-small-cap">Admin Company Profile</li>
-                        <li> <a class="waves-effect waves-dark" href="admin" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Dashboard</span></a>
-                        </li>
-                        <li> <a class="waves-effect waves-dark" href="tambah_kantor" aria-expanded="false"><i class="mdi mdi-map-marker-multiple"></i><span class="hide-menu">Tambah Kantor</span></a>
-                        </li>
-                        <li> <a class="waves-effect waves-dark" href="tambah_produk" aria-expanded="false"><i class="mdi mdi-dropbox"></i><span class="hide-menu">Tambah Produk</span></a>
-                        </li>
-                        <li> <a class="waves-effect waves-dark" href="tambah_mitra" aria-expanded="false"><i class="mdi mdi-dropbox"></i><span class="hide-menu">Tambah Mitra</span></a>
-                        </li>
-                        <li> <a class="waves-effect waves-dark" href="tambah_artikel" aria-expanded="false"><i class="mdi mdi-dropbox"></i><span class="hide-menu">Tambah Artikel</span></a>
-                        </li>
-                    </ul>
-                </nav>
-                <!-- End Sidebar navigation -->
-            </div>
-            <!-- End Sidebar scroll-->
-        </aside>
+        @include('layout_admin.header')
+        @include('layout_admin.sidebar')
         <div class="page-wrapper">
             <div class="row page-titles">
                 <div class="col-md-12 align-self-center">
@@ -122,71 +20,7 @@
             </div>
 
             <div class="container-fluid">
-                <div class="row">
-                    <div class="col-12">
-                        <!-- Card 1 -->
-                        <div class="row">
-                            <div class="col-lg-3">
-                                <div class="card card-ukuran">
-                                    <div class="card-body analytics-info card-background-1">
-                                        <h3 class="card-title">TOTAL KANTOR</h3>
-                                        <div class="stats-row">
-                                            <div class="right stat-item">
-                                                <h1 class="text-success text-right">{{sizeof($user)}}</h1>
-                                                <h4 class="text-right">Kantor Tersedia</h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Card 2 -->
-                            <div class="col-lg-3">
-                                <div class="card card-ukuran">
-                                    <div class="card-body card-background-2 analytics-info">
-                                        <h3 class="card-title">TOTAL PRODUK</h3>
-                                        <div class="stats-row">
-                                            <div class="right stat-item">
-                                                <h1 class="text-success text-right">{{sizeof($user1)}}</h1>
-                                                <h4 class="text-right">Produk Tersedia</h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Card 3 -->
-                            <div class="col-lg-3">
-                                <div class="card card-ukuran">
-                                    <div class="card-body card-background-3 analytics-info">
-                                        <h3 class="card-title">TOTAL MITRA</h3>
-                                        <div class="stats-row">
-                                            <div class="right stat-item">
-                                                <h1 class="text-success text-right">{{sizeof($mitra)}}</h1>
-                                                <h4 class="text-right">Mitra Tersedia</h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Card 4 -->
-                            <div class="col-lg-3">
-                                <div class="card card-ukuran">
-                                    <div class="card-body card-background-4 analytics-info">
-                                        <h3 class="card-title">TOTAL ARTIKEL</h3>
-                                        <div class="stats-row">
-                                            <div class="right stat-item">
-                                                <h1 class="text-success text-right">{{sizeof($produk_detail)}}</h1>
-                                                <h4 class="text-right">Artikel Tersedia</h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @include('layout_admin.card')
                 <!-- Table Checkout -->
                 <div class="row">
                     <div class="col-12">
@@ -220,8 +54,8 @@
                                                 <td>{{$checkout->total_harga}}</td>
                                                 <td>{{$checkout->status}}</td>
                                                 <td>
-                                                    <a href="/ubah_kantor/{{$checkout->id}}" class="btn btn-warning"> Edit </a>
-                                                    <a href="/delete/{{$checkout->id}}" onclick="return confirm('Apakah anda yakin untuk menghapus data ini ?')" class="btn btn-danger"> Hapus </a>
+                                                    <a href="/ubah_pesanan/{{$checkout->id}}" class="btn btn-warning"> Edit </a>
+                                                    <a href="/delete_pesanan/{{$checkout->id}}" onclick="return confirm('Apakah anda yakin untuk menghapus data ini ?')" class="btn btn-danger"> Hapus </a>
                                                     <a href="/verif/{{$checkout->id}}" onclick="return confirm('Apakah anda yakin untuk memverifikasi pembayaran ini ?')" class="btn btn-primary"> Verifikasi Pembayaran</a>
                                                 </td>
                                             </tr>

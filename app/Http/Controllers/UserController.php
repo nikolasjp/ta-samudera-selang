@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AdminModelProdukCabang;
 use App\Models\DetailPembelianModel;
+use App\Models\LoginAdminModel;
 use App\Models\LoginModel;
 use App\Models\ProdukDetailModel;
 use Illuminate\Support\File;
@@ -17,18 +19,19 @@ use Symfony\Component\Console\Output\Output;
 
 class UserController extends Controller
 {
-    public function admin()
+
+    public function tampil(Request $request)
     {
-        $user = UserModel::all();
-        $user1 = UserModelProduk::all();
-        $produk_detail = ProdukDetailModel::all();
         $mitra = MitraModel::all();
-        $checkout = DetailPembelianModel::all();
-        return view('admin_website.admin', ['user' => $user, 'mitra' => $mitra, 'produk_detail' => $produk_detail, 'checkout' => $checkout], ['user1' => $user1]);
+        $riwayat = DetailPembelianModel::join('login_user', 'detail_pembelian.user_id', '=', 'login_user.id')
+            ->where('login_user.id', '=', $request->session()->get('data_user')[0]['id'])
+            ->get(['login_user.*', 'detail_pembelian.*']);
+        return view('user.tampil_riwayat', ['mitra' => $mitra, 'riwayat' => $riwayat]);
     }
 
-    public function tampil()
+    public function index(Request $request)
     {
+        $request->session()->flush();
         $mitra = MitraModel::all();
         return view('user.tampil', ['mitra' => $mitra]);
     }
@@ -82,9 +85,9 @@ class UserController extends Controller
         return view('user.contact', ['user' => $user], ['user1' => $user1]);
     }
 
-    public function tambah_kantor()
+    public function tambah_kantor(Request $request)
     {
-        return view('admin_website.tambah_kantor');
+        return view('admin_website.tambah_kantor', $request->session()->all());
     }
     public function add(Request $request)
     {
@@ -98,6 +101,7 @@ class UserController extends Controller
         return redirect('/admin');
     }
 
+
     //Checkout
     public function verifikasi($id)
     {
@@ -105,6 +109,23 @@ class UserController extends Controller
         $checkout->update([
             'status' => 'TERBAYAR'
         ]);
+        return redirect('/admin');
+    }
+
+    public function ubah_pesanan($id)
+    {
+        $checkout = DetailPembelianModel::find($id);
+        return view('admin_website.ubah_pembelian', ['checkout' => $checkout]);
+    }
+
+    public function edit_pembelian(Request $request, $id)
+    {
+        $validateData = $request->validate([
+            'quantity' => 'required',
+            'detail_alamat' => 'required'
+        ]);
+        $checkout = DetailPembelianModel::find($id);
+        $checkout->update($validateData);
         return redirect('/admin');
     }
 
@@ -192,6 +213,13 @@ class UserController extends Controller
         return redirect('/admin');
     }
 
+    public function delete_pesanan($id)
+    {
+        $checkout = DetailPembelianModel::find($id);
+        $checkout->delete($checkout);
+        return redirect('/admin');
+    }
+
     public function delete_produk($id)
     {
         $user1 = UserModelProduk::find($id);
@@ -213,9 +241,30 @@ class UserController extends Controller
         return redirect('/admin');
     }
 
-    public function tambah_produk()
+    public function tambah_produk(Request $request)
     {
-        return view('admin_website.tambah_produk');
+
+        return view('admin_website.tambah_produk', $request->session()->all());
+    }
+
+    public function logout(Request $request)
+    {
+        $request->session()->flush();
+        return redirect('/login_admin');
+    }
+
+    public function riwayat(Request $request)
+    {
+        $riwayat = DetailPembelianModel::join('login_user', 'detail_pembelian.user_id', '=', 'login_user.id')
+            ->where('login_user.id', '=', $request->session()->get('data_user')[0]['id'])
+            ->get(['login_user.*', 'detail_pembelian.*']);
+        return view('user.riwayat', ['riwayat' => $riwayat]);
+    }
+
+    public function logout_user(Request $request)
+    {
+        $request->session()->flush();
+        return redirect('/login');
     }
 
     public function add_produk(Request $request)
@@ -224,6 +273,8 @@ class UserController extends Controller
             'kategori' => 'required',
             'nama_produk' => 'required',
             'detail_produk' => 'required',
+            'harga' => 'required',
+            'berat' => 'required',
             'status_stok' => 'required'
         ]);
 
@@ -232,9 +283,9 @@ class UserController extends Controller
         return redirect('/admin');
     }
 
-    public function tambah_mitra()
+    public function tambah_mitra(Request $request)
     {
-        return view('admin_website.tambah_mitra');
+        return view('admin_website.tambah_mitra', $request->session()->all());
     }
 
     public function add_mitra(Request $request)
@@ -248,9 +299,9 @@ class UserController extends Controller
         return redirect('/admin');
     }
 
-    public function tambah_artikel()
+    public function tambah_artikel(Request $request)
     {
-        return view('admin_website.tambah_artikel');
+        return view('admin_website.tambah_artikel', $request->session()->all());
     }
 
     public function add_artikel(Request $request)
@@ -274,27 +325,112 @@ class UserController extends Controller
 
     public function login_user(Request $request)
     {
-        $data = LoginModel::where([
+        $data_nama = LoginModel::where([
             'nama' => $request->nama,
+        ])->get();
+        $data_password = LoginModel::where([
             'password' => $request->password,
         ])->get();
-        if (count($data) == 1) {
-            $mitra = MitraModel::all();
-            return view('user.tampil', ['mitra' => $mitra]);
+
+        if (count($data_nama) == 0) {
+            return back()->with("gagal", "Nama tidak terdaftar");
+        } else if (count($data_password) == 0) {
+            return back()->with("gagal", "Password salah");
         } else {
+            $mitra = MitraModel::all();
+            $request->session()->put('data_user', $data_nama);
+            $riwayat = DetailPembelianModel::join('login_user', 'detail_pembelian.user_id', '=', 'login_user.id')
+                ->where('login_user.id', '=', $request->session()->get('data_user')[0]['id'])
+                ->get(['login_user.*', 'detail_pembelian.*']);
+            return view('user.tampil_riwayat', ['mitra' => $mitra, 'riwayat' => $riwayat]);
+        }
+    }
+
+
+    public function register_user(Request $request)
+    {
+        $data_nama = LoginModel::where([
+            'nama' => $request->nama,
+        ])->get();
+        $data_email = LoginModel::where([
+            'email' => $request->email,
+        ])->get();
+
+        if (count($data_nama) == 1) {
+            return back()->with("gagal_regis", "Nama Sudah Digunakan");
+        } else if (count($data_email) == 1) {
+            return back()->with("gagal_regis", "Email Sudah Digunakan");
+        } else {
+            $validateData = $request->validate([
+                'nama' => 'required',
+                'email' => 'required',
+                'password' => 'required'
+            ]);
+
+            LoginModel::create($validateData);
             return redirect('/');
         }
     }
 
-    public function register_user(Request $request)
+    public function admin(Request $request)
     {
-        $validateData = $request->validate([
-            'nama' => 'required',
-            'email' => 'required',
-            'password' => 'required'
-        ]);
+        $nama = ($request->session()->get('nama'));
+        $password = ($request->session()->get('password'));
+        $data = LoginAdminModel::where([
+            'nama' => $nama,
+            'password' => $password,
+        ])->get();
+        if (count($data) == 1) {
+            $allData = UserController::get_all_data($data);
+            return view('admin_website.admin', $allData);
+        } else {
+            return view('admin_website.login_admin');
+        }
+    }
 
-        LoginModel::create($validateData);
-        return redirect('/');
+    public function get_all_data($data)
+    {
+        $user = UserModel::all();
+        $user1 = UserModelProduk::all();
+        $produk_detail = ProdukDetailModel::all();
+        $mitra = MitraModel::all();
+        $checkout = DetailPembelianModel::all();
+
+        return  ['data' => $data, 'user' => $user, 'mitra' => $mitra, 'produk_detail' => $produk_detail, 'checkout' => $checkout, 'user1' => $user1];
+    }
+
+    public function login_admin(Request $request)
+    {
+        if ($request->isMethod('post')) {
+            $data = LoginAdminModel::where([
+                'nama' => $request->nama,
+                'password' => $request->password,
+            ])->get();
+            if (count($data) == 1) {
+                $allData = UserController::get_all_data($data);
+                $request->session()->put('nama', $request->nama);
+                $request->session()->put('password', $request->password);
+                return view('admin_website.admin', $allData);
+            } else {
+                return redirect('/admin');
+            }
+        } else {
+            $nama = ($request->session()->get('nama'));
+            $password = ($request->session()->get('password'));
+            $data = LoginAdminModel::where([
+                'nama' => $nama,
+                'password' => $password,
+            ])->get();
+            if (count($data) == 1) {
+                $user = UserModel::all();
+                $user1 = UserModelProduk::all();
+                $produk_detail = ProdukDetailModel::all();
+                $mitra = MitraModel::all();
+                $checkout = DetailPembelianModel::all();
+                return view('admin_website.admin', ['data' => $data, 'user' => $user, 'mitra' => $mitra, 'produk_detail' => $produk_detail, 'checkout' => $checkout], ['user1' => $user1]);
+            } else {
+                return redirect('/admin');
+            }
+        }
     }
 }

@@ -62,7 +62,7 @@
                 <div class="col-lg-9 tagline-delay">
                     <div class="text-beli mt-5 ml-4"></div>
                     <div class="card-body">
-                        <form class="form-horizontal" role="form" method="GET" action="/">
+                        <form class="form-horizontal" role="form" method="GET" action="/confirm">
                             {{ @csrf_field() }}
                             <h5>{{$produk_hose->nama_produk}}</h5>
                             <h5>Rp. {{$produk_hose->harga}} / meter</h5>

@@ -14,7 +14,7 @@
                     <a class="nav-item nav-link" href="/contact">Persebaran Kantor</a>
                     <a class="nav-item nav-link" href="#produk_page">Produk</a>
                     <a class="nav-item nav-link btn btn_franchise" href="/franchise">Franchise</a>
-                    <a class="nav-item" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../assets/images/avatar1.png" alt="user" class="profile-pic" /></a>
+                    <a class="nav-item" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../assets/images/avatar_user.png" alt="user" class="profile-pic" /></a>
                     <div class="dropdown-menu dropdown-menu-right scale-up">
                         <ul class="dropdown-user">
                             <div class="dw-user-box">

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\CheckoutModel;
 use Illuminate\Http\Request;
 use App\Models\Courier;
 use App\Models\Province;
@@ -11,7 +10,7 @@ use App\Models\DetailPembelianModel;
 use App\Models\UserModelProduk;
 use Kavist\RajaOngkir\Facades\RajaOngkir;
 
-class CekOngkirController extends Controller
+class CheckoutController extends Controller
 {
     public function index($id_produk)
     {
@@ -38,16 +37,6 @@ class CekOngkirController extends Controller
             'courier' => $request->courier,
         ])->get();
         $user_id = $request->session()->get('data_user')[0]['id'];
-        // DetailPembelianModel::create([
-        //     'user_id' => $user_id,
-        //     'nama_barang'  => $produk_hose->nama_produk,
-        //     'harga' => $produk_hose->harga,
-        //     'quantity' => $_POST['quantity'],
-        //     'harga_pengiriman' => $cost[0]['costs'][0]['cost'][0]['value'],
-        //     'detail_alamat' => $_POST['detail_alamat'],
-        //     'total_harga' => $_POST['quantity']  * $produk_hose->harga + $cost[0]['costs'][0]['cost'][0]['value'],
-        //     'status' => 'BELUM TERBAYAR'
-        // ])->get();
 
         $data_query = [
             'quantity' => $_POST['quantity'],
@@ -69,7 +58,6 @@ class CekOngkirController extends Controller
         $produk_hose = $request->session()->get('confirm-user-' . $user_id)['produk_hose'];
         $cost = $request->session()->get('confirm-user-' . $user_id)['cost'];
         $data_query = $request->session()->get('confirm-user-' . $user_id)['data_query'];
-        // dd($data_query['quantity']);
         DetailPembelianModel::create([
             'user_id' => $user_id,
             'nama_barang'  => $produk_hose->nama_produk,

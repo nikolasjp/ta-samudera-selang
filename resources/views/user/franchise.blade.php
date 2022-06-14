@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="../gambar/Fix/logo.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../gambar/fix/logo.png">
 
     <!-- Scroll Reveal -->
     <script src="https://unpkg.com/scrollreveal"></script>

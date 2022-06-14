@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="../gambar/Fix/logo.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../gambar/fix/logo.png">
     <title>Admin Samudera Selang</title>
     <!-- Bootstrap Core CSS -->
     <link href="../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">

@@ -26,70 +26,8 @@
 
 <body class="fix-header card-no-border">
     <div id="main-wrapper">
-        <header class="topbar">
-            <nav class="navbar top-navbar navbar-expand-md navbar-light">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="index.html">
-                        <!-- Logo icon --><b>
-                            <img src="../gambar/fix/logo.png" alt="homepage" style="width: 40px;" class="dark-logo" />
-                            <!-- Light Logo icon -->
-                            <img src="../assets/images/logo-light-icon.png" alt="homepage" class="light-logo" />
-                        </b>
-                        <!--End Logo icon -->
-                        <!-- Logo text --><span>
-                            Samudera Selang
-                        </span>
-                    </a>
-                </div>
-                <div class="navbar-collapse justify-content-right">
-                    <ul class="navbar-nav my-lg-0">
-                        <li class="nav-item dropdown float-right">
-                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../assets/images/avatar1.png" alt="user" class="profile-pic" /></a>
-                            <div class="dropdown-menu dropdown-menu-right scale-up">
-                                <ul class="dropdown-user">
-                                    <li>
-                                        <div class="dw-user-box">
-                                            <div class="u-img"><img src="../assets/images/avatar1.png" alt="user"></div>
-                                            <div class="u-text">
-                                                <h4>Nicholass Jeffensen</h4>
-                                                <p class="text-muted">Manager</p><a href="pages-profile.html" class="btn btn-rounded btn-danger btn-sm"><i class="fa fa-power-off"></i> Logout</a>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </header>
-        <aside class="left-sidebar" style="position: fixed;">
-            <!-- Sidebar scroll-->
-            <div class="scroll-sidebar">
-                <!-- User profile -->
-                <div class="user-profile">
-                    <!-- User profile image -->
-                    <div class="profile-img"> <img src="../assets/images/avatar1.png" alt="user" />
-                        <!-- this is blinking heartbit-->
-                        <div class="notify setpos"> <span class="heartbit"></span> <span class="point"></span> </div>
-                    </div>
-                    <!-- User profile text-->
-                    <div class="profile-text">
-                        <h5>Nicholass Jeffensen</h5>
-                        <p class="text-muted">Manager</p>
-                    </div>
-                </div>
-                <!-- End User profile text-->
-                <!-- Sidebar navigation-->
-                <nav class="sidebar-nav">
-                    <ul id="sidebarnav">
-                        <li class="nav-devider"></li>
-                    </ul>
-                </nav>
-                <!-- End Sidebar navigation -->
-            </div>
-            <!-- End Sidebar scroll-->
-        </aside>
+        @include('layout_admin.navbar_ubah')
+        @include('layout_admin.aside_ubah')
         <div class="page-wrapper">
             <div class="row page-titles">
                 <div class="col-md-12 align-self-center">

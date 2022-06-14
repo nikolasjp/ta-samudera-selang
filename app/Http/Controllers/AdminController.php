@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\File;
 use App\Models\AdminModelProdukCabang;
+use App\Models\UserModelProduk;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\Console\Output\Output;

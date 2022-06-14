@@ -52,7 +52,7 @@
                                             <div class="u-img"><img src="../assets/images/avatar1.png" alt="user"></div>
                                             <div class="u-text">
                                                 <h4>Nicholass Jeffensen</h4>
-                                                <p class="text-muted">Manager</p><a href="pages-profile.html" class="btn btn-rounded btn-danger btn-sm"><i class="fa fa-power-off"></i> Logout</a>
+                                                <p class="text-muted">Manager</p><a href="/logout" class="btn btn-rounded btn-danger btn-sm"><i class="fa fa-power-off"></i> Logout</a>
                                             </div>
                                         </div>
                                     </li>

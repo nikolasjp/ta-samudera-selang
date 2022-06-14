@@ -85,7 +85,7 @@
                             <h5>Marutex</h5>
                             <p class="mt-3">{{$produk_hose->detail_produk}}</p>
                             <p>Stok {{$produk_hose->status_stok}}</p>
-                            <a href="/produk_felxible" class="hyper-link"></a>
+                            <a href="/beli_hose/{{$produk_hose->id_produk}}" class="hyper-link"></a>
                         </div>
                     </div>
                 </div>

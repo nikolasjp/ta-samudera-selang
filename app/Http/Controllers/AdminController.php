@@ -21,7 +21,7 @@ class AdminController extends Controller
                 'password' => $request->password,
             ])->get();
             if (count($data) == 1) {
-                $allData = UserController::get_all_data($data);
+                $allData = AdminController::get_all_data($data);
                 $request->session()->put('nama', $request->nama);
                 $request->session()->put('password', $request->password);
                 return view('admin_website.admin', $allData);
@@ -48,6 +48,17 @@ class AdminController extends Controller
         }
     }
 
+    public function get_all_data($data)
+    {
+        $user = UserModel::all();
+        $user1 = UserModelProduk::all();
+        $produk_detail = ProdukDetailModel::all();
+        $mitra = MitraModel::all();
+        $checkout = DetailPembelianModel::all();
+
+        return  ['data' => $data, 'user' => $user, 'mitra' => $mitra, 'produk_detail' => $produk_detail, 'checkout' => $checkout, 'user1' => $user1];
+    }
+
     public function admin(Request $request)
     {
         $nama = ($request->session()->get('nama'));
@@ -57,7 +68,7 @@ class AdminController extends Controller
             'password' => $password,
         ])->get();
         if (count($data) == 1) {
-            $allData = UserController::get_all_data($data);
+            $allData = AdminController::get_all_data($data);
             return view('admin_website.admin', $allData);
         } else {
             return view('admin_website.login_admin');

@@ -147,15 +147,4 @@ class UserController extends Controller
         $request->session()->flush();
         return redirect('/login');
     }
-
-    public function get_all_data($data)
-    {
-        $user = UserModel::all();
-        $user1 = UserModelProduk::all();
-        $produk_detail = ProdukDetailModel::all();
-        $mitra = MitraModel::all();
-        $checkout = DetailPembelianModel::all();
-
-        return  ['data' => $data, 'user' => $user, 'mitra' => $mitra, 'produk_detail' => $produk_detail, 'checkout' => $checkout, 'user1' => $user1];
-    }
 }

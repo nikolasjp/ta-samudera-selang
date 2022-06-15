@@ -15,8 +15,8 @@ class UserController extends Controller
     public function tampil(Request $request)
     {
         $mitra = MitraModel::all();
-        $riwayat = $request->session()->all();
-        dd($riwayat);
+        $riwayat = LoginModel::where('nama', '=', $request->session()->get('data_user')[0]['nama'])
+            ->get();
         return view('user.tampil_riwayat', ['mitra' => $mitra, 'riwayat' => $riwayat], $request->session()->all());
     }
 
@@ -25,7 +25,8 @@ class UserController extends Controller
         $data = $request->session()->all();
         if (count($data) >= 4) {
             $mitra = MitraModel::all();
-            $riwayat = DetailPembelianModel::all();
+            $riwayat = LoginModel::where('nama', '=', $request->session()->get('data_user')[0]['nama'])
+                ->get();
             return view('user.tampil_riwayat', ['mitra' => $mitra, 'riwayat' => $riwayat]);
         } else {
             $request->session()->flush();

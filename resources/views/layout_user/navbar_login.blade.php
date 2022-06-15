@@ -21,6 +21,9 @@
                                 <div class="u-text">
                                     <p>{{$riwayat[0]->nama}}</p>
                                     <p class="text-muted"></p><a style="color: white;" href="/riwayat" class="btn btn-rounded btn-warning btn-sm"><i class="fas fa-cart-plus"></i> Riwayat Pembelian</a>
+                                    @if(Session::has("gagal"))
+                                    <p style="color:red;margin:0;"> {{Session::get("gagal")}}</p>
+                                    @endif
                                     <p class="text-muted"></p><a href="/logout_user" class="btn btn-rounded btn-danger btn-sm"><i class="fa fa-power-off"></i> Logout</a>
                                 </div>
                             </div>

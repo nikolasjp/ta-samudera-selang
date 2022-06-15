@@ -26,7 +26,7 @@ class CheckoutController extends Controller
         return json_encode($city);
     }
 
-    public function submit(Request $request, $id_produk)
+    public function checkout(Request $request, $id_produk)
     {
         $data = $request->session()->all();
         if (count($data) >= 4) {
@@ -57,7 +57,7 @@ class CheckoutController extends Controller
         }
     }
 
-    public function confirm(Request $request)
+    public function confirm_pesanan(Request $request)
     {
         $user_id = $request->session()->get('data_user')[0]['id'];
         $produk_hose = $request->session()->get('confirm-user-' . $user_id)['produk_hose'];

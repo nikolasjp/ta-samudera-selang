@@ -44,9 +44,9 @@ Route::get('/verif/{id}', [AdminController::class, 'verifikasi']);
 // CheckoutController
 Route::get('/beli_hose/{id_produk}', [CheckoutController::class, 'index']);
 Route::get('/province/{id}/cities', [CheckoutController::class, 'getCities']);
-Route::post('/test_ongkir/{id_produk}', [CheckoutController::class, 'submit']);
-Route::post('/apply', [CheckoutController::class, 'submit']);
-Route::get('/confirm', [CheckoutController::class, 'confirm']);
+Route::post('/test_ongkir/{id_produk}', [CheckoutController::class, 'checkout']);
+Route::post('/apply', [CheckoutController::class, 'checkout']);
+Route::get('/confirm', [CheckoutController::class, 'confirm_pesanan']);
 
 // UserController
 // Login Register Logout User

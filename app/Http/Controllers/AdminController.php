@@ -22,7 +22,7 @@ class AdminController extends Controller
             ])->get();
             if (count($data) == 1) {
                 $allData = AdminController::get_all_data($data);
-                $request->session()->put('nama', $request->nama); 
+                $request->session()->put('nama', $request->nama);
                 $request->session()->put('password', $request->password);
                 return view('admin_website.admin', $allData);
             } else {

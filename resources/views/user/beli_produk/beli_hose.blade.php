@@ -77,7 +77,7 @@
                                                     <i class="fa-solid fa-minus"></i>
                                                 </button>
                                             </span>
-                                            <input type="text" id="quantity" name="quantity" class="form-control input-number" value="0" min="1" max="100" required>
+                                            <input type="text" id="quantity" name="quantity" class="form-control input-number" value="1" min="1" max="100" required>
                                             <span class="input-group-btn">
                                                 <button type="button" class="quantity-right-plus btn btn-primary btn-number" data-type="plus" data-field="">
                                                     <i class="fa-solid fa-plus"></i>

@@ -31,14 +31,12 @@ class CheckoutController extends Controller
         $data = $request->session()->all();
         if (count($data) >= 4) {
             $produk_hose = UserModelProduk::find($id_produk);
-
             $cost = RajaOngkir::ongkosKirim([
                 'origin' => $request->city_origin,
                 'destination' => $request->city_destination,
                 'weight' => $_POST['quantity'] * $produk_hose->berat * 1000,
                 'courier' => $request->courier,
             ])->get();
-
             if (count($cost[0]["costs"]) == 0) {
                 return back()->with("gagal", "*Destinasi Pengiriman Paket Tidak Tersedia");
             } else {

@@ -94,7 +94,11 @@ class UserController extends Controller
         $riwayat = DetailPembelianModel::join('login_user', 'detail_pembelian.user_id', '=', 'login_user.id')
             ->where('login_user.id', '=', $request->session()->get('data_user')[0]['id'])
             ->get(['login_user.*', 'detail_pembelian.*']);
-        return view('user.riwayat', ['riwayat' => $riwayat]);
+        if (count($riwayat) >= 1) {
+            return view('user.riwayat', ['riwayat' => $riwayat]);
+        } else {
+            return redirect('/login_user')->with("gagal", "Belum ada riwayat transaksi");
+        }
     }
 
     // Login
@@ -119,9 +123,7 @@ class UserController extends Controller
         } else {
             $mitra = MitraModel::all();
             $request->session()->put('data_user', $data_nama);
-            $riwayat = DetailPembelianModel::join('login_user', 'detail_pembelian.user_id', '=', 'login_user.id')
-                ->where('login_user.id', '=', $request->session()->get('data_user')[0]['id'])
-                ->get(['login_user.*', 'detail_pembelian.*']);
+            $riwayat = $data_nama;
             return view('user.tampil_riwayat', ['mitra' => $mitra, 'riwayat' => $riwayat]);
         }
     }
@@ -147,7 +149,7 @@ class UserController extends Controller
             ]);
 
             LoginModel::create($validateData);
-            return redirect('/');
+            return redirect('/login');
         }
     }
 

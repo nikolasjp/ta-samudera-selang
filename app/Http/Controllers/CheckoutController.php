@@ -36,23 +36,21 @@ class CheckoutController extends Controller
                 'originType' => "city",
                 'destination' => $request->city_destination,
                 'destinationType' => "city",
-                'weight' => $_POST['quantity'] * $produk_hose->berat * 1000,
+                'weight' => 1000,
                 'courier' => $request->courier,
             ])->get();
-            dd($cost);
-            if (count($cost[0]["costs"]) == 0) {
-                return back()->with("gagal", "*Destinasi Pengiriman Paket Tidak Tersedia");
-            } else {
-                return view('user.beli_produk.checkout', ['produk_hose' => $produk_hose])->with('cost', $cost);
-            }
             $user_id = $request->session()->get('data_user')[0]['id'];
             $data_query = [
                 'quantity' => $_POST['quantity'],
                 'detail_alamat' => $_POST['detail_alamat'],
                 'total_harga' => $_POST['quantity']  * $produk_hose->harga + $cost[0]['costs'][0]['cost'][0]['value'],
             ];
-
             $request->session()->put('confirm-user-' . $user_id, ['produk_hose' => $produk_hose, 'cost' => $cost, 'data_query' => $data_query]);
+            if (count($cost[0]["costs"]) == 0) {
+                return back()->with("gagal", "*Destinasi Pengiriman Paket Tidak Tersedia");
+            } else {
+                return view('user.beli_produk.checkout', ['produk_hose' => $produk_hose])->with('cost', $cost);
+            }
         } else {
             return redirect('/login');
         }

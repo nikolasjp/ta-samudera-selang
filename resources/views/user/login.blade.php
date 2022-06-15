@@ -43,6 +43,7 @@
 				@endif
 				<a href="#">Forgot your password?</a>
 				<button>Sign In</button>
+				<a href="/">Kembali</a>
 			</form>
 		</div>
 		<div class="overlay-container">

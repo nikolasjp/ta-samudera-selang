@@ -36,7 +36,7 @@ class CheckoutController extends Controller
                 'originType' => "city",
                 'destination' => $request->city_destination,
                 'destinationType' => "city",
-                'weight' => 1000,
+                'weight' => $_POST['quantity'] * $produk_hose->berat * 1000,
                 'courier' => $request->courier,
             ])->get();
             $user_id = $request->session()->get('data_user')[0]['id'];

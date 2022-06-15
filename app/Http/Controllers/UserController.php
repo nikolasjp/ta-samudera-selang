@@ -15,10 +15,9 @@ class UserController extends Controller
     public function tampil(Request $request)
     {
         $mitra = MitraModel::all();
-        $riwayat = DetailPembelianModel::join('login_user', 'detail_pembelian.user_id', '=', 'login_user.id')
-            ->where('login_user.id', '=', $request->session()->get('data_user')[0]['id'])
-            ->get(['login_user.*', 'detail_pembelian.*']);
-        return view('user.tampil_riwayat', ['mitra' => $mitra, 'riwayat' => $riwayat]);
+        $riwayat = $request->session()->all();
+        dd($riwayat);
+        return view('user.tampil_riwayat', ['mitra' => $mitra, 'riwayat' => $riwayat], $request->session()->all());
     }
 
     public function index(Request $request)
@@ -26,14 +25,24 @@ class UserController extends Controller
         $data = $request->session()->all();
         if (count($data) >= 4) {
             $mitra = MitraModel::all();
-            $riwayat = DetailPembelianModel::join('login_user', 'detail_pembelian.user_id', '=', 'login_user.id')
-                ->where('login_user.id', '=', $request->session()->get('data_user')[0]['id'])
-                ->get(['login_user.*', 'detail_pembelian.*']);
+            $riwayat = DetailPembelianModel::all();
             return view('user.tampil_riwayat', ['mitra' => $mitra, 'riwayat' => $riwayat]);
         } else {
             $request->session()->flush();
             $mitra = MitraModel::all();
             return view('user.tampil', ['mitra' => $mitra]);
+        }
+    }
+
+    public function riwayat(Request $request)
+    {
+        $riwayat = DetailPembelianModel::join('login_user', 'detail_pembelian.user_id', '=', 'login_user.id')
+            ->where('login_user.id', '=', $request->session()->get('data_user')[0]['id'])
+            ->get(['login_user.*', 'detail_pembelian.*']);
+        if (count($riwayat) >= 1) {
+            return view('user.riwayat', ['riwayat' => $riwayat]);
+        } else {
+            return redirect('/tampil')->with("gagal", "Belum ada riwayat transaksi");
         }
     }
 
@@ -89,18 +98,6 @@ class UserController extends Controller
         return view('user.contact', ['user' => $user], ['user1' => $user1]);
     }
 
-    public function riwayat(Request $request)
-    {
-        $riwayat = DetailPembelianModel::join('login_user', 'detail_pembelian.user_id', '=', 'login_user.id')
-            ->where('login_user.id', '=', $request->session()->get('data_user')[0]['id'])
-            ->get(['login_user.*', 'detail_pembelian.*']);
-        if (count($riwayat) >= 1) {
-            return view('user.riwayat', ['riwayat' => $riwayat]);
-        } else {
-            return redirect('/login_user')->with("gagal", "Belum ada riwayat transaksi");
-        }
-    }
-
     // Login
     public function login()
     {
@@ -124,7 +121,7 @@ class UserController extends Controller
             $mitra = MitraModel::all();
             $request->session()->put('data_user', $data_nama);
             $riwayat = $data_nama;
-            return view('user.tampil_riwayat', ['mitra' => $mitra, 'riwayat' => $riwayat]);
+            return view('user.tampil_riwayat', $request->session()->all(), ['mitra' => $mitra, 'riwayat' => $riwayat]);
         }
     }
 

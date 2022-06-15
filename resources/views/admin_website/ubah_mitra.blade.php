@@ -31,7 +31,7 @@
         <div class="page-wrapper">
             <div class="row page-titles">
                 <div class="col-md-12 align-self-center">
-                    <h3 class="text-themecolor text-center">Edit Lokasi</h3>
+                    <h3 class="text-themecolor text-center">Edit Mitra</h3>
                 </div>
             </div>
 
@@ -39,7 +39,7 @@
                 <div class="page-conten" id="content">
                     <div class="card mt-3">
                         <div class="card-header bg-info text-white text-center">
-                            Masukkan Data Lokasi
+                            Masukkan Data Mitra
                         </div>
                         <div class="card-body">
                             <form method="post" action="/edit_mitra/{{$mitra->id}}" enctype="multipart/form-data">

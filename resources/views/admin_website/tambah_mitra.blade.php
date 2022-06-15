@@ -15,7 +15,7 @@
         <div class="page-wrapper">
             <div class="row page-titles">
                 <div class="col-md-12 align-self-center">
-                    <h3 class="text-themecolor text-center">Tambah Data Produk</h3>
+                    <h3 class="text-themecolor text-center">Tambah Data Mitra</h3>
                 </div>
             </div>
 
@@ -23,7 +23,7 @@
                 <div class="page-conten" id="content">
                     <div class="card mt-3">
                         <div class="card-header bg-info text-white text-center">
-                            Masukkan Data Produk
+                            Masukkan Data Mitra
                         </div>
                         <div class="card-body">
                             <form method="post" action="/add_mitra" enctype="multipart/form-data">

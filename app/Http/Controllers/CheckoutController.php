@@ -33,10 +33,13 @@ class CheckoutController extends Controller
             $produk_hose = UserModelProduk::find($id_produk);
             $cost = RajaOngkir::ongkosKirim([
                 'origin' => $request->city_origin,
+                'originType' => "city",
                 'destination' => $request->city_destination,
+                'destinationType' => "city",
                 'weight' => $_POST['quantity'] * $produk_hose->berat * 1000,
                 'courier' => $request->courier,
             ])->get();
+            dd($cost);
             if (count($cost[0]["costs"]) == 0) {
                 return back()->with("gagal", "*Destinasi Pengiriman Paket Tidak Tersedia");
             } else {

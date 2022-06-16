@@ -31,10 +31,11 @@ class UserController extends Controller
     {
         $data = $request->session()->all();
 
-        if (count($data) >= 1) {
+        if (count($data) >= 5) {
             $mitra = MitraModel::all();
             $riwayat = LoginModel::where('nama', '=', $request->session()->get('data_user')[0]['nama'])
                 ->get();
+
             return view('user.tampil_riwayat', ['mitra' => $mitra, 'riwayat' => $riwayat]);
         } else {
             $request->session()->flush();

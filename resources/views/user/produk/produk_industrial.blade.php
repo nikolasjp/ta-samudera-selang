@@ -79,7 +79,7 @@
                     <h1>Konsultasi dengan ahlinya</h1>
                     <h4>Untuk mendapat solusi terbaik tentang {{$artikel[0]->header_produk}}</h4>
                 </div>
-                <div class="col-lg-4 btn btn-konsultasi">Konsultasi Sekarang</div>
+                <a href="https://api.whatsapp.com/send?phone=081326694806&text=Halo,%20saya%20konsumen%20samudera%20selang,%20saya%20ingin%20bertanya" class="col-lg-3 btn btn-konsultasi top-mobile">Konsultasi Sekarang</a>
             </div>
         </div>
     </div>

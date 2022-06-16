@@ -52,7 +52,7 @@
         <div class="container">
             <p class="lead tagline">Franchise Samudera Selang Cirebon</p>
             <h1 class="display-4 tagline-core-left"><span>Anda ingin buka usaha fabrikasi selang hydrauic ?</span></h1>
-            <a href="" class="btn btn_see_produk tagline-core-right">Join Us</a>
+            <a href="https://api.whatsapp.com/send?phone=081326694806&text=Halo,%20saya%20konsumen%20samudera%20selang,%20saya%20ingin%20bergabung%20menjadi%20mitra%20samudera%20selang" class="btn btn_see_produk tagline-core-right">Join Us</a>
         </div>
     </div>
     <!-- Akhir Jumbotron -->

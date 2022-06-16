@@ -1,7 +1,7 @@
 <header class="topbar">
     <nav class="navbar top-navbar navbar-expand-md navbar-light">
         <div class="navbar-header">
-            <a class="navbar-brand" href="index.html">
+            <a class="navbar-brand" href="/admin">
                 <!-- Logo icon --><b>
                     <img src="../gambar/fix/logo.png" alt="homepage" style="width: 40px;" class="dark-logo" />
                     <!-- Light Logo icon -->

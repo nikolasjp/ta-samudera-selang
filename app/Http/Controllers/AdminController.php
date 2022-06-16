@@ -81,7 +81,7 @@ class AdminController extends Controller
         $request->session()->flush();
         return redirect('/login_admin');
     }
-
+    
     // Kantor
     public function tambah_kantor(Request $request)
     {

@@ -123,7 +123,7 @@ class UserController extends Controller
             return back()->with("gagal", "Password salah");
         } else {
             $request->session()->put('data_user', $data_nama);
-            return redirect('/tampil');
+            return redirect('/');
         }
     }
 

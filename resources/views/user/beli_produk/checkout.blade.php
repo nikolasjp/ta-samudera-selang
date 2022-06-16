@@ -111,7 +111,7 @@
                             Kami ingin menjadi bagian dari mitra anda untuk maju bersama menyongsong masa depan yang lebih sukses.
                         </p>
                         <b>
-                            Contact Us : 081326694806
+                            Contact Us : 082217277481
                         </b>
                     </div>
                 </div>

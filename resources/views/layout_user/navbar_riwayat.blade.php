@@ -1,7 +1,7 @@
     <!-- Navbar -->
     <nav style="background-color: black;" class="navbar navbar-expand-lg navbar-light nav-fixed">
         <div class="container">
-            <a class="navbar-brand" href="/tampil">
+            <a class="navbar-brand" href="/">
                 <img src="{{ asset('gambar/fix/logo.png')}}" width="49" height="49" alt="">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -9,7 +9,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav ml-auto">
-                    <a class="nav-item nav-link active" href="/tampil">Home<span class="sr-only">(current)</span></a>
+                    <a class="nav-item nav-link active" href="/">Home<span class="sr-only">(current)</span></a>
                     <a class="nav-item nav-link btn btn_franchise" href="/franchise">Franchise</a>
                     <a class="nav-item" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../assets/images/avatar_user.png" alt="user" class="profile-pic" /></a>
                     <div class="dropdown-menu dropdown-menu-right scale-up">

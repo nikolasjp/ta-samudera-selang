@@ -12,21 +12,6 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function tampil(Request $request)
-    {
-        $cek_data = $request->session()->all();
-        if (count($cek_data) >= 1) {
-            $mitra = MitraModel::all();
-            $riwayat = LoginModel::where('nama', '=', $request->session()->get('data_user')[0]['nama'])
-                ->get();
-            return view('user.tampil_riwayat', ['mitra' => $mitra, 'riwayat' => $riwayat], $request->session()->all());
-        } else {
-            $request->session()->flush();
-            $mitra = MitraModel::all();
-            return view('user.tampil', ['mitra' => $mitra]);
-        }
-    }
-
     public function index(Request $request)
     {
         $data = $request->session()->all();
@@ -61,7 +46,7 @@ class UserController extends Controller
         if (count($riwayat) >= 1) {
             return view('user.riwayat', ['riwayat' => $riwayat]);
         } else {
-            return redirect('/tampil')->with("gagal", "Belum ada riwayat transaksi");
+            return redirect('/')->with("gagal", "Belum ada riwayat transaksi");
         }
     }
 

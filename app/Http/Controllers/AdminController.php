@@ -81,11 +81,21 @@ class AdminController extends Controller
         $request->session()->flush();
         return redirect('/login_admin');
     }
-    
+
     // Kantor
     public function tambah_kantor(Request $request)
     {
-        return view('admin_website.tambah_kantor', $request->session()->all());
+        $nama = ($request->session()->get('nama'));
+        $password = ($request->session()->get('password'));
+        $data = LoginAdminModel::where([
+            'nama' => $nama,
+            'password' => $password,
+        ])->get();
+        if (count($data) == 1) {
+            return view('admin_website.tambah_kantor');
+        } else {
+            return view('admin_website.login_admin');
+        }
     }
     public function add(Request $request)
     {
@@ -127,8 +137,17 @@ class AdminController extends Controller
     // Produk
     public function tambah_produk(Request $request)
     {
-
-        return view('admin_website.tambah_produk', $request->session()->all());
+        $nama = ($request->session()->get('nama'));
+        $password = ($request->session()->get('password'));
+        $data = LoginAdminModel::where([
+            'nama' => $nama,
+            'password' => $password,
+        ])->get();
+        if (count($data) == 1) {
+            return view('admin_website.tambah_produk');
+        } else {
+            return view('admin_website.login_admin');
+        }
     }
 
     public function add_produk(Request $request)
@@ -177,7 +196,17 @@ class AdminController extends Controller
     // Mitra
     public function tambah_mitra(Request $request)
     {
-        return view('admin_website.tambah_mitra', $request->session()->all());
+        $nama = ($request->session()->get('nama'));
+        $password = ($request->session()->get('password'));
+        $data = LoginAdminModel::where([
+            'nama' => $nama,
+            'password' => $password,
+        ])->get();
+        if (count($data) == 1) {
+            return view('admin_website.tambah_mitra');
+        } else {
+            return view('admin_website.login_admin');
+        }
     }
 
     public function add_mitra(Request $request)
@@ -218,7 +247,17 @@ class AdminController extends Controller
     // Artikel
     public function tambah_artikel(Request $request)
     {
-        return view('admin_website.tambah_artikel', $request->session()->all());
+        $nama = ($request->session()->get('nama'));
+        $password = ($request->session()->get('password'));
+        $data = LoginAdminModel::where([
+            'nama' => $nama,
+            'password' => $password,
+        ])->get();
+        if (count($data) == 1) {
+            return view('admin_website.tambah_artikel');
+        } else {
+            return view('admin_website.login_admin');
+        }
     }
 
     public function add_artikel(Request $request)

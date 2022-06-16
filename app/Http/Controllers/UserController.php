@@ -30,17 +30,26 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $data = $request->session()->all();
+        $data2 = $request->session()->get('data_user');
 
-        if (count($data) >= 5) {
+        if (count($data) == 1) {
             $mitra = MitraModel::all();
             $riwayat = LoginModel::where('nama', '=', $request->session()->get('data_user')[0]['nama'])
                 ->get();
 
             return view('user.tampil_riwayat', ['mitra' => $mitra, 'riwayat' => $riwayat]);
         } else {
-            $request->session()->flush();
-            $mitra = MitraModel::all();
-            return view('user.tampil', ['mitra' => $mitra]);
+            if ($data2 = $data2) {
+                $mitra = MitraModel::all();
+                $riwayat = LoginModel::where('nama', '=', $request->session()->get('data_user')[0]['nama'])
+                    ->get();
+
+                return view('user.tampil_riwayat', ['mitra' => $mitra, 'riwayat' => $riwayat]);
+            } else {
+                $request->session()->flush();
+                $mitra = MitraModel::all();
+                return view('user.tampil', ['mitra' => $mitra]);
+            }
         }
     }
 
@@ -128,10 +137,8 @@ class UserController extends Controller
         } else if (count($data_password) == 0) {
             return back()->with("gagal", "Password salah");
         } else {
-            $mitra = MitraModel::all();
             $request->session()->put('data_user', $data_nama);
-            $riwayat = $data_nama;
-            return view('user.tampil_riwayat', $request->session()->all(), ['mitra' => $mitra, 'riwayat' => $riwayat]);
+            return redirect('/tampil');
         }
     }
 

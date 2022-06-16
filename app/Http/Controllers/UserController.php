@@ -14,16 +14,24 @@ class UserController extends Controller
 {
     public function tampil(Request $request)
     {
-        $mitra = MitraModel::all();
-        $riwayat = LoginModel::where('nama', '=', $request->session()->get('data_user')[0]['nama'])
-            ->get();
-        return view('user.tampil_riwayat', ['mitra' => $mitra, 'riwayat' => $riwayat], $request->session()->all());
+        $cek_data = $request->session()->all();
+        if (count($cek_data) >= 1) {
+            $mitra = MitraModel::all();
+            $riwayat = LoginModel::where('nama', '=', $request->session()->get('data_user')[0]['nama'])
+                ->get();
+            return view('user.tampil_riwayat', ['mitra' => $mitra, 'riwayat' => $riwayat], $request->session()->all());
+        } else {
+            $request->session()->flush();
+            $mitra = MitraModel::all();
+            return view('user.tampil', ['mitra' => $mitra]);
+        }
     }
 
     public function index(Request $request)
     {
         $data = $request->session()->all();
-        if (count($data) >= 4) {
+
+        if (count($data) >= 1) {
             $mitra = MitraModel::all();
             $riwayat = LoginModel::where('nama', '=', $request->session()->get('data_user')[0]['nama'])
                 ->get();

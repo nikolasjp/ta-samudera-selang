@@ -9,7 +9,7 @@
         <div class="container">
             <p class="lead tagline">Samudera Selang Cirebon</p>
             <h1 class="display-4 tagline-core-left"><span>Perusahaan Penjualan Sparepart & Hose Hydraulik</span></h1>
-            <a href="#produk" class="btn btn_see_produk tagline-core-right">See Produk</a>
+            <a href="#produk_page" class="btn btn_see_produk tagline-core-right">See Produk</a>
         </div>
     </div>
     <!-- Akhir Jumbotron -->

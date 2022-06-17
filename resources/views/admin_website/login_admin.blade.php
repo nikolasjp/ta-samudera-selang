@@ -4,14 +4,12 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" type="image/png" sizes="16x16" href="../gambar/fix/logo.png">
     <title>Samudera Selang</title>
     <script src="https://kit.fontawesome.com/4619c8d9c5.js" crossorigin="anonymous"></script>
-    <!-- You can change the theme colors from here -->
     <link rel="stylesheet" href="{{ asset('css_public/login.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
 </head>

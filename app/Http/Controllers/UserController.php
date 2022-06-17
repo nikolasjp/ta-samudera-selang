@@ -17,7 +17,7 @@ class UserController extends Controller
         $data = $request->session()->all();
         $data2 = $request->session()->get('data_user');
 
-        if (count($data) == 1) {
+        if ($data == null) {
             $mitra = MitraModel::all();
             $riwayat = LoginModel::where('nama', '=', $request->session()->get('data_user')[0]['nama'])
                 ->get();

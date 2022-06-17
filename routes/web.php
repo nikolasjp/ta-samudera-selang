@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
 
 // Admin Controller
 // Admin
@@ -69,3 +70,7 @@ Route::get('/produk_felxible', [UserController::class, 'produk_felxible']);
 Route::get('/produk_assesoris', [UserController::class, 'produk_assesoris']);
 Route::get('/produk_pipa_nozel', [UserController::class, 'produk_pipa_nozel']);
 Route::get('/produk_industrial', [UserController::class, 'produk_industrial']);
+
+Route::get('/linkstorage', function () {
+    Artisan::call('storage:link');
+});

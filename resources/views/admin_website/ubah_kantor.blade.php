@@ -46,7 +46,7 @@
                                 @csrf
                                 <div class="form-group">
                                     <label>Nama Kota</label>
-                                    <input type="text" name="kota" class="form-control" placeholder="Masukan Nama Kota" required>
+                                    <input type="text" name="kota" class="form-control" value="{{$user->kota}}" placeholder="Masukan Nama Kota" required>
                                 </div>
                                 <div class="form-group">
                                     <label>Alamat Kantor</label>

@@ -45,15 +45,8 @@
                             <form method="post" action="/edit/{{$user->id}}" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group">
-                                    <label>Kota</label>
-                                    <select class="form-control" name="kota" required>
-                                        <option value="{{$user->kota}}">{{$user->kota}}</option>
-                                        <option value="Kantor Cirebon">Cirebon</option>
-                                        <option value="Kantor Semarang">Semarang</option>
-                                        <option value="Kantor Tasikmalaya">Tasikmalaya</option>
-                                        <option value="Kantor Jogjakarta">Jogjakarta</option>
-                                        <option value="Kantor Tegal">Tegal</option>
-                                    </select>
+                                    <label>Nama Kota</label>
+                                    <input type="text" name="kota" class="form-control" placeholder="Masukan Nama Kota" required>
                                 </div>
                                 <div class="form-group">
                                     <label>Alamat Kantor</label>

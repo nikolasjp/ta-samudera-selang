@@ -54,7 +54,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Link Google Maps</label>
-                                    <input type="text" name="link" class="form-control" placeholder="Masukan Link Lengkap Google Maps Kantor" required>
+                                    <input type="text" name="link" class="form-control" value="{{$user->link}}" placeholder="Masukan Link Lengkap Google Maps Kantor" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="image" class="form-label">Upload Gambar Kantor</label>

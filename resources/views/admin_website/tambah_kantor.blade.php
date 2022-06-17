@@ -28,25 +28,17 @@
                         <div class="card-body">
                             <form method="post" action="/add" enctype="multipart/form-data">
                                 @csrf
-                                <div class=" form-group">
-                                    <label>Kota</label>
-                                    <select class="form-control" name="kota" required>
-                                        <option value="" disabled selected>Pilihan</option>
-                                        <option value="Kantor Cirebon">Cirebon</option>
-                                        <option value="Kantor Semarang">Semarang</option>
-                                        <option value="Kantor Tasikmalaya">Tasikmalaya</option>
-                                        <option value="Kantor Jogjakarta">Jogjakarta</option>
-                                        <option value="Kantor Tegal">Tegal</option>
-                                        <option value="Kantor Cilacap">Cilacap</option>
-                                        <option value="Kantor Kudus">Kudus</option>
-                                        <option value="Kantor Manis">Manis</option>
-                                        <option value="Kantor Subang">Subang</option>
-                                        <option value="Kantor Purwokerto">Purwokerto</option>
-                                    </select>
+                                <div class="form-group">
+                                    <label>Nama Kota</label>
+                                    <input type="text" name="kota" class="form-control" placeholder="Masukan Nama Kota" required>
                                 </div>
                                 <div class="form-group">
                                     <label>Alamat Kantor</label>
                                     <input type="text" name="alamat" class="form-control" placeholder="Masukan Alamat Lengkap Kantor" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Link Google Maps</label>
+                                    <input type="text" name="link" class="form-control" placeholder="Masukan Link Lengkap Google Maps Kantor" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="image" class="form-label">Upload Gambar Kantor</label>

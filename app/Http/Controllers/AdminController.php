@@ -101,7 +101,8 @@ class AdminController extends Controller
     {
         $validateData = $request->validate([
             'kota' => 'required',
-            'alamat' => 'required'
+            'alamat' => 'required',
+            'link' => 'required'
         ]);
 
         $validateData['img'] = $request->file('img')->store('gambar-upload');
@@ -119,7 +120,8 @@ class AdminController extends Controller
     {
         $validateData = $request->validate([
             'kota' => 'required',
-            'alamat' => 'required'
+            'alamat' => 'required',
+            'link' => 'required'
         ]);
         $user = UserModel::find($id);
         $validateData['img'] = $request->file('img')->store('gambar-upload');

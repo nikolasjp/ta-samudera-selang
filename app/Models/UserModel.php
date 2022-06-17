@@ -8,5 +8,5 @@ class UserModel extends Model
 {
     protected $table = 'persebaran';
     protected $primaryKey = 'id';
-    protected $fillable = ['id', 'kota', 'alamat', 'img'];
+    protected $fillable = ['id', 'kota', 'alamat', 'link', 'img'];
 }

@@ -21,14 +21,12 @@ class UserController extends Controller
             $mitra = MitraModel::all();
             $riwayat = LoginModel::where('nama', '=', $request->session()->get('data_user')[0]['nama'])
                 ->get();
-
             return view('user.tampil_riwayat', ['mitra' => $mitra, 'riwayat' => $riwayat]);
         } else {
             if ($data2 = $data2) {
                 $mitra = MitraModel::all();
                 $riwayat = LoginModel::where('nama', '=', $request->session()->get('data_user')[0]['nama'])
                     ->get();
-
                 return view('user.tampil_riwayat', ['mitra' => $mitra, 'riwayat' => $riwayat]);
             } else {
                 $request->session()->flush();

@@ -60,6 +60,10 @@
                                     <input type="text" name="alamat" class="form-control" placeholder="Masukan Alamat Lengkap Kantor" value="{{$user->alamat}}" required>
                                 </div>
                                 <div class="form-group">
+                                    <label>Link Google Maps</label>
+                                    <input type="text" name="link" class="form-control" placeholder="Masukan Link Lengkap Google Maps Kantor" required>
+                                </div>
+                                <div class="form-group">
                                     <label for="image" class="form-label">Upload Gambar Kantor</label>
                                     <input class="form-control" type="file" name="img" value="{{$user->img}}">
                                 </div>

@@ -69,6 +69,7 @@
             <div class="col-lg-4 mb-5 mobile-center">
                 <h3 class="text-kantor-pusat">{{$user->kota}}</h3>
                 <p>{{$user->alamat}}</p>
+                <a href="{{$user->link}}">Lokasi</a>
             </div>
             @endforeach
         </div>

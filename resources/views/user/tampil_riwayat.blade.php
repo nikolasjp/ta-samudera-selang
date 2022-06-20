@@ -23,19 +23,19 @@
                     <div class="row">
                         <!-- Info 1 -->
                         <div class="col-lg tagline-core-left">
-                            <img src="{{ asset('storage/gambar/office 1.png')}}" alt="office">
+                            <img src="{{ asset('gambar/gambar/office 1.png')}}" alt="office">
                             <h4>10+</h4>
                             <p>Toko & Kantor</p>
                         </div>
                         <!-- Info 2 -->
                         <div class="col-lg tagline-down">
-                            <img src="{{ asset('storage/gambar/worker 1.png')}}" alt="worker">
+                            <img src="{{ asset('gambar/gambar/worker 1.png')}}" alt="worker">
                             <h4>100+</h4>
                             <p>Karyawan</p>
                         </div>
                         <!-- Info 3 -->
                         <div class="col-lg tagline-core-right">
-                            <img src="{{ asset('storage/gambar/delivery-box 1.png')}}" alt="product">
+                            <img src="{{ asset('gambar/gambar/delivery-box 1.png')}}" alt="product">
                             <h4>500+</h4>
                             <p>Product</p>
                         </div>
@@ -51,7 +51,7 @@
         <div class="container">
             <div class="row align-items-center profile_perusahaan mt-5">
                 <div class="col tagline-down">
-                    <img src="{{ asset('storage/gambar/kantor_profile.png')}}" class="img-fluid profile_samudera" alt="profile_image">
+                    <img src="{{ asset('gambar/gambar/kantor_profile.png')}}" class="img-fluid profile_samudera" alt="profile_image">
                 </div>
                 <div class="col-lg-6 mt-2 mobile-center">
                     <h1 class="tagline-core-left">Profile Samudera Selang</h1>

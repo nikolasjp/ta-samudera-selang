@@ -143,7 +143,7 @@ border-color: #136fd1;
 }
 
 .jumbotron-background-1 {
-    background-image: url(/storage/gambar/background-image.png);
+    background-image: url(/gambar/gambar/background-image.png);
     background-size: cover;
     height: 1024px;
     text-align: center;
@@ -544,7 +544,7 @@ color: white !important;
     }
 
     .jumbotron-background-1 {
-        background-image: url("/storage/gambar/background-image.png");
+        background-image: url("/gambar/gambar/background-image.png");
         background-size: cover;
         height: 1110px;
         margin-top: -75px;

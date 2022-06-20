@@ -242,7 +242,7 @@
                     <h1>Konsultasi dengan ahlinya</h1>
                     <h4>Untuk mendapat solusi terbaik tentang Selang</h4>
                 </div>
-                <a href="https://api.whatsapp.com/send?phone=+6282217277481&text=Halo,%20saya%20konsumen%20samudera%20selang,%20saya%20ingin%20bertanya" class="col-lg-3 btn btn-konsultasi top-mobile">Konsultasi Sekarang</a>
+                <a href="https://api.whatsapp.com/send?phone=+6282217277481&text=Halo,%20saya%20konsumen%20samudera%20selang,%20saya%20ingin%20bertanya" target="_blank" class="col-lg-3 btn btn-konsultasi top-mobile">Konsultasi Sekarang</a>
             </div>
         </div>
     </div>

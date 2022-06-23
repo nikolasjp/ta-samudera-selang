@@ -5,36 +5,38 @@
 <body>
     @include('layout_user.navbar_riwayat')
     <!-- Table Checkout -->
-    <div class="mt-7">
-        <div class="card-body">
-            <h4 class="card-title text-center m-30">Data Table Checkout</h4>
-            <div class="table-responsive m-t-40">
-                <table id="myTable" class="table table-bordered table-striped">
-                    <thead class="thead-light">
-                        <tr>
-                            <th class="w-220">Nama Barang</th>
-                            <th>Harga</th>
-                            <th>Quantity</th>
-                            <th>Harga Pengiriman</th>
-                            <th>Detail Alamat</th>
-                            <th>Total Harga</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($riwayat as $riwayat)
-                        <tr>
-                            <td>{{$riwayat->nama_barang}}</td>
-                            <td>{{$riwayat->harga}}</td>
-                            <td>{{$riwayat->quantity}}</td>
-                            <td>{{$riwayat->harga_pengiriman}}</td>
-                            <td>{{$riwayat->detail_alamat}}</td>
-                            <td>{{$riwayat->total_harga}}</td>
-                            <td>{{$riwayat->status}}</td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+    <div class="mt-5">
+        <div class="container-xl">
+            <div class="card-body">
+                <h4 class="card-title text-center m-30">Data Table Checkout</h4>
+                <div class="table-responsive m-t-40">
+                    <table id="myTable" class="table table-bordered table-striped">
+                        <thead class="thead-light">
+                            <tr>
+                                <th class="w-220">Nama Barang</th>
+                                <th>Harga</th>
+                                <th>Quantity</th>
+                                <th>Harga Pengiriman</th>
+                                <th>Detail Alamat</th>
+                                <th>Total Harga</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($riwayat as $riwayat)
+                            <tr>
+                                <td>{{$riwayat->nama_barang}}</td>
+                                <td>{{$riwayat->harga}}</td>
+                                <td>{{$riwayat->quantity}}</td>
+                                <td>{{$riwayat->harga_pengiriman}}</td>
+                                <td>{{$riwayat->detail_alamat}}</td>
+                                <td>{{$riwayat->total_harga}}</td>
+                                <td>{{$riwayat->status}}</td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

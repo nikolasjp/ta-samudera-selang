@@ -58,7 +58,7 @@
             <div class="col-lg tagline-core-left mobile-center">
                 <h1 class="text-kantor-pusat">Kantor Pusat</h1>
                 <p>Jl. Ahmad Yani, Kalijaga, Kec. Harjamukti, Kota Cirebon, Jawa Barat 45142</p>
-                <a href="https://maps.app.goo.gl/Te2XCQQrMbDHw5968">Lokasi</a>
+                <a href="https://maps.app.goo.gl/Te2XCQQrMbDHw5968" target="_blank">Lokasi</a>
             </div>
             <div class="col-lg">
                 <img src="{{ asset('gambar/ills-kantor.jpg')}}" width="500px" style="border-radius: 40px;" alt="" class="img-fluid mt-4 tagline-core-right">
@@ -69,7 +69,7 @@
             <div class="col-lg-4 mb-5 mobile-center">
                 <h3 class="text-kantor-pusat">{{$user->kota}}</h3>
                 <p>{{$user->alamat}}</p>
-                <a href="{{$user->link}}">Lokasi</a>
+                <a href="{{$user->link}}" target="_blank">Lokasi</a>
             </div>
             @endforeach
         </div>

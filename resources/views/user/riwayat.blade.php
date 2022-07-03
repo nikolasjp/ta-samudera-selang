@@ -2,42 +2,53 @@
 <html lang="en">
 @include('layout_user.head')
 
-<body>
+<body style="background: rgba(216, 216, 216, 0.32);">
     @include('layout_user.navbar_riwayat')
     <!-- Table Checkout -->
     <div class="mt-5">
         <div class="container-xl">
-            <div class="card-body">
-                <h4 class="card-title text-center m-30">Data Table Checkout</h4>
-                <div class="table-responsive m-t-40">
-                    <table id="myTable" class="table table-bordered table-striped">
-                        <thead class="thead-light">
-                            <tr>
-                                <th class="w-220">Nama Barang</th>
-                                <th>Harga</th>
-                                <th>Quantity</th>
-                                <th>Harga Pengiriman</th>
-                                <th>Detail Alamat</th>
-                                <th>Total Harga</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($riwayat as $riwayat)
-                            <tr>
-                                <td>{{$riwayat->nama_barang}}</td>
-                                <td>{{$riwayat->harga}}</td>
-                                <td>{{$riwayat->quantity}}</td>
-                                <td>{{$riwayat->harga_pengiriman}}</td>
-                                <td>{{$riwayat->detail_alamat}}</td>
-                                <td>{{$riwayat->total_harga}}</td>
-                                <td>{{$riwayat->status}}</td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+            <h4 class="card-title text-center m-30">Riwayat Pembelian</h4>
+            @foreach ($pesanan as $key => $item)
+            <div id="accordion{{$key}}" class="mt-3">
+                <div class="card-1">
+                    <div class="card-header" data-toggle="collapse" data-target="#collapse{{$key}}" aria-expanded="true" aria-controls="collapse{{$key}}" id="head{{$key}}">
+                        <div class="d-flex">
+                            <p class="mb-0">
+                                Invoice : {{$item['invoice']}}
+                            </p>
+                            <p class="mb-0 ml-4">
+                                Tanggal Transaksi : {{$item['timestamp']}}
+                            </p>
+                            <p class="mb-0 rotate ml-auto">
+                                <i class="fas fa-chevron-right"></i>
+                            </p>
+                        </div>
+                    </div>
+                    <div id="collapse{{$key}}" class="collapse" aria-labelledby="head{{$key}}" data-parent="#accordion{{$key}}">
+                        <div class="card-body-1 d-flex">
+                            <div class="card card-2 p-3">
+                                <h5>Detail Pembelian Barang</h5>
+                                <!-- <p>Barang 1 :</p> -->
+                                @foreach ($item['data'] as $barang)
+                                <div class="d-flex">
+                                    <p>Nama Barang : {{$barang->nama_produk}} |</p>
+                                    <p class="ml-1">Quantity : {{$barang->quantity}} |</p>
+                                    <p class="ml-1">Harga : Rp. {{number_format($barang->harga,0,',','.')}} |</p>
+                                    <p class="ml-1">Total Harga : Rp. {{number_format($barang->total_harga,0,',','.')}} |</p>
+                                </div>
+                                @endforeach
+                            </div>
+
+                            <div class="card card-2 p-3">
+                                <h5>Rincian Pembayaran</h5>
+                                <p>Metode Pembayaran : Bank BCA</p>
+                                <p>Total Harga : Rp. {{number_format($item['total_harga'],0,',','.')}}</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+            @endforeach
         </div>
     </div>
 
@@ -97,6 +108,12 @@
         });
         ScrollReveal().reveal(".tagline-delay", {
             delay: 600,
+        });
+    </script>
+
+    <script>
+        $(".rotate").click(function() {
+            $(this).toggleClass("down");
         });
     </script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

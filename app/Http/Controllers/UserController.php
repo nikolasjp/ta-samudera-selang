@@ -2,13 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\DetailPembelianModel;
+use App\Models\DetailPesananModel;
+use App\Models\KeranjangModel;
 use App\Models\LoginModel;
 use App\Models\ProdukDetailModel;
 use App\Models\UserModel;
 use App\Models\MitraModel;
 use App\Models\UserModelProduk;
 use Illuminate\Http\Request;
+use Kavist\RajaOngkir\Facades\RajaOngkir;
+use App\Models\Courier;
+use App\Models\Province;
+use Illuminate\Auth\Events\Login;
 
 class UserController extends Controller
 {
@@ -36,16 +41,78 @@ class UserController extends Controller
         }
     }
 
+    public function detail_pembelian(Request $request)
+    {
+        $belanja = KeranjangModel::join('login_user', 'keranjang_belanja.user_id', '=', 'login_user.id')
+            ->join('produk', 'keranjang_belanja.id_produk', '=', 'produk.id_produk')
+            ->where('login_user.id', '=', $request->session()->get('data_user')[0]['id'])
+            ->get(['login_user.*', 'keranjang_belanja.*', 'produk.*']);
+        // $total_harga = DetailPesananModel::join('login_user', 'detail_pembelian.user_id', '=', 'login_user.id')
+        //     ->where('login_user.id', '=', $request->session()->get('data_user')[0]['id'])
+        //     ->get(['login_user.*', 'detail_pembelian.*']);
+        // dd($belanja);
+        $total_harga = [];
+        foreach ($belanja as $item) {
+            array_push($total_harga, intval($item->harga) * intval($item->quantity));
+        }
+        return view('user.detail_pembelian', ['belanja' => $belanja, 'total_harga' => array_sum($total_harga)]);
+    }
+
     public function riwayat(Request $request)
     {
-        $riwayat = DetailPembelianModel::join('login_user', 'detail_pembelian.user_id', '=', 'login_user.id')
+        $user_id = $request->session()->get('data_user')[0]['id'];
+        $pesanan = DetailPesananModel::join('pesanan', 'detail_pesanan.pesanan_id', '=', 'pesanan.pesanan_id')
+            ->join('produk', 'detail_pesanan.barang_id', '=', 'produk.id_produk')
+            ->join('login_user', 'pesanan.user_id', '=', 'login_user.id')
             ->where('login_user.id', '=', $request->session()->get('data_user')[0]['id'])
-            ->get(['login_user.*', 'detail_pembelian.*']);
-        if (count($riwayat) >= 1) {
-            return view('user.riwayat', ['riwayat' => $riwayat]);
-        } else {
-            return redirect('/')->with("gagal", "Belum ada riwayat transaksi");
+            ->get(['pesanan.*', 'detail_pesanan.*', 'login_user.*', 'produk.*']);
+        $data = [];
+        function toStringDate($timestamp)
+        {
+            $date = date('d M Y g:i', strtotime($timestamp));
+            return $date . ' WIB';
         }
+        foreach ($pesanan as $item) {
+            if (array_key_exists($item->pesanan_id, $data)) {
+                array_push($data[$item->pesanan_id]['data'], $item);
+            } else {
+                $data[$item->pesanan_id]['data'] = array($item);
+                $data[$item->pesanan_id]['total_harga'] = $item->total_harga_barang + $item->random;
+                $data[$item->pesanan_id]['invoice'] = $item->invoice;
+                $data[$item->pesanan_id]['timestamp'] = toStringDate($item->timestamp);
+            }
+        }
+        return view('user.riwayat', ['pesanan' => $data]);
+    }
+
+    public function keranjang(Request $request)
+    {
+        $couriers = Courier::pluck('title', 'code');
+        $provinces = Province::pluck('title', 'province_id');
+        $belanja = KeranjangModel::join('login_user', 'keranjang_belanja.user_id', '=', 'login_user.id')
+            ->join('produk', 'keranjang_belanja.id_produk', '=', 'produk.id_produk')
+            ->where('login_user.id', '=', $request->session()->get('data_user')[0]['id'])
+            ->get(['login_user.*', 'keranjang_belanja.*', 'produk.*']);
+        // $total_harga = DetailPesananModel::join('login_user', 'detail_pembelian.user_id', '=', 'login_user.id')
+        //     ->where('login_user.id', '=', $request->session()->get('data_user')[0]['id'])
+        //     ->get(['login_user.*', 'detail_pembelian.*']);
+        // dd($belanja);
+        $total_harga = [];
+        foreach ($belanja as $item) {
+            array_push($total_harga, intval($item->harga) * intval($item->quantity));
+        }
+        if (count($belanja) >= 1) {
+            return view('user.keranjang_belanja', ['belanja' => $belanja, 'total_harga' => array_sum($total_harga)], compact('couriers', 'provinces'));
+        } else {
+            return redirect('/')->with("gagal", "Belum ada riwayat pembelanjaan");
+        }
+    }
+
+    public function delete_pesanan($id)
+    {
+        $belanja = KeranjangModel::find($id);
+        $belanja->delete($belanja);
+        return redirect('/keranjang');
     }
 
     // Produk User

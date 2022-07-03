@@ -94,7 +94,6 @@ p{
     background: white;
 }
 .pad-4{
-    margin-top: -10px;
     margin-bottom: 10px;
     flex: 0 0 33.333333%;
     max-width: 15.333333%;
@@ -129,12 +128,44 @@ border-color: #136fd1;
 }
 
 .btn_franchise{
-    width: 140px !important;
+    width: max-content !important;
     height: 42px !important;
     background: #02468f;
     border-radius: 16px 4px 16px 4px;
     color: white;
     padding: 10px;
+}
+
+.rotate{
+    -moz-transition: all 0.5s linear;
+    -webkit-transition: all 0.5s linear;
+    transition: all 0.5s linear;
+}
+
+.rotate.down{
+    -ms-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+
+.card-body-1{
+    background-color: white;
+    padding: 20px;
+}
+
+.card-2{
+    height: max-content !important;
+    width: max-content !important;
+    max-width: max-content !important;
+    box-shadow: none !important;
+    border: none !important;
+    background: rgba(216, 216, 216, 0.32) !important;
+    border-radius: 0 !important;
+}
+
+.card-header{
+    background-color: white;
 }
 
 .btn_franchise:hover{

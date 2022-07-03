@@ -8,7 +8,7 @@ use App\Models\UserModelProduk;
 use App\Models\UserModel;
 use App\Models\MitraModel;
 use App\Models\ProdukDetailModel;
-use App\Models\DetailPembelianModel;
+use App\Models\DetailPesananModel;
 
 class AdminController extends Controller
 {
@@ -40,7 +40,7 @@ class AdminController extends Controller
                 $user1 = UserModelProduk::all();
                 $produk_detail = ProdukDetailModel::all();
                 $mitra = MitraModel::all();
-                $checkout = DetailPembelianModel::all();
+                $checkout = DetailPesananModel::all();
                 return view('admin_website.admin', ['data' => $data, 'user' => $user, 'mitra' => $mitra, 'produk_detail' => $produk_detail, 'checkout' => $checkout], ['user1' => $user1]);
             } else {
                 return redirect('/admin');
@@ -54,7 +54,7 @@ class AdminController extends Controller
         $user1 = UserModelProduk::all();
         $produk_detail = ProdukDetailModel::all();
         $mitra = MitraModel::all();
-        $checkout = DetailPembelianModel::all();
+        $checkout = DetailPesananModel::all();
 
         return  ['data' => $data, 'user' => $user, 'mitra' => $mitra, 'produk_detail' => $produk_detail, 'checkout' => $checkout, 'user1' => $user1];
     }
@@ -303,7 +303,7 @@ class AdminController extends Controller
     //Checkout
     public function verifikasi($id)
     {
-        $checkout = DetailPembelianModel::find($id);
+        $checkout = DetailPesananModel::find($id);
         $checkout->update([
             'status' => 'TERBAYAR'
         ]);
@@ -312,7 +312,7 @@ class AdminController extends Controller
 
     public function ubah_pesanan($id)
     {
-        $checkout = DetailPembelianModel::find($id);
+        $checkout = DetailPesananModel::find($id);
         return view('admin_website.ubah_pembelian', ['checkout' => $checkout]);
     }
 
@@ -322,14 +322,14 @@ class AdminController extends Controller
             'quantity' => 'required',
             'detail_alamat' => 'required'
         ]);
-        $checkout = DetailPembelianModel::find($id);
+        $checkout = DetailPesananModel::find($id);
         $checkout->update($validateData);
         return redirect('/admin');
     }
 
     public function delete_pesanan($id)
     {
-        $checkout = DetailPembelianModel::find($id);
+        $checkout = DetailPesananModel::find($id);
         $checkout->delete($checkout);
         return redirect('/admin');
     }

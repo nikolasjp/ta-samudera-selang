@@ -6,8 +6,13 @@
     <!-- Icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../gambar/fix/logo.png">
 
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+
     <!-- Scroll Reveal -->
     <script src="https://unpkg.com/scrollreveal"></script>
+
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -16,9 +21,6 @@
     <!-- My CSS -->
     <link rel="stylesheet" href="{{ asset('css_public/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css_public/pagination.css') }}">
-
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
 
     <title>Samudera Selang</title>
 </head>

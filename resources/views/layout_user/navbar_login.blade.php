@@ -10,7 +10,7 @@
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav ml-auto">
                     <a class="nav-item nav-link active" href="#">Home<span class="sr-only">(current)</span></a>
-                    <a class="nav-item nav-link" href="#profile_page">About Us</a>
+                    <a class="nav-item nav-link" href="/keranjang">Keranjang Belanja</a>
                     <a class="nav-item nav-link" href="/contact">Persebaran Kantor</a>
                     <a class="nav-item nav-link" href="#produk_page">Produk</a>
                     <a class="nav-item nav-link btn btn_franchise" href="/franchise">Franchise</a>

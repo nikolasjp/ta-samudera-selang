@@ -64,7 +64,6 @@ class UserController extends Controller
             ->where([['login_user.id', '=', $request->session()->get('data_user')[0]['id']], ['pesanan.pesanan_id', '=', $pesanan_id]])
             ->get(['pesanan.*', 'detail_pesanan.*', 'login_user.*', 'produk.*']);
         $data = ["data" => []];
-
         foreach ($pesanan as $item) {
             array_push($data['data'], $item);
             $data['total_harga'] = $item->total_harga_barang + $item->random;
@@ -73,9 +72,10 @@ class UserController extends Controller
             $data['timestamp'] = $this->toStringDate($item->timestamp);
             $data['status_bayar'] = $item->status;
         }
+        $user = $request->session()->get('data_user');
 
         // dd($data);
-        return view('user.detail_pembelian', ['pesanan' => $data]);
+        return view('user.detail_pembelian', ['pesanan' => $data, 'user' => $user]);
     }
 
     public function riwayat(Request $request)

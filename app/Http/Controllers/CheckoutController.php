@@ -175,7 +175,7 @@ class CheckoutController extends Controller
             }
             return redirect('/keranjang');
         } else {
-            return redirect('/login')->with("gagal", "Anda harus login terlebih dahulu untuk belanja");
+            return redirect('/login')->with("gagal", "Anda harus login terlebih dahulu untuk berbelanja");
         }
     }
 

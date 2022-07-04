@@ -23,11 +23,11 @@ class UserController extends Controller
         $user = $request->session()->get('data_user');
         if ($user != null) {
             $mitra = MitraModel::all();
-            $riwayat = LoginModel::where('nama', '=', $request->session()->get('data_user')[0]['nama'])
+            $riwayat = LoginModel::where('nama', '=', $user[0]['nama'])
                 ->get();
             $belanja = KeranjangModel::join('login_user', 'keranjang_belanja.user_id', '=', 'login_user.id')
                 ->join('produk', 'keranjang_belanja.id_produk', '=', 'produk.id_produk')
-                ->where('login_user.id', '=', $request->session()->get('data_user')[0]['id'])
+                ->where('login_user.id', '=', $user[0]['id'])
                 ->get(['login_user.*', 'keranjang_belanja.*', 'produk.*']);
             $produk = UserModelProduk::all();
             $kantor = UserModel::all();
@@ -74,7 +74,6 @@ class UserController extends Controller
         }
         $user = $request->session()->get('data_user');
 
-        // dd($data);
         return view('user.detail_pembelian', ['pesanan' => $data, 'user' => $user]);
     }
 
@@ -121,31 +120,30 @@ class UserController extends Controller
 
     public function keranjang(Request $request)
     {
+        $user = $request->session()->get('data_user');
         $couriers = Courier::pluck('title', 'code');
         $provinces = Province::pluck('title', 'province_id');
-        $belanja = KeranjangModel::join('login_user', 'keranjang_belanja.user_id', '=', 'login_user.id')
+        
+        $user = $request->session()->get('data_user');
+        if ($user != null) {
+            $belanja = KeranjangModel::join('login_user', 'keranjang_belanja.user_id', '=', 'login_user.id')
             ->join('produk', 'keranjang_belanja.id_produk', '=', 'produk.id_produk')
-            ->where('login_user.id', '=', $request->session()->get('data_user')[0]['id'])
+            ->where('login_user.id', '=', $user[0]['id'])
             ->get(['login_user.*', 'keranjang_belanja.*', 'produk.*']);
 
         // dd($belanja);
-        $total_harga = [];
-        foreach ($belanja as $item) {
-            array_push($total_harga, intval($item->harga) * intval($item->quantity));
-        }
-        $user = $request->session()->get('data_user');
-        if ($user != null) {
+            $total_harga = [];
+            foreach ($belanja as $item) {
+                array_push($total_harga, intval($item->harga) * intval($item->quantity));
+            }
             if (count($belanja) >= 1) {
                 return view('user.keranjang_belanja', ['belanja' => $belanja, 'user' => $user, 'total_harga' => array_sum($total_harga)], compact('couriers', 'provinces'));
             } else {
                 return view('user.keranjang_empty', ['belanja' => $belanja, 'user' => $user]);
             }
         } else {
-            if (count($belanja) >= 1) {
-                return view('user.keranjang_belanja', ['belanja' => $belanja, 'total_harga' => array_sum($total_harga)], compact('couriers', 'provinces'));
-            } else {
-                return redirect('/login')->with("gagal", "Anda harus login terlebih dahulu untuk melihat keranjang belanja");
-            }
+            return redirect('/login')->with("gagal", "Anda harus login terlebih dahulu untuk melihat keranjang belanja");
+            
         }
     }
 

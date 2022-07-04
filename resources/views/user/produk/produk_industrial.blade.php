@@ -56,7 +56,7 @@
                 @foreach ($produk_hose as $produk_hose)
                 <div class="col-lg-3 tagline-delay">
                     <div class="card_produk_hose mt-5">
-                        <img src="{{ asset('/storage/'.$produk_hose->img_produk)}}" alt="{{$produk_hose->nama_produk}}">
+                        <img width="100" src="{{ asset('/storage/'.$produk_hose->img_produk)}}" alt="{{$produk_hose->nama_produk}}">
                         <h5>{{$produk_hose->nama_produk}}</h5>
                         <div class="card-produk-hover text-center">
                             <h5>Marutex</h5>

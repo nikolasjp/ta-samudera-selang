@@ -186,7 +186,7 @@ class CheckoutController extends Controller
         ]);
         $validateData['img_pembelian'] = $request->file('img_pembelian')->store('gambar-upload-pembelian');
         PesananModel::where('pesanan_id', $pesanan_id)->update($validateData);
-
-        return view('user.terimakasih');
+        $user = $request->session()->get('data_user');
+        return view('user.terimakasih', ['user' => $user]);
     }
 }

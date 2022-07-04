@@ -8,6 +8,7 @@ use App\Models\LoginModel;
 use App\Models\ProdukDetailModel;
 use App\Models\UserModel;
 use App\Models\MitraModel;
+use App\Models\PesananModel;
 use App\Models\UserModelProduk;
 use Illuminate\Http\Request;
 use Kavist\RajaOngkir\Facades\RajaOngkir;
@@ -19,70 +20,103 @@ class UserController extends Controller
 {
     public function index(Request $request)
     {
-        $data = $request->session()->all();
-        $data2 = $request->session()->get('data_user');
-
-        if ($data == null) {
+        $user = $request->session()->get('data_user');
+        if ($user != null) {
             $mitra = MitraModel::all();
             $riwayat = LoginModel::where('nama', '=', $request->session()->get('data_user')[0]['nama'])
                 ->get();
-            return view('user.tampil_riwayat', ['mitra' => $mitra, 'riwayat' => $riwayat]);
+            $belanja = KeranjangModel::join('login_user', 'keranjang_belanja.user_id', '=', 'login_user.id')
+                ->join('produk', 'keranjang_belanja.id_produk', '=', 'produk.id_produk')
+                ->where('login_user.id', '=', $request->session()->get('data_user')[0]['id'])
+                ->get(['login_user.*', 'keranjang_belanja.*', 'produk.*']);
+            $produk = UserModelProduk::all();
+            $kantor = UserModel::all();
+            $produk_hydraulic = UserModelProduk::where('kategori', 'LIKE', 'Hydraulic Hose')->get();
+            $produk_industrial = UserModelProduk::where('kategori', 'LIKE', 'Industrial Hose')->get();
+            $produk_pipa = UserModelProduk::where('kategori', 'LIKE', 'Pipa Nozel')->get();
+            $produk_felxible = UserModelProduk::where('kategori', 'LIKE', 'Flexible Stainless')->get();
+            $produk_assesoris = UserModelProduk::where('kategori', 'LIKE', 'Assesories')->get();
+            return view('user.tampil_riwayat', ['mitra' => $mitra, 'riwayat' => $riwayat, 'kantor' => $kantor, 'produk' => $produk, 'produk_hydraulic' => $produk_hydraulic, 'produk_industrial' => $produk_industrial, 'produk_pipa' => $produk_pipa, 'produk_felxible' => $produk_felxible, 'produk_assesoris' => $produk_assesoris, 'belanja' => $belanja]);
         } else {
-            if ($data2 = $data2) {
-                $mitra = MitraModel::all();
-                $riwayat = LoginModel::where('nama', '=', $request->session()->get('data_user')[0]['nama'])
-                    ->get();
-                return view('user.tampil_riwayat', ['mitra' => $mitra, 'riwayat' => $riwayat]);
-            } else {
-                $request->session()->flush();
-                $mitra = MitraModel::all();
-                return view('user.tampil', ['mitra' => $mitra]);
-            }
+            $mitra = MitraModel::all();
+            $produk = UserModelProduk::all();
+            $kantor = UserModel::all();
+            $produk_hydraulic = UserModelProduk::where('kategori', 'LIKE', 'Hydraulic Hose')->get();
+            $produk_industrial = UserModelProduk::where('kategori', 'LIKE', 'Industrial Hose')->get();
+            $produk_pipa = UserModelProduk::where('kategori', 'LIKE', 'Pipa Nozel')->get();
+            $produk_felxible = UserModelProduk::where('kategori', 'LIKE', 'Flexible Stainless')->get();
+            $produk_assesoris = UserModelProduk::where('kategori', 'LIKE', 'Assesories')->get();
+            return view('user.tampil', ['mitra' => $mitra, 'kantor' => $kantor, 'produk' => $produk, 'produk_hydraulic' => $produk_hydraulic, 'produk_industrial' => $produk_industrial, 'produk_pipa' => $produk_pipa, 'produk_felxible' => $produk_felxible, 'produk_assesoris' => $produk_assesoris]);
         }
     }
 
-    public function detail_pembelian(Request $request)
+    private function toStringDate($timestamp)
     {
-        $belanja = KeranjangModel::join('login_user', 'keranjang_belanja.user_id', '=', 'login_user.id')
-            ->join('produk', 'keranjang_belanja.id_produk', '=', 'produk.id_produk')
-            ->where('login_user.id', '=', $request->session()->get('data_user')[0]['id'])
-            ->get(['login_user.*', 'keranjang_belanja.*', 'produk.*']);
-        // $total_harga = DetailPesananModel::join('login_user', 'detail_pembelian.user_id', '=', 'login_user.id')
-        //     ->where('login_user.id', '=', $request->session()->get('data_user')[0]['id'])
-        //     ->get(['login_user.*', 'detail_pembelian.*']);
-        // dd($belanja);
-        $total_harga = [];
-        foreach ($belanja as $item) {
-            array_push($total_harga, intval($item->harga) * intval($item->quantity));
+        $date = date('d M Y g:i', strtotime($timestamp));
+        return $date . ' WIB';
+    }
+
+    public function detail_pembelian(Request $request, $pesanan_id)
+    {
+        $pesanan = DetailPesananModel::join('pesanan', 'detail_pesanan.pesanan_id', '=', 'pesanan.pesanan_id')
+            ->join('produk', 'detail_pesanan.barang_id', '=', 'produk.id_produk')
+            ->join('login_user', 'pesanan.user_id', '=', 'login_user.id')
+            ->where([['login_user.id', '=', $request->session()->get('data_user')[0]['id']], ['pesanan.pesanan_id', '=', $pesanan_id]])
+            ->get(['pesanan.*', 'detail_pesanan.*', 'login_user.*', 'produk.*']);
+        $data = ["data" => []];
+
+        foreach ($pesanan as $item) {
+            array_push($data['data'], $item);
+            $data['total_harga'] = $item->total_harga_barang + $item->random;
+            $data['invoice'] = $item->invoice;
+            $data['nama'] = $item->nama;
+            $data['timestamp'] = $this->toStringDate($item->timestamp);
+            $data['status_bayar'] = $item->status;
         }
-        return view('user.detail_pembelian', ['belanja' => $belanja, 'total_harga' => array_sum($total_harga)]);
+
+        // dd($data);
+        return view('user.detail_pembelian', ['pesanan' => $data]);
     }
 
     public function riwayat(Request $request)
     {
-        $user_id = $request->session()->get('data_user')[0]['id'];
         $pesanan = DetailPesananModel::join('pesanan', 'detail_pesanan.pesanan_id', '=', 'pesanan.pesanan_id')
             ->join('produk', 'detail_pesanan.barang_id', '=', 'produk.id_produk')
             ->join('login_user', 'pesanan.user_id', '=', 'login_user.id')
             ->where('login_user.id', '=', $request->session()->get('data_user')[0]['id'])
             ->get(['pesanan.*', 'detail_pesanan.*', 'login_user.*', 'produk.*']);
         $data = [];
-        function toStringDate($timestamp)
-        {
-            $date = date('d M Y g:i', strtotime($timestamp));
-            return $date . ' WIB';
-        }
-        foreach ($pesanan as $item) {
-            if (array_key_exists($item->pesanan_id, $data)) {
-                array_push($data[$item->pesanan_id]['data'], $item);
-            } else {
-                $data[$item->pesanan_id]['data'] = array($item);
-                $data[$item->pesanan_id]['total_harga'] = $item->total_harga_barang + $item->random;
-                $data[$item->pesanan_id]['invoice'] = $item->invoice;
-                $data[$item->pesanan_id]['timestamp'] = toStringDate($item->timestamp);
+        if (count($pesanan) == 0) {
+            $user = $request->session()->get('data_user');
+            return view('user.riwayat_empty', ['user' => $user]);
+        } else {
+            foreach ($pesanan as $item) {
+                if (array_key_exists($item->pesanan_id, $data)) {
+                    array_push($data[$item->pesanan_id]['data'], $item);
+                } else {
+                    $data[$item->pesanan_id]['data'] = array($item);
+                    $data[$item->pesanan_id]['total_harga'] = $item->total_harga_barang + $item->random;
+                    $data[$item->pesanan_id]['invoice'] = $item->invoice;
+                    $data[$item->pesanan_id]['status'] = $item->status;
+                    $data[$item->pesanan_id]['nama'] = $item->nama;
+                    $data[$item->pesanan_id]['pesanan_id'] = $item->pesanan_id;
+                    $data[$item->pesanan_id]['kurir'] = $item->kurir;
+                    $data[$item->pesanan_id]['nomor_resi'] = $item->nomor_resi;
+                    $data[$item->pesanan_id]['timestamp'] = $this->toStringDate($item->timestamp);
+                }
             }
+            $user = $request->session()->get('data_user');
+            return view('user.riwayat', ['pesanan' => $data, 'user' => $user]);
         }
-        return view('user.riwayat', ['pesanan' => $data]);
+    }
+
+    public function selesai($pesanan_id)
+    {
+        $checkout = PesananModel::find($pesanan_id);
+        $checkout->update([
+            'status' => 'Selesai'
+        ]);
+        return redirect('/riwayat');
     }
 
     public function keranjang(Request $request)
@@ -93,18 +127,25 @@ class UserController extends Controller
             ->join('produk', 'keranjang_belanja.id_produk', '=', 'produk.id_produk')
             ->where('login_user.id', '=', $request->session()->get('data_user')[0]['id'])
             ->get(['login_user.*', 'keranjang_belanja.*', 'produk.*']);
-        // $total_harga = DetailPesananModel::join('login_user', 'detail_pembelian.user_id', '=', 'login_user.id')
-        //     ->where('login_user.id', '=', $request->session()->get('data_user')[0]['id'])
-        //     ->get(['login_user.*', 'detail_pembelian.*']);
+
         // dd($belanja);
         $total_harga = [];
         foreach ($belanja as $item) {
             array_push($total_harga, intval($item->harga) * intval($item->quantity));
         }
-        if (count($belanja) >= 1) {
-            return view('user.keranjang_belanja', ['belanja' => $belanja, 'total_harga' => array_sum($total_harga)], compact('couriers', 'provinces'));
+        $user = $request->session()->get('data_user');
+        if ($user != null) {
+            if (count($belanja) >= 1) {
+                return view('user.keranjang_belanja', ['belanja' => $belanja, 'user' => $user, 'total_harga' => array_sum($total_harga)], compact('couriers', 'provinces'));
+            } else {
+                return view('user.keranjang_empty', ['belanja' => $belanja, 'user' => $user]);
+            }
         } else {
-            return redirect('/')->with("gagal", "Belum ada riwayat pembelanjaan");
+            if (count($belanja) >= 1) {
+                return view('user.keranjang_belanja', ['belanja' => $belanja, 'total_harga' => array_sum($total_harga)], compact('couriers', 'provinces'));
+            } else {
+                return redirect('/login')->with("gagal", "Anda harus login terlebih dahulu untuk melihat keranjang belanja");
+            }
         }
     }
 
@@ -141,14 +182,14 @@ class UserController extends Controller
     {
         $produk_hose = UserModelProduk::where('kategori', 'LIKE', 'Flexible Stainless')->get();
         $artikel = ProdukDetailModel::where('kategori_artikel', 'LIKE', 'Flexible Stainless')->get();
-        return view('user.produk.produk_industrial', ['produk_hose' => $produk_hose], ['artikel' => $artikel]);
+        return view('user.produk.produk_felxible', ['produk_hose' => $produk_hose], ['artikel' => $artikel]);
     }
 
     public function produk_assesoris()
     {
         $produk_hose = UserModelProduk::where('kategori', 'LIKE', 'Assesories')->get();
         $artikel = ProdukDetailModel::where('kategori_artikel', 'LIKE', 'Assesories')->get();
-        return view('user.produk.produk_industrial', ['produk_hose' => $produk_hose], ['artikel' => $artikel]);
+        return view('user.produk.produk_assesoris', ['produk_hose' => $produk_hose], ['artikel' => $artikel]);
     }
 
     // Franchise
@@ -168,9 +209,14 @@ class UserController extends Controller
     }
 
     // Login
-    public function login()
+    public function login(Request $request)
     {
-        return view('user.login');
+        $user = $request->session()->get('data_user');
+        if ($user != null) {
+            return redirect('/keranjang');
+        } else {
+            return view('user.login');
+        }
     }
 
     public function login_user(Request $request)
@@ -219,7 +265,7 @@ class UserController extends Controller
 
     public function logout_user(Request $request)
     {
-        $request->session()->flush();
+        $request->session()->forget('data_user');
         return redirect('/login');
     }
 }

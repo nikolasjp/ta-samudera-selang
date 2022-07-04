@@ -21,6 +21,7 @@
     <!-- My CSS -->
     <link rel="stylesheet" href="{{ asset('css_public/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css_public/pagination.css') }}">
+    <link rel="stylesheet" href="{{ asset('css_public/keranjang.css') }}">
 
     <title>Samudera Selang</title>
 </head>

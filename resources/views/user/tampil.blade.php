@@ -24,7 +24,7 @@
                         <!-- Info 1 -->
                         <div class="col-lg tagline-core-left">
                             <img src="{{ asset('gambar/gambar/office 1.png')}}" alt="office">
-                            <h4>10+</h4>
+                            <h4>{{sizeof($kantor)}}</h4>
                             <p>Toko & Kantor</p>
                         </div>
                         <!-- Info 2 -->
@@ -36,7 +36,7 @@
                         <!-- Info 3 -->
                         <div class="col-lg tagline-core-right">
                             <img src="{{ asset('gambar/gambar/delivery-box 1.png')}}" alt="product">
-                            <h4>500+</h4>
+                            <h4>{{sizeof($produk)}}</h4>
                             <p>Product</p>
                         </div>
                     </div>
@@ -58,7 +58,6 @@
                     <p id="produk_page" class="tagline-core-left-delay">PT. Samudera Selang yang berpusat di kota Cirebon Jawa Barat adalah perusahaan yang bergerak di bidang Import dan supply kebutuhan sparepart untuk pertambangan, industri minyak dan gas serta otomotif.</p>
                     <p class="tagline-core-left-delay">Untuk meningkatkan pelayanan yang maksimal, kami hadir diberbagai kota antara lain Cirebon, Tegal, Semarang, Jogya, Cilacap, Tasikmalaya, Purwokerto, Klaten dengan didukung SDM yang mumpuni serta pelayanan 24 jam, dengan dukungan produk bergaransi.
                     </p>
-                    <a class="tagline-delay" href="">Lihat Selangkapnya</a>
                 </div>
             </div>
         </div>
@@ -82,7 +81,7 @@
                         <div class="card-produk-hover text-center">
                             <h5>Hydraulic Hose</h5>
                             <p class="mt-3">Adalah selang hydraulic dengan tekanan tinggi maupun rendah.</p>
-                            <p>30 Produk</p>
+                            <p>{{sizeof($produk_hydraulic)}} Produk</p>
                             <a href="/produk_hose" class="hyper-link"></a>
                         </div>
                     </div>
@@ -99,7 +98,7 @@
                         <div class="card-produk-hover text-center">
                             <h5>Industrial Hose</h5>
                             <p class="mt-3">Adalah produk pipa flexible yang mana diaplikasikan untuk rem angin, rem oli serta sambungan pipa.</p>
-                            <p>30 Produk</p>
+                            <p>{{sizeof($produk_industrial)}} Produk</p>
                             <a href="/produk_industrial" class="hyper-link"></a>
                         </div>
                     </div>
@@ -116,7 +115,7 @@
                         <div class="card-produk-hover text-center">
                             <h5>Pipa Nozel / Injection</h5>
                             <p class="mt-3">Adalah produk pipa untuk diaplikasikan pada unit engine berbahan solar.</p>
-                            <p>30 Produk</p>
+                            <p>{{sizeof($produk_pipa)}} Produk</p>
                             <a href="/produk_pipa_nozel" class="hyper-link"></a>
                         </div>
                     </div>
@@ -133,7 +132,7 @@
                         <div class="card-produk-hover text-center">
                             <h5>Felxible Stainless</h5>
                             <p class="mt-3">Adalah salah satu produk kami dengan system pembikinan pressing, welding and holding.</p>
-                            <p>30 Produk</p>
+                            <p>{{sizeof($produk_felxible)}} Produk</p>
                             <a href="/produk_felxible" class="hyper-link"></a>
                         </div>
                     </div>
@@ -150,13 +149,15 @@
                         <div class="card-produk-hover text-center">
                             <h5>Assesoris Heavy Duty</h5>
                             <p class="mt-3">Adalah serangkaian produk import untuk melengkapi penanggan sekalian untuk melakukan pembelanjaan</p>
-                            <p>30 Produk</p>
+                            <p>{{sizeof($produk_assesoris)}} Produk</p>
                             <a href="/produk_assesoris" class="hyper-link"></a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+    </div>
     </div>
 
     <!-- Hadir di berbagai kota -->

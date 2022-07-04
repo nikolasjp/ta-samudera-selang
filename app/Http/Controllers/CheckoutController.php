@@ -16,44 +16,12 @@ use Kavist\RajaOngkir\Facades\RajaOngkir;
 
 class CheckoutController extends Controller
 {
-    public function index($id_produk)
+    public function beli_produk($id_produk)
     {
         $produk_hose = UserModelProduk::find($id_produk);
         $couriers = Courier::pluck('title', 'code');
         $provinces = Province::pluck('title', 'province_id');
-        return view('user.beli_produk.beli_hose', ['produk_hose' => $produk_hose], compact('couriers', 'provinces'));
-    }
-
-    public function beli_industrial($id_produk)
-    {
-        $produk_hose = UserModelProduk::find($id_produk);
-        $couriers = Courier::pluck('title', 'code');
-        $provinces = Province::pluck('title', 'province_id');
-        return view('user.beli_produk.beli_industrial', ['produk_hose' => $produk_hose], compact('couriers', 'provinces'));
-    }
-
-    public function beli_pipa($id_produk)
-    {
-        $produk_hose = UserModelProduk::find($id_produk);
-        $couriers = Courier::pluck('title', 'code');
-        $provinces = Province::pluck('title', 'province_id');
-        return view('user.beli_produk.beli_pipa', ['produk_hose' => $produk_hose], compact('couriers', 'provinces'));
-    }
-
-    public function beli_felxible($id_produk)
-    {
-        $produk_hose = UserModelProduk::find($id_produk);
-        $couriers = Courier::pluck('title', 'code');
-        $provinces = Province::pluck('title', 'province_id');
-        return view('user.beli_produk.beli_felxible', ['produk_hose' => $produk_hose], compact('couriers', 'provinces'));
-    }
-
-    public function beli_heavy_duty($id_produk)
-    {
-        $produk_hose = UserModelProduk::find($id_produk);
-        $couriers = Courier::pluck('title', 'code');
-        $provinces = Province::pluck('title', 'province_id');
-        return view('user.beli_produk.beli_heavy_duty', ['produk_hose' => $produk_hose], compact('couriers', 'provinces'));
+        return view('user.beli_produk.beli_produk', ['produk_hose' => $produk_hose], compact('couriers', 'provinces'));
     }
 
     public function getCities($id)
@@ -143,15 +111,22 @@ class CheckoutController extends Controller
             'courier' => $request->courier,
         ])->get();
 
+
         $timestamp = now()->setTimezone('Asia/Jakarta');
         $invoceNumber = generateInvoice($timestamp);
+        $alamat = City::join('provinces', 'cities.province_id', '=', 'provinces.province_id')
+            ->where('cities.city_id', '=', $request->city_destination)
+            ->get(['provinces.title as province', 'cities.title as city',])->first();
         $pesanan_id = PesananModel::insertGetId([
             'user_id' => $user_id = $request->session()->get('data_user')[0]['id'],
             'harga_pengiriman' => $cost[0]['costs'][0]['cost'][0]['value'],
-            'detail_alamat' => $_POST['detail_alamat'],
+            'detail_alamat' => $_POST['detail_alamat'] . ' ' . $alamat->province . ' ' . $alamat->city,
             'total_harga_barang' => array_sum($harga_pesanan),
             'random' => mt_rand(100, 999),
             'status' => 'Belum Terbayar',
+            'img_pembelian' => '',
+            'nomor_resi' => '',
+            'kurir' => $request->courier . '.png',
             'invoice' => $invoceNumber,
             'timestamp' => $timestamp->toDate()
         ]);
@@ -166,7 +141,9 @@ class CheckoutController extends Controller
             ]);
         }
 
-        return redirect('/detail_pembelian');
+        $belanja = KeranjangModel::where('user_id', '=', $user_id)->delete();
+
+        return redirect('/detail_pembelian/' . $pesanan_id);
     }
 
     public function keranjang_belanja(Request $request, $id_produk)
@@ -217,5 +194,16 @@ class CheckoutController extends Controller
         //     $tambah_pesanan_detail->update($validateDataDetail);
         // }
         return redirect('/keranjang');
+    }
+
+    public function bukti_pembayaran(Request $request, $pesanan_id)
+    {
+        $validateData = ([
+            'status' => 'Sedang Diproses',
+        ]);
+        $validateData['img_pembelian'] = $request->file('img_pembelian')->store('gambar-upload-pembelian');
+        PesananModel::where('pesanan_id', $pesanan_id)->update($validateData);
+
+        return view('user.terimakasih');
     }
 }

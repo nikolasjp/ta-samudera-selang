@@ -9,7 +9,7 @@
         <div class="container-xl">
             <h4 class="card-title text-center m-30">Riwayat Pembelian</h4>
             @foreach ($pesanan as $key => $item)
-            <div id="accordion{{$key}}" class="mt-3">
+            <div id="accordion{{$key}}" class="mb-3">
                 <div class="card-1">
                     <div class="card-header" data-toggle="collapse" data-target="#collapse{{$key}}" aria-expanded="true" aria-controls="collapse{{$key}}" id="head{{$key}}">
                         <div class="d-flex">
@@ -19,31 +19,92 @@
                             <p class="mb-0 ml-4">
                                 Tanggal Transaksi : {{$item['timestamp']}}
                             </p>
+                            <p class="mb-0 ml-auto">
+                                Status : {{$item['status']}}
+                            </p>
                             <p class="mb-0 rotate ml-auto">
                                 <i class="fas fa-chevron-right"></i>
                             </p>
                         </div>
                     </div>
                     <div id="collapse{{$key}}" class="collapse" aria-labelledby="head{{$key}}" data-parent="#accordion{{$key}}">
-                        <div class="card-body-1 d-flex">
-                            <div class="card card-2 p-3">
-                                <h5>Detail Pembelian Barang</h5>
-                                <!-- <p>Barang 1 :</p> -->
-                                @foreach ($item['data'] as $barang)
+                        <div class="card-body-1">
+                            <div class="card card-keranjang">
                                 <div class="d-flex">
-                                    <p>Nama Barang : {{$barang->nama_produk}} |</p>
-                                    <p class="ml-1">Quantity : {{$barang->quantity}} |</p>
-                                    <p class="ml-1">Harga : Rp. {{number_format($barang->harga,0,',','.')}} |</p>
-                                    <p class="ml-1">Total Harga : Rp. {{number_format($barang->total_harga,0,',','.')}} |</p>
+                                    <h5>Detail Pembelian Barang</h5>
+                                    <a class="ml-auto" href="/detail_pembelian/{{$item['pesanan_id']}}">Detail</a>
                                 </div>
-                                @endforeach
+                                <table id="myTable" class="table table-striped bg-white">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th>No</th>
+                                            <th class="w-220">Picture</th>
+                                            <th class="w-220">Nama Barang</th>
+                                            <th>Quantity</th>
+                                            <th>Harga</th>
+                                            <th>Total Harga</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($item['data'] as $barang)
+                                        <?php
+                                        $i = 1;
+                                        $total_harga_all = $item['total_harga'] + $barang->harga_pengiriman;
+                                        ?>
+                                        <tr>
+                                            <td>{{$i++}}</td>
+                                            <td><img width="100" src="{{ asset('/storage/'.$barang->img_produk)}}" alt="{{$barang->img_produk}}"></td>
+                                            <td>{{$barang->nama_produk}}</td>
+                                            <td>{{$barang->quantity}} Meter</td>
+                                            <td>Rp. {{number_format($barang->harga,0,',','.')}}</td>
+                                            <td>Rp. {{number_format($barang->total_harga,0,',','.')}}</td>
+                                        </tr>
+                                        @endforeach
+                                        <tr style="font-weight: bold;">
+                                            <td colspan="4"></td>
+                                            <td>Kode Unik :</td>
+                                            <td>Rp. {{number_format($barang->random,0,',','.')}}</td>
+                                        </tr>
+                                        <tr style="font-weight: bold;">
+                                            <td colspan="4"></td>
+                                            <td>Ongkos Kirim :</td>
+                                            <td>Rp. {{number_format($barang->harga_pengiriman,0,',','.')}}</td>
+                                        </tr>
+                                        <tr style="font-weight: bold;">
+                                            <td colspan="4"></td>
+                                            <td>Total Harga :</td>
+                                            <td>Rp. {{number_format($total_harga_all,0,',','.')}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
-
-                            <div class="card card-2 p-3">
-                                <h5>Rincian Pembayaran</h5>
-                                <p>Metode Pembayaran : Bank BCA</p>
-                                <p>Total Harga : Rp. {{number_format($item['total_harga'],0,',','.')}}</p>
+                            @if ($item['status'] == 'Dikirim')
+                            <?php
+                            $kurir = $item['kurir'];
+                            ?>
+                            <div class="card card-keranjang">
+                                <h5>Pengiriman</h5>
+                                <p>Nomor Resi : {{$item['nomor_resi']}}</p>
+                                @if ($item['kurir'] == 'tiki.png')
+                                <p>Jasa Pengiriman : <img width="80" src="{{ asset('/gambar/kurir/'.$kurir)}}" alt=""></p>
+                                <a target="_blank" href="https://www.tiki.id/id/tracking">Lacak Paket Anda</a>
+                                @endif
+                                @if ($item['kurir'] == 'jne.png')
+                                <p>Jasa Pengiriman : <img width="80" src="{{ asset('/gambar/kurir/'.$kurir)}}" alt=""></p>
+                                <a target="_blank" href="https://www.jne.co.id/id/tracking/trace">Lacak Paket Anda</a>
+                                @endif
+                                @if ($item['kurir'] == 'pos.png')
+                                <p>Jasa Pengiriman : <img width="80" src="{{ asset('/gambar/kurir/'.$kurir)}}" alt=""></p>
+                                <a target="_blank" href="https://www.posindonesia.co.id/id/tracking">Lacak Paket Anda</a>
+                                @endif
+                                @if ($item['status'] == 'Dikirim')
+                                <form method="POST" action="/selesai/{{$item['pesanan_id']}}">
+                                    @csrf
+                                    <button type="submit" style="width: max-content;" class="btn btn-primary">Barang Telah Diterima</button>
+                                </form>
+                                @endif
                             </div>
+                            @endif
                         </div>
                     </div>
                 </div>

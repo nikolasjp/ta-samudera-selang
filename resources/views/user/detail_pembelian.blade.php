@@ -8,38 +8,92 @@
     <div class="mt-5">
         <div class="container-xl">
             <div class="card-body">
-                <h4 class="card-title text-center m-30">Keranjang Checkout</h4>
-                <div class="table-responsive m-t-40">
-                    <table id="myTable" class="table table-bordered table-striped">
-                        <thead class="thead-light">
-                            <tr>
-                                <th>No</th>
-                                <th class="w-220">Nama Barang</th>
-                                <th>Quantity</th>
-                                <th>Harga</th>
-                                <th>Perintah</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            $i = 1;
-                            ?>
-                            @foreach ($pesanan as $key => $item)
-                            {{ @csrf_field() }}
-                            <tr>
-                                <td>{{$i++}}</td>
-                                <td>{{$item->nama_produk}}</td>
-                                <td>{{$item->quantity}}</td>
-                                <td>{{$item->harga}}</td>
-                                <td style="width: 100px;"> <a href="/delete_pesanan_keranjang/{{$item->id}}" onclick="return confirm('Apakah anda yakin untuk menghapus data ini ?')" class="btn btn-danger"> Hapus </a></td>
-                            </tr>
-                            @endforeach
-                            <td colspan="3">Total Harga :</td>
-                            <td colspan="2">{{$total_harga}}</td>
-                        </tbody>
-                    </table>
+                <div class="d-flex">
+                    <h4 class="card-title text-center m-30">Keranjang Checkout</h4>
+                    <p class="ml-auto">Tanggal Transaksi : {{$pesanan['timestamp']}}</p>
                 </div>
-                <button style="margin-top: 12px;" type="submit" class="btn btn_franchise">Beli Produk</button>
+                <div class="card card-keranjang">
+                    <h5 class="card-title m-30"><i class="fas fa-cart-plus"></i> List Barang</h5>
+                    <div class="table-responsive m-t-40">
+                        <table id="myTable" class="table table-striped">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>No</th>
+                                    <th class="w-220">Nama Barang</th>
+                                    <th>Quantity</th>
+                                    <th>Harga</th>
+                                    <th>Total Harga</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                $i = 1;
+                                ?>
+                                @foreach ($pesanan['data'] as $key => $item)
+                                {{ @csrf_field() }}
+                                <tr>
+                                    <td>{{$i++}}</td>
+                                    <td>{{$item['nama_produk']}}</td>
+                                    <td>{{$item['quantity']}}</td>
+                                    <td>Rp. {{number_format($item['harga'],0,',','.')}}</td>
+                                    <td>Rp. {{number_format($item['total_harga'],0,',','.')}}</td>
+                                </tr>
+                                @endforeach
+                                <tr>
+                                    <td colspan="3"></td>
+                                    <td style="font-weight: bold;">Kode Unik :</td>
+                                    <td>Rp. {{number_format($item['random'],0,',','.')}}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3"></td>
+                                    <td style="font-weight: bold;">Total Harga Barang :</td>
+                                    <td>Rp. {{number_format($pesanan['total_harga'],0,',','.')}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <?php
+                $kurir = $item['kurir'];
+                $total_harga_all = $pesanan['total_harga'] + $item['harga_pengiriman'] ?>
+                <div class="card card-keranjang">
+                    <div class="row align-items-center">
+                        <div class="col-lg-9">
+                            <h5 class="card-title m-30">Detail Pembayaran</h5>
+                            <p>Invoice : {{$item['invoice']}}</p>
+                            <p>Harga Pengiriman : Rp. {{number_format($item['harga_pengiriman'],0,',','.')}}</p>
+                            <p>Jasa Pengiriman : <img width="60" src="{{ asset('/gambar/kurir/'.$kurir)}}" alt=""></p>
+                            <p>Detail Alamat Pembeli : {{$item['detail_alamat']}}</p>
+                            <p style="font-weight: bold;">Total Harga : Rp. {{number_format($total_harga_all,0,',','.')}}</p>
+                            @if ($pesanan['status_bayar'] == 'Belum Terbayar')
+                            <p style="font-weight: bold; color: red;">Pembayaran dapat dilakukan melalui QR yang terdapat pada gambar !! -----></p>
+                            @endif
+                        </div>
+                        @if ($pesanan['status_bayar'] == 'Belum Terbayar')
+                        <div class="col-lg-3 text-right">
+                            <img src="{{ asset('/gambar/qr_bca.png')}}">
+                        </div>
+                        @endif
+                    </div>
+                </div>
+                @if ($pesanan['status_bayar'] == 'Belum Terbayar')
+                <form action="/bukti_pembayaran/{{$item['pesanan_id']}}" enctype="multipart/form-data" method="POST">
+                    @csrf
+                    <div class="card card-keranjang">
+                        <h5>Kirim Bukti Pembayaran Disini</h5>
+                        <div class="form-group">
+                            <input class="form-control height" type="file" name="img_pembelian" required>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-right mb-2">
+                        <a class="mr-2" href="/riwayat">Kembali</a>
+                        <button type="submit" class="btn btn_franchise">Sudah Bayar</button>
+                    </div>
+                </form>
+                @endif
+                @if ($pesanan['status_bayar'] == 'Sedang Diproses' or $pesanan['status_bayar'] == 'Terbayar')
+                <a class="btn btn-primary mb-3 float-right" href="/riwayat">Kembali</a>
+                @endif
             </div>
         </div>
 

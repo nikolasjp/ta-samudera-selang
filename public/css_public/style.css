@@ -164,6 +164,20 @@ border-color: #136fd1;
     border-radius: 0 !important;
 }
 
+.red-info{
+    color: white;
+    position: absolute;
+    top: 5px;
+    right: 0px;
+    background: red;
+    border-radius: 50%;
+    width: 16px;
+}
+
+.height{
+    height: max-content !important;
+}
+
 .card-header{
     background-color: white;
 }

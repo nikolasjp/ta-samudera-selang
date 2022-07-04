@@ -16,7 +16,7 @@
                         <ul class="dropdown-user">
                             <div class="dw-user-box">
                                 <div class="u-text">
-                                    <p><?php $random = mt_rand(100, 999); ?>{{$random}}</p>
+                                    <p>{{$user[0]->nama}}</p>
                                     <p class="text-muted"></p><a style="color: white;" href="/riwayat" class="btn btn-rounded btn-warning btn-sm"><i class="fas fa-cart-plus"></i> Riwayat Pembelian</a>
                                     @if(Session::has("gagal"))
                                     <p style="color:red;margin:0;"> {{Session::get("gagal")}}</p>

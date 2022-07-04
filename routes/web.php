@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Artisan;
 Route::post('/login_admin', [AdminController::class, 'login_admin']);
 Route::get('/login_admin', [AdminController::class, 'login_admin']);
 Route::get('/admin', [AdminController::class, 'admin']);
-Route::get('/logout', [AdminController::class, 'logout']);
+Route::get('/logout', [AdminController::class, 'logout_admin']);
 // Kantor
 Route::get('/tambah_kantor', [AdminController::class, 'tambah_kantor']);
 Route::post('/add', [AdminController::class, 'add']);
@@ -41,16 +41,18 @@ Route::get('/ubah_pesanan/{id}', [AdminController::class, 'ubah_pesanan']);
 Route::post('/edit_pembelian/{id}', [AdminController::class, 'edit_pembelian']);
 Route::get('/delete_pesanan/{id}', [AdminController::class, 'delete_pesanan']);
 Route::get('/verif/{id}', [AdminController::class, 'verifikasi']);
+// Pengiriman
+Route::post('/add_pengiriman/{pesanan_id}', [AdminController::class, 'add_pengiriman']);
 
 // CheckoutController
-Route::get('/beli_hose/{id_produk}', [CheckoutController::class, 'index']);
-Route::get('/beli_industrial/{id_produk}', [CheckoutController::class, 'beli_industrial']);
+Route::get('/beli_produk/{id_produk}', [CheckoutController::class, 'beli_produk']);
 Route::get('/province/{id}/cities', [CheckoutController::class, 'getCities']);
 Route::post('/test_ongkir/{id_produk}', [CheckoutController::class, 'checkout']);
 Route::post('/keranjang_belanja/{id_produk}', [CheckoutController::class, 'keranjang_belanja']);
 Route::post('/apply', [CheckoutController::class, 'checkout']);
 Route::get('/confirm', [CheckoutController::class, 'confirm_pesanan']);
 Route::post('/checkout_keranjang/{id}', [CheckoutController::class, 'checkout_keranjang']);
+Route::post('/bukti_pembayaran/{pesanan_id}', [CheckoutController::class, 'bukti_pembayaran']);
 
 // UserController
 // Login Register Logout User
@@ -63,12 +65,13 @@ Route::get('/logout_user', [UserController::class, 'logout_user']);
 // User Index
 Route::get('/', [UserController::class, 'index']);
 Route::get('/riwayat', [UserController::class, 'riwayat']);
-Route::get('/detail_pembelian', [UserController::class, 'detail_pembelian']);
+Route::get('/detail_pembelian/{id_pesanan}', [UserController::class, 'detail_pembelian']);
 Route::get('/contact', [UserController::class, 'contact']);
 Route::get('/franchise', [UserController::class, 'franchise']);
 Route::get('/tampil', [UserController::class, 'tampil']);
 Route::get('/keranjang', [UserController::class, 'keranjang']);
 Route::get('/delete_pesanan_keranjang/{id}', [UserController::class, 'delete_pesanan']);
+Route::post('/selesai/{pesanan_id}', [UserController::class, 'selesai']);
 
 // User Produk
 Route::get('/produk_hose', [UserController::class, 'produk_hose']);

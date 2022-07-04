@@ -9,43 +9,32 @@ use App\Models\UserModel;
 use App\Models\MitraModel;
 use App\Models\ProdukDetailModel;
 use App\Models\DetailPesananModel;
+use App\Models\Pengiriman;
+use App\Models\PesananModel;
 
 class AdminController extends Controller
 {
     // Login Admin
     public function login_admin(Request $request)
     {
-        if ($request->isMethod('post')) {
-            $data = LoginAdminModel::where([
-                'nama' => $request->nama,
-                'password' => $request->password,
-            ])->get();
-            if (count($data) == 1) {
-                $allData = AdminController::get_all_data($data);
-                $request->session()->put('nama', $request->nama);
-                $request->session()->put('password', $request->password);
-                return view('admin_website.admin', $allData);
-            } else {
-                return redirect('/admin');
-            }
+        $data = LoginAdminModel::where([
+            'nama' => $request->nama,
+            'password' => $request->password,
+        ])->get();
+        if (count($data) == 1) {
+            $allData = AdminController::get_all_data($data);
+            $request->session()->put('nama', $request->nama);
+            $request->session()->put('password', $request->password);
+            return redirect('/admin');
         } else {
-            $nama = ($request->session()->get('nama'));
-            $password = ($request->session()->get('password'));
-            $data = LoginAdminModel::where([
-                'nama' => $nama,
-                'password' => $password,
-            ])->get();
-            if (count($data) == 1) {
-                $user = UserModel::all();
-                $user1 = UserModelProduk::all();
-                $produk_detail = ProdukDetailModel::all();
-                $mitra = MitraModel::all();
-                $checkout = DetailPesananModel::all();
-                return view('admin_website.admin', ['data' => $data, 'user' => $user, 'mitra' => $mitra, 'produk_detail' => $produk_detail, 'checkout' => $checkout], ['user1' => $user1]);
-            } else {
-                return redirect('/admin');
-            }
+            return redirect('/admin');
         }
+    }
+
+    private function toStringDate($timestamp)
+    {
+        $date = date('d M Y g:i', strtotime($timestamp));
+        return $date . ' WIB';
     }
 
     public function get_all_data($data)
@@ -54,9 +43,28 @@ class AdminController extends Controller
         $user1 = UserModelProduk::all();
         $produk_detail = ProdukDetailModel::all();
         $mitra = MitraModel::all();
-        $checkout = DetailPesananModel::all();
-
-        return  ['data' => $data, 'user' => $user, 'mitra' => $mitra, 'produk_detail' => $produk_detail, 'checkout' => $checkout, 'user1' => $user1];
+        $pesanan = DetailPesananModel::join('pesanan', 'detail_pesanan.pesanan_id', '=', 'pesanan.pesanan_id')
+            ->join('produk', 'detail_pesanan.barang_id', '=', 'produk.id_produk')
+            ->join('login_user', 'pesanan.user_id', '=', 'login_user.id')
+            ->get(['pesanan.*', 'detail_pesanan.*', 'produk.*', 'login_user.*']);
+        $data = [];
+        foreach ($pesanan as $item) {
+            if (array_key_exists($item->pesanan_id, $data)) {
+                array_push($data[$item->pesanan_id]['data'], $item);
+            } else {
+                $data[$item->pesanan_id]['data'] = array($item);
+                $data[$item->pesanan_id]['total_harga'] = $item->total_harga_barang + $item->random;
+                $data[$item->pesanan_id]['invoice'] = $item->invoice;
+                $data[$item->pesanan_id]['status'] = $item->status;
+                $data[$item->pesanan_id]['pesanan_id'] = $item->pesanan_id;
+                $data[$item->pesanan_id]['nama'] = $item->nama;
+                $data[$item->pesanan_id]['img_pembelian'] = $item->img_pembelian;
+                $data[$item->pesanan_id]['timestamp'] = $this->toStringDate($item->timestamp);
+            }
+            // dd($data);
+        }
+        // dd($data);
+        return  ['data' => $data, 'user' => $user, 'mitra' => $mitra, 'produk_detail' => $produk_detail, 'pesanan' => $data, 'user1' => $user1];
     }
 
     public function admin(Request $request)
@@ -76,9 +84,9 @@ class AdminController extends Controller
     }
 
     // Logout Admin
-    public function logout(Request $request)
+    public function logout_admin(Request $request)
     {
-        $request->session()->flush();
+        $request->session()->forget('nama');
         return redirect('/login_admin');
     }
 
@@ -300,12 +308,39 @@ class AdminController extends Controller
         return redirect('/admin');
     }
 
-    //Checkout
-    public function verifikasi($id)
+    // Tambah Pengiriman
+    public function tambah_pengiriman(Request $request)
     {
-        $checkout = DetailPesananModel::find($id);
+        $nama = ($request->session()->get('nama'));
+        $password = ($request->session()->get('password'));
+        $data = LoginAdminModel::where([
+            'nama' => $nama,
+            'password' => $password,
+        ])->get();
+        if (count($data) == 1) {
+            return view('admin_website.tambah_pengiriman');
+        } else {
+            return view('admin_website.login_admin');
+        }
+    }
+
+    public function add_pengiriman(Request $request, $pesanan_id)
+    {
+        $checkout = PesananModel::find($pesanan_id);
+        $validateData = ([
+            'nomor_resi' => $request->nomor_resi,
+            'status' => 'Dikirim',
+        ]);
+        $checkout->update($validateData);
+        return redirect('/admin');
+    }
+
+    //Checkout
+    public function verifikasi($pesanan_id)
+    {
+        $checkout = PesananModel::find($pesanan_id);
         $checkout->update([
-            'status' => 'TERBAYAR'
+            'status' => 'Terbayar'
         ]);
         return redirect('/admin');
     }

@@ -10,10 +10,12 @@
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav ml-auto">
                     <a class="nav-item nav-link active" href="#">Home<span class="sr-only">(current)</span></a>
-                    <a class="nav-item nav-link" href="/keranjang">Keranjang Belanja</a>
                     <a class="nav-item nav-link" href="/contact">Persebaran Kantor</a>
                     <a class="nav-item nav-link" href="#produk_page">Produk</a>
                     <a class="nav-item nav-link btn btn_franchise" href="/franchise">Franchise</a>
+                    <a style="font-size: 20px;" class="nav-item nav-link mr-2" href="/keranjang"><i class="fas fa-cart-plus">
+                            <p class="red-info">{{sizeof($belanja)}}</p>
+                        </i></a>
                     <a class="nav-item" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../assets/images/avatar_user.png" alt="user" class="profile-pic" /></a>
                     <div class="dropdown-menu dropdown-menu-right scale-up">
                         <ul class="dropdown-user">

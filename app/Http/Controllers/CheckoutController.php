@@ -153,47 +153,30 @@ class CheckoutController extends Controller
         $produk_hose = UserModelProduk::find($id_produk);
         $quantity = $_POST['quantity'];
         $cek_pesanan_detail = KeranjangModel::where('user_id', $user_id)->where('id_produk', $produk_hose->id_produk)->first();
-
-        if (empty($cek_pesanan_detail)) {
-            KeranjangModel::create([
-                'user_id' => $user_id,
-                'id_produk'  => $produk_hose->id_produk,
-                'berat' => $produk_hose->berat * $quantity,
-                'quantity' => $quantity,
-                'harga' => $produk_hose->harga * $quantity,
-            ])->get();
+        if ($user_id != null) {
+            if (empty($cek_pesanan_detail)) {
+                KeranjangModel::create([
+                    'user_id' => $user_id,
+                    'id_produk'  => $produk_hose->id_produk,
+                    'berat' => $produk_hose->berat * $quantity,
+                    'quantity' => $quantity,
+                    'harga' => $produk_hose->harga * $quantity,
+                ])->get();
+            } else {
+                $update_pesanan = KeranjangModel::where('id_produk', $produk_hose->id_produk)->get();
+                $quantity_sekarang = $update_pesanan[0]->quantity;
+                $quantity_total = $quantity + $quantity_sekarang;
+                $validateData = ([
+                    'quantity' => $quantity_total,
+                    'harga' => $produk_hose->harga * $quantity_total,
+                ]);
+                $tambah_pesanan = KeranjangModel::where('id_produk', $produk_hose->id_produk);
+                $tambah_pesanan->update($validateData);
+            }
+            return redirect('/keranjang');
         } else {
-            $update_pesanan = KeranjangModel::where('id_produk', $produk_hose->id_produk)->get();
-            $quantity_sekarang = $update_pesanan[0]->quantity;
-            $quantity_total = $quantity + $quantity_sekarang;
-            $validateData = ([
-                'quantity' => $quantity_total,
-                'harga' => $produk_hose->harga * $quantity_total,
-            ]);
-            $tambah_pesanan = KeranjangModel::where('id_produk', $produk_hose->id_produk);
-            $tambah_pesanan->update($validateData);
+            return redirect('/login')->with("gagal", "Anda harus login terlebih dahulu untuk belanja");
         }
-        // $cek_pesanan_harga = DetailPesananModel::where('user_id', $user_id)->first();
-        // if (empty($cek_pesanan_harga)) {
-        //     DetailPesananModel::create([
-        //         'user_id' => $user_id,
-        //         'nama_user' => $nama_user,
-        //         'total_harga' => $produk_hose->harga * $quantity,
-        //         'berat' => $produk_hose->berat * $quantity,
-        //     ])->get();
-        // } else {
-        //     // Harga Total
-        //     $total_harga = DetailPesananModel::where('user_id', $user_id)->get();
-        //     $harga_sekarang = $total_harga[0]->total_harga;
-        //     $berat_sekarang = $total_harga[0]->berat;
-        //     $validateDataDetail = ([
-        //         'total_harga' => $produk_hose->harga * $quantity + $harga_sekarang,
-        //         'berat' => $produk_hose->berat + $berat_sekarang,
-        //     ]);
-        //     $tambah_pesanan_detail = DetailPesananModel::where('user_id', $user_id);
-        //     $tambah_pesanan_detail->update($validateDataDetail);
-        // }
-        return redirect('/keranjang');
     }
 
     public function bukti_pembayaran(Request $request, $pesanan_id)

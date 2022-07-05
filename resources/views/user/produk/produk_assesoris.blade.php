@@ -59,7 +59,7 @@
                         <img width="100" src="{{ asset('/storage/'.$produk_hose->img_produk)}}" alt="{{$produk_hose->nama_produk}}">
                         <h5>{{$produk_hose->nama_produk}}</h5>
                         <div class="card-produk-hover text-center">
-                            <h5>Marutex</h5>
+                            <h5>{{$produk_hose->nama_produk}}</h5>
                             <p class="mt-3">{{$produk_hose->detail_produk}}</p>
                             <p>Stok {{$produk_hose->status_stok}}</p>
                             <a href="/beli_produk/{{$produk_hose->id_produk}}" class="hyper-link"></a>

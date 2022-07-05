@@ -123,8 +123,6 @@ class UserController extends Controller
         $user = $request->session()->get('data_user');
         $couriers = Courier::pluck('title', 'code');
         $provinces = Province::pluck('title', 'province_id');
-        
-        $user = $request->session()->get('data_user');
         if ($user != null) {
             $belanja = KeranjangModel::join('login_user', 'keranjang_belanja.user_id', '=', 'login_user.id')
             ->join('produk', 'keranjang_belanja.id_produk', '=', 'produk.id_produk')

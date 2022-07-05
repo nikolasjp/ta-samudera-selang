@@ -181,12 +181,15 @@ class CheckoutController extends Controller
 
     public function bukti_pembayaran(Request $request, $pesanan_id)
     {
+        $timestamp = now()->setTimezone('Asia/Jakarta');
         $validateData = ([
             'status' => 'Sedang Diproses',
+            'timestamp' => $timestamp->toDate(),
         ]);
         $validateData['img_pembelian'] = $request->file('img_pembelian')->store('gambar-upload-pembelian');
         PesananModel::where('pesanan_id', $pesanan_id)->update($validateData);
         $user = $request->session()->get('data_user');
         return view('user.terimakasih', ['user' => $user]);
     }
+    
 }

@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Kavist\RajaOngkir\Facades\RajaOngkir;
 use App\Models\Courier;
 use App\Models\Province;
+use DateTime;
 use Illuminate\Auth\Events\Login;
 
 class UserController extends Controller
@@ -69,7 +70,7 @@ class UserController extends Controller
             $data['total_harga'] = $item->total_harga_barang + $item->random;
             $data['invoice'] = $item->invoice;
             $data['nama'] = $item->nama;
-            $data['timestamp'] = $this->toStringDate($item->timestamp);
+            $data['timestamp'] = $item->timestamp;
             $data['status_bayar'] = $item->status;
         }
         $user = $request->session()->get('data_user');
@@ -101,7 +102,7 @@ class UserController extends Controller
                     $data[$item->pesanan_id]['pesanan_id'] = $item->pesanan_id;
                     $data[$item->pesanan_id]['kurir'] = $item->kurir;
                     $data[$item->pesanan_id]['nomor_resi'] = $item->nomor_resi;
-                    $data[$item->pesanan_id]['timestamp'] = $this->toStringDate($item->timestamp);
+                    $data[$item->pesanan_id]['timestamp'] = $item->timestamp;
                 }
             }
             $user = $request->session()->get('data_user');
@@ -111,10 +112,12 @@ class UserController extends Controller
 
     public function selesai($pesanan_id)
     {
-        $checkout = PesananModel::find($pesanan_id);
-        $checkout->update([
-            'status' => 'Selesai'
+        $timestamp = now()->setTimezone('Asia/Jakarta');
+        $validateData = ([
+            'timestamp' => $timestamp->toDate(),
+            'status' => 'Selesai',
         ]);
+        PesananModel::where('pesanan_id', $pesanan_id)->update($validateData);
         return redirect('/riwayat');
     }
 

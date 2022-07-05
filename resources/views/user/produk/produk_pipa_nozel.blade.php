@@ -61,7 +61,7 @@
                         <div class="card-produk-hover text-center">
                             <h5>{{$produk_hose->nama_produk}}</h5>
                             <p class="mt-3">{{$produk_hose->detail_produk}}</p>
-                            <p>Stok {{$produk_hose->status_stok}}</p>
+                            <p>{{$produk_hose->status_stok}}</p>
                             <a href="/beli_produk/{{$produk_hose->id_produk}}" class="hyper-link"></a>
                         </div>
                     </div>

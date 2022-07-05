@@ -40,7 +40,7 @@ class CheckoutController extends Controller
                 'originType' => "city",
                 'destination' => $request->city_destination,
                 'destinationType' => "city",
-                'weight' => $_POST['quantity'] * $produk_hose->berat * 1000,
+                'weight' => $_POST['quantity'] * $produk_hose->berat,
                 'courier' => $request->courier,
             ])->get();
             $user_id = $request->session()->get('data_user')[0]['id'];
@@ -107,7 +107,7 @@ class CheckoutController extends Controller
             'originType' => "city",
             'destination' => $request->city_destination,
             'destinationType' => "city",
-            'weight' => array_sum($total_berat) * 1000,
+            'weight' => array_sum($total_berat),
             'courier' => $request->courier,
         ])->get();
 
@@ -148,12 +148,12 @@ class CheckoutController extends Controller
 
     public function keranjang_belanja(Request $request, $id_produk)
     {
-        $user_id = $request->session()->get('data_user')[0]['id'];
-        $nama_user = $request->session()->get('data_user')[0]['nama'];
+        $user = $request->session()->get('data_user');
         $produk_hose = UserModelProduk::find($id_produk);
         $quantity = $_POST['quantity'];
-        $cek_pesanan_detail = KeranjangModel::where('user_id', $user_id)->where('id_produk', $produk_hose->id_produk)->first();
-        if ($user_id != null) {
+        if ($user != null) {
+            $user_id = $request->session()->get('data_user')[0]['id'];
+            $cek_pesanan_detail = KeranjangModel::where('user_id', $user_id)->where('id_produk', $produk_hose->id_produk)->first();
             if (empty($cek_pesanan_detail)) {
                 KeranjangModel::create([
                     'user_id' => $user_id,
@@ -181,12 +181,15 @@ class CheckoutController extends Controller
 
     public function bukti_pembayaran(Request $request, $pesanan_id)
     {
+        $timestamp = now()->setTimezone('Asia/Jakarta');
         $validateData = ([
             'status' => 'Sedang Diproses',
+            'timestamp' => $timestamp->toDate(),
         ]);
         $validateData['img_pembelian'] = $request->file('img_pembelian')->store('gambar-upload-pembelian');
         PesananModel::where('pesanan_id', $pesanan_id)->update($validateData);
         $user = $request->session()->get('data_user');
         return view('user.terimakasih', ['user' => $user]);
     }
+    
 }

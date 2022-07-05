@@ -10,6 +10,7 @@ use App\Models\MitraModel;
 use App\Models\ProdukDetailModel;
 use App\Models\DetailPesananModel;
 use App\Models\Pengiriman;
+use DateTime;
 use App\Models\PesananModel;
 
 class AdminController extends Controller
@@ -33,7 +34,7 @@ class AdminController extends Controller
 
     private function toStringDate($timestamp)
     {
-        $date = date('d M Y g:i', strtotime($timestamp));
+        $date = $timestamp;
         return $date . ' WIB';
     }
 
@@ -308,40 +309,27 @@ class AdminController extends Controller
         return redirect('/admin');
     }
 
-    // Tambah Pengiriman
-    public function tambah_pengiriman(Request $request)
-    {
-        $nama = ($request->session()->get('nama'));
-        $password = ($request->session()->get('password'));
-        $data = LoginAdminModel::where([
-            'nama' => $nama,
-            'password' => $password,
-        ])->get();
-        if (count($data) == 1) {
-            return view('admin_website.tambah_pengiriman');
-        } else {
-            return view('admin_website.login_admin');
-        }
-    }
-
     public function add_pengiriman(Request $request, $pesanan_id)
     {
-        $checkout = PesananModel::find($pesanan_id);
+        $timestamp = now()->setTimezone('Asia/Jakarta');
         $validateData = ([
+            'timestamp' => $timestamp->toDate(),
             'nomor_resi' => $request->nomor_resi,
             'status' => 'Dikirim',
         ]);
-        $checkout->update($validateData);
+        PesananModel::where('pesanan_id', $pesanan_id)->update($validateData);
         return redirect('/admin');
     }
 
     //Checkout
     public function verifikasi($pesanan_id)
     {
-        $checkout = PesananModel::find($pesanan_id);
-        $checkout->update([
-            'status' => 'Terbayar'
+        $timestamp = now()->setTimezone('Asia/Jakarta');
+        $validateData = ([
+            'status' => 'Terbayar',
+            'timestamp' => $timestamp->toDate(),
         ]);
+        PesananModel::where('pesanan_id', $pesanan_id)->update($validateData);
         return redirect('/admin');
     }
 
@@ -349,17 +337,6 @@ class AdminController extends Controller
     {
         $checkout = DetailPesananModel::find($id);
         return view('admin_website.ubah_pembelian', ['checkout' => $checkout]);
-    }
-
-    public function edit_pembelian(Request $request, $id)
-    {
-        $validateData = $request->validate([
-            'quantity' => 'required',
-            'detail_alamat' => 'required'
-        ]);
-        $checkout = DetailPesananModel::find($id);
-        $checkout->update($validateData);
-        return redirect('/admin');
     }
 
     public function delete_pesanan($id)

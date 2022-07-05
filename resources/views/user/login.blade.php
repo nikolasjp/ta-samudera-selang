@@ -41,8 +41,7 @@
 				@if(Session::has("gagal"))
 				<p style="color:red;margin:0;"> {{Session::get("gagal")}}</p>
 				@endif
-				<a href="#">Forgot your password?</a>
-				<button>Sign In</button>
+				<button style="margin-top: 10px;">Sign In</button>
 				<a href="/">Kembali</a>
 			</form>
 		</div>

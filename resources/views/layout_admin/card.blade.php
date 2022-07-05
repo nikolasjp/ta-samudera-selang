@@ -50,10 +50,10 @@
             <div class="col-lg-3">
                 <div class="card card-ukuran">
                     <div class="card-body card-background-4 analytics-info">
-                        <h3 class="card-title">TOTAL ARTIKEL</h3>
+                        <h3 class="card-title">TOTAL TRANSAKSI</h3>
                         <div class="stats-row">
                             <div class="right stat-item">
-                                <h1 class="text-success text-right">{{sizeof($produk_detail)}}</h1>
+                                <h1 class="text-success text-right">{{sizeof($pesanan)}}</h1>
                                 <h4 class="text-right">Artikel Tersedia</h4>
                             </div>
                         </div>

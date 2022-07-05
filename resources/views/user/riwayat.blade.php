@@ -100,7 +100,7 @@
                                 @if ($item['status'] == 'Dikirim')
                                 <form method="POST" action="/selesai/{{$item['pesanan_id']}}">
                                     @csrf
-                                    <button type="submit" style="width: max-content;" class="btn btn-primary">Barang Telah Diterima</button>
+                                    <button onclick="return confirm('Apakah anda yakin untuk menyelesaikan pesanan ini?')" type="submit" style="width: max-content;" class="btn btn-primary mt-2">Barang Telah Diterima</button>
                                 </form>
                                 @endif
                             </div>

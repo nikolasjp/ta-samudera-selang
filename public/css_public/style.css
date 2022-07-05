@@ -1,19 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;500;700&display=swap');
 
-html{
+html {
     scroll-behavior: smooth;
 }
 
-body{
+body {
     font-family: 'Roboto', sans-serif;
 }
 
-h1{
+h1 {
     font-size: 32px;
     font-weight: 500;
 }
 
-p{
+p {
     font-size: 16px;
     font-weight: 300;
 }
@@ -26,11 +26,30 @@ p{
     font-weight: 400;
 }
 
-.navbar-light .navbar-nav .active>.nav-link, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .show>.nav-link {
+.navbar-light .navbar-nav .active>.nav-link,
+.navbar-light .navbar-nav .nav-link.active,
+.navbar-light .navbar-nav .nav-link.show,
+.navbar-light .navbar-nav .show>.nav-link {
     color: white !important;
 }
 
-.box{
+.paging-card {
+    text-align: right;
+    display: none;
+}
+
+.left-paging,
+.right-paging {
+    background-color: #0056b3;
+    color: white;
+    height: 40px;
+    width: 40px;
+    padding: 12px 15px;
+    border-radius: 50%;
+    margin: 10px;
+}
+
+.box {
     z-index: -9999;
     position: absolute;
     top: 0;
@@ -39,16 +58,16 @@ p{
     background-color: #101820;
 }
 
-.p-20{
+.p-20 {
     padding: 150px 0px 100px 0px;
 }
 
-.text-kantor-pusat{
+.text-kantor-pusat {
     font-weight: bold;
 }
 
 /* Jumbotron */
-.jumbotron{
+.jumbotron {
     margin-bottom: 0px;
 }
 
@@ -67,7 +86,7 @@ p{
     text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
-.btn_see_all{
+.btn_see_all {
     width: 180px !important;
     height: 42px !important;
     background: #02468f;
@@ -76,12 +95,12 @@ p{
     padding: 10px;
 }
 
-.btn_see_all:hover{
+.btn_see_all:hover {
     background: rgb(0, 0, 0);
     color: white;
 }
 
-.btn_see_produk{
+.btn_see_produk {
     width: 180px !important;
     height: 42px !important;
     background: #02468f;
@@ -90,16 +109,17 @@ p{
     padding: 10px;
 }
 
-.btn_see_produk:hover{
+.btn_see_produk:hover {
     background: white;
 }
-.pad-4{
+
+.pad-4 {
     margin-bottom: 10px;
     flex: 0 0 33.333333%;
     max-width: 15.333333%;
 }
 
-.profile-pic{
+.profile-pic {
     width: 40px;
     border-radius: 100%;
 }
@@ -109,25 +129,25 @@ p{
     left: auto;
 }
 
-.dropdown-user{
+.dropdown-user {
     margin: 0;
     padding: 10px;
 }
 
-.btn-primary{
-background-color: #136fd1;
-border-color: #136fd1;
+.btn-primary {
+    background-color: #136fd1;
+    border-color: #136fd1;
 }
 
-.card-body{
+.card-body {
     padding: 10px 10px 10px 0px;
 }
 
-.text-beli h5{
+.text-beli h5 {
     font-size: 16px;
 }
 
-.btn_franchise{
+.btn_franchise {
     width: max-content !important;
     height: 42px !important;
     background: #02468f;
@@ -136,25 +156,25 @@ border-color: #136fd1;
     padding: 10px;
 }
 
-.rotate{
+.rotate {
     -moz-transition: all 0.5s linear;
     -webkit-transition: all 0.5s linear;
     transition: all 0.5s linear;
 }
 
-.rotate.down{
+.rotate.down {
     -ms-transform: rotate(90deg);
     -moz-transform: rotate(90deg);
     -webkit-transform: rotate(90deg);
     transform: rotate(90deg);
 }
 
-.card-body-1{
+.card-body-1 {
     background-color: white;
     padding: 20px;
 }
 
-.card-2{
+.card-2 {
     height: max-content !important;
     width: max-content !important;
     max-width: max-content !important;
@@ -164,7 +184,7 @@ border-color: #136fd1;
     border-radius: 0 !important;
 }
 
-.red-info{
+.red-info {
     color: white;
     position: absolute;
     top: 5px;
@@ -174,15 +194,15 @@ border-color: #136fd1;
     width: 16px;
 }
 
-.height{
+.height {
     height: max-content !important;
 }
 
-.card-header{
+.card-header {
     background-color: white;
 }
 
-.btn_franchise:hover{
+.btn_franchise:hover {
     color: black !important;
     background: white;
 }
@@ -221,19 +241,20 @@ border-color: #136fd1;
 .card img {
     border-radius: 20px 20px 0px 0px;
 }
+
 /* Akhir Persebaran Perusahaan */
 
-.body-profile{
+.body-profile {
     width: 100%;
     height: max-content;
     background-color: white;
     border-radius: 30px 30px 0px 0px;
-    margin-top: -40px; 
+    margin-top: -40px;
     margin-bottom: 50px;
     padding: 50px;
 }
 
-.body-perusahaan{
+.body-perusahaan {
     width: 100%;
     height: max-content;
     background-color: #101820;
@@ -241,30 +262,30 @@ border-color: #136fd1;
 }
 
 .nav-active {
-    background-color:#101820; 
+    background-color: #101820;
     transition: all 0.3s ease-out;
-  }
+}
 
-  .nav-fixed{
+.nav-fixed {
     transition: all 0.3s ease-in;
-  }
+}
 
-  .mt-7{
-    margin-top: 7.5rem!important;
-  }
+.mt-7 {
+    margin-top: 7.5rem !important;
+}
 
 /* List Produk Dashboard */
-.body-produk{
+.body-produk {
     background-color: #02468f;
     padding: 2px 0px 36px 0px;
 }
 
-.body-produk h1{
+.body-produk h1 {
     font-weight: 600;
     color: white;
 }
 
-.container .xl{
+.container .xl {
     padding: 0px 220px 0px 220px !important;
 }
 
@@ -277,7 +298,7 @@ border-color: #136fd1;
     height: 200px;
     background-color: #e6e1e1;
     border-radius: 30px 8px 30px 8px;
-    font-size: 16px;   
+    font-size: 16px;
     transition: all 0.3s ease;
     position: relative;
     display: flex;
@@ -287,9 +308,9 @@ border-color: #136fd1;
     cursor: pointer;
     transition: all 0.3s ease;
     overflow: hidden;
- }
+}
 
- .icon {
+.icon {
     margin: 0 auto;
     width: 100%;
     height: 100px;
@@ -303,20 +324,20 @@ border-color: #136fd1;
     transition: all 0.8s ease;
     background-position: 0px;
     background-size: 200px;
- }
+}
 
- .card-produk-text p{
-     margin-top: 12px;
-     font-weight: 500;
- }
+.card-produk-text p {
+    margin-top: 12px;
+    font-weight: 500;
+}
 
- .card-produk:hover .card-produk-hover{
-    bottom:0;
-  }
+.card-produk:hover .card-produk-hover {
+    bottom: 0;
+}
 
- .card-produk-hover{
+.card-produk-hover {
     color: white;
-    background-color:  #0069D9;
+    background-color: #0069D9;
     position: absolute;
     width: 100%;
     bottom: -100%;
@@ -326,14 +347,14 @@ border-color: #136fd1;
     box-sizing: border-box;
     border-radius: 30px 8px 30px 8px;
     transition: all 0.5s;
- }
+}
 
- /* Penyebarang kota */
- .container-kota{
+/* Penyebarang kota */
+.container-kota {
     padding: 0px 220px 0px 220px;
- }
- 
-.box-kota{
+}
+
+.box-kota {
     background-image: url("/gambar/kota/background-lokasi.png");
     background-repeat: no-repeat;
     width: 100%;
@@ -342,7 +363,7 @@ border-color: #136fd1;
     padding: 30px;
 }
 
-.card-kota{
+.card-kota {
     position: relative;
     display: flex;
     background-color: white;
@@ -359,7 +380,7 @@ border-color: #136fd1;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
-.card-kota:hover .card-produk-hover{
+.card-kota:hover .card-produk-hover {
     bottom: 0;
 }
 
@@ -381,7 +402,7 @@ border-color: #136fd1;
 }
 
 /* Hose */
-.body-hose{
+.body-hose {
     position: relative;
     background-color: #1C1C1C;
     width: 100%;
@@ -389,15 +410,15 @@ border-color: #136fd1;
     padding: 150px 0px 150px 0px;
 }
 
-.text-hose{
+.text-hose {
     color: white;
 }
 
-.padding{
+.padding {
     padding: 50px;
 }
 
-.card_produk_beli{
+.card_produk_beli {
     position: relative;
     padding: 40px;
     text-align: center;
@@ -412,7 +433,7 @@ border-color: #136fd1;
     overflow: hidden;
 }
 
-.card_produk_hose{
+.card_produk_hose {
     position: relative;
     padding: 40px;
     text-align: center;
@@ -428,16 +449,16 @@ border-color: #136fd1;
     overflow: hidden;
 }
 
-.card_produk_hose:hover .card-produk-hover{
-    bottom:0;
-  }
+.card_produk_hose:hover .card-produk-hover {
+    bottom: 0;
+}
 
-.card_produk_hose img{
+.card_produk_hose img {
     justify-self: center;
 }
 
 /* Konsultasi */
-.box-konsultasi{
+.box-konsultasi {
     width: 100%;
     height: max-content;
     padding: 50px;
@@ -446,7 +467,7 @@ border-color: #136fd1;
     color: white;
 }
 
-.btn-konsultasi{
+.btn-konsultasi {
     width: 264px !important;
     height: 49px !important;
     background: white;
@@ -455,29 +476,29 @@ border-color: #136fd1;
     padding: 12px;
 }
 
-.btn-konsultasi:hover{
+.btn-konsultasi:hover {
     background: #0069D9;
     color: white;
 }
 
-.profile_samudera{
+.profile_samudera {
     border-radius: 30px 8px 30px 8px;
 }
 
 /* Mitra Sejati */
-.body_mitra{
+.body_mitra {
     width: 100%;
     height: max-content;
     padding: 50px;
     background: #101820;
     color: white;
-} 
+}
 
-.text_mitra h5{
+.text_mitra h5 {
     font-weight: 300;
 }
 
-.btn_mitra{
+.btn_mitra {
     width: 180px !important;
     height: 42px !important;
     background: #02468f;
@@ -486,82 +507,86 @@ border-color: #136fd1;
     padding: 10px;
 }
 
-.btn_mitra:hover{
+.btn_mitra:hover {
     background: white !important;
 }
 
 /* Responsive HP */
 @media (max-width: 800px) {
-.img-user{
-    width: 0px;
-    height: 0px;
-    visibility: hidden !important;
-}
+    .img-user {
+        width: 0px;
+        height: 0px;
+        visibility: hidden !important;
+    }
 
-.box-kota{
-    background-image: url("");
-    background-color: #02468f;
-}
+    .box-kota {
+        background-image: url("");
+        background-color: #02468f;
+    }
 
-.navbar-light .navbar-toggler-icon {
-    background-image: url("/gambar/navbar.png");
-}
+    .navbar-light .navbar-toggler-icon {
+        background-image: url("/gambar/navbar.png");
+    }
 
-.mobile-center{
-    text-align: center;
-    text-align: -webkit-center;
-    place-content: center;
-}
+    .mobile-center {
+        text-align: center;
+        text-align: -webkit-center;
+        place-content: center;
+    }
 
-.row {
-    text-align: center;
-    text-align: -webkit-center;
-    place-content: center;
-}
+    .row {
+        text-align: center;
+        text-align: -webkit-center;
+        place-content: center;
+    }
 
-.btn-konsultasi{
-    margin-top: 20px;
-}
+    .btn-konsultasi {
+        margin-top: 20px;
+    }
 
-.top-mobile{
-    margin-top: 20px;
-}
+    .top-mobile {
+        margin-top: 20px;
+    }
 
-.text-hose{
-    text-align: center;
-}
+    .text-hose {
+        text-align: center;
+    }
 
-.card_produk_hose{
-width: 240px;
-}
+    .card_produk_hose {
+        width: 240px;
+    }
 
-.navbar-light .navbar-nav .nav-link:focus, .navbar-light .navbar-nav .nav-link:hover {
-color: white !important;
-}
+    .navbar-light .navbar-nav .nav-link:focus,
+    .navbar-light .navbar-nav .nav-link:hover {
+        color: white !important;
+    }
 
-.navbar-light .navbar-nav .nav-link {
-    color: white !important;
-}
-.btn_franchise{
-    align-self: center;
-}
+    .navbar-light .navbar-nav .nav-link {
+        color: white !important;
+    }
 
-.body-produk-hose{
-    background-color: #02468f;
-    width: 100%;
-    height: max-content;
-    text-align: center;
-    padding: 60px;
-    color: white;
-}
+    .btn_franchise {
+        align-self: center;
+    }
+
+    .body-produk-hose {
+        background-color: #02468f;
+        width: 100%;
+        height: max-content;
+        text-align: center;
+        padding: 60px;
+        color: white;
+    }
 }
 
 /* Desktop */
 @media (min-width: 992px) {
+
     .navbar-brand,
     .nav-link {
         color: rgb(211, 211, 211) !important;
     }
+
     .nav-link {
         position: relative;
         padding-bottom: 8px;
@@ -569,19 +594,19 @@ color: white !important;
         margin-right: 50px;
     }
 
-    .nav-link::after{
-      position: absolute;
-      bottom: 0;
-      margin-left: auto;
-      margin-right: auto;
-      left: 0;
-      right: 0;
-      content: "";
-      width: 0;
-      height: 3px;
-      background-color: var(--primary);
-      transition: width 0.4s ease-out;
-      border-radius: 30px;
+    .nav-link::after {
+        position: absolute;
+        bottom: 0;
+        margin-left: auto;
+        margin-right: auto;
+        left: 0;
+        right: 0;
+        content: "";
+        width: 0;
+        height: 3px;
+        background-color: var(--primary);
+        transition: width 0.4s ease-out;
+        border-radius: 30px;
     }
 
     .nav-link:hover::after {
@@ -608,20 +633,21 @@ color: white !important;
         font-size: 36px;
     }
 
-    .img-user{
+    .img-user {
         position: absolute;
         right: 50px;
         bottom: 0;
     }
 
-    .body-produk-hose{
+    .body-produk-hose {
         background-image: url("/gambar/produk/background-1.png");
         width: 100%;
-        height: 752px;
+        height: max-content;
         padding: 60px;
         color: white;
     }
-    .beli_tab{
+
+    .beli_tab {
         background-image: url("/gambar/produk/background-2.png");
         width: 100%;
         padding: 60px;
@@ -630,30 +656,30 @@ color: white !important;
 }
 
 /* Container XL */
-@media (min-width: 576px){
+@media (min-width: 576px) {
     .container-xl {
         max-width: 540px;
     }
+}
+
+@media (min-width: 768px) {
+    .container-xl {
+        max-width: 720px;
     }
-
-    @media (min-width: 768px){
-        .container-xl {
-            max-width: 720px;
-        }
-        }
-    
-
-@media (min-width: 992px){
-.container-xl {
-    max-width: 960px;
-}
 }
 
-@media (min-width: 1200px){
+
+@media (min-width: 992px) {
+    .container-xl {
+        max-width: 960px;
+    }
+}
+
+@media (min-width: 1200px) {
     .container-xl {
         max-width: 1440px;
-        }
     }
+}
 
 .container-xl {
     width: 100%;

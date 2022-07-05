@@ -56,7 +56,7 @@
                 @csrf
                 <div class="col-lg-3 tagline-delay">
                     <div class="card_produk_beli mt-5">
-                        <img src="{{ asset('/storage/'.$produk_hose->img_produk)}}" alt="{{$produk_hose->nama_produk}}">
+                        <img width="140" src="{{ asset('/storage/'.$produk_hose->img_produk)}}" alt="{{$produk_hose->nama_produk}}">
                     </div>
                 </div>
                 <div class="col-lg-9 tagline-delay">

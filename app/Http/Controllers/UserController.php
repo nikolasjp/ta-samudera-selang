@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Kavist\RajaOngkir\Facades\RajaOngkir;
 use App\Models\Courier;
 use App\Models\Province;
+use DateTime;
 use Illuminate\Auth\Events\Login;
 
 class UserController extends Controller
@@ -23,11 +24,11 @@ class UserController extends Controller
         $user = $request->session()->get('data_user');
         if ($user != null) {
             $mitra = MitraModel::all();
-            $riwayat = LoginModel::where('nama', '=', $request->session()->get('data_user')[0]['nama'])
+            $riwayat = LoginModel::where('nama', '=', $user[0]['nama'])
                 ->get();
             $belanja = KeranjangModel::join('login_user', 'keranjang_belanja.user_id', '=', 'login_user.id')
                 ->join('produk', 'keranjang_belanja.id_produk', '=', 'produk.id_produk')
-                ->where('login_user.id', '=', $request->session()->get('data_user')[0]['id'])
+                ->where('login_user.id', '=', $user[0]['id'])
                 ->get(['login_user.*', 'keranjang_belanja.*', 'produk.*']);
             $produk = UserModelProduk::all();
             $kantor = UserModel::all();
@@ -69,12 +70,11 @@ class UserController extends Controller
             $data['total_harga'] = $item->total_harga_barang + $item->random;
             $data['invoice'] = $item->invoice;
             $data['nama'] = $item->nama;
-            $data['timestamp'] = $this->toStringDate($item->timestamp);
+            $data['timestamp'] = $item->timestamp;
             $data['status_bayar'] = $item->status;
         }
         $user = $request->session()->get('data_user');
 
-        // dd($data);
         return view('user.detail_pembelian', ['pesanan' => $data, 'user' => $user]);
     }
 
@@ -102,7 +102,7 @@ class UserController extends Controller
                     $data[$item->pesanan_id]['pesanan_id'] = $item->pesanan_id;
                     $data[$item->pesanan_id]['kurir'] = $item->kurir;
                     $data[$item->pesanan_id]['nomor_resi'] = $item->nomor_resi;
-                    $data[$item->pesanan_id]['timestamp'] = $this->toStringDate($item->timestamp);
+                    $data[$item->pesanan_id]['timestamp'] = $item->timestamp;
                 }
             }
             $user = $request->session()->get('data_user');
@@ -112,40 +112,39 @@ class UserController extends Controller
 
     public function selesai($pesanan_id)
     {
-        $checkout = PesananModel::find($pesanan_id);
-        $checkout->update([
-            'status' => 'Selesai'
+        $timestamp = now()->setTimezone('Asia/Jakarta');
+        $validateData = ([
+            'timestamp' => $timestamp->toDate(),
+            'status' => 'Selesai',
         ]);
+        PesananModel::where('pesanan_id', $pesanan_id)->update($validateData);
         return redirect('/riwayat');
     }
 
     public function keranjang(Request $request)
     {
+        $user = $request->session()->get('data_user');
         $couriers = Courier::pluck('title', 'code');
         $provinces = Province::pluck('title', 'province_id');
-        $belanja = KeranjangModel::join('login_user', 'keranjang_belanja.user_id', '=', 'login_user.id')
+        if ($user != null) {
+            $belanja = KeranjangModel::join('login_user', 'keranjang_belanja.user_id', '=', 'login_user.id')
             ->join('produk', 'keranjang_belanja.id_produk', '=', 'produk.id_produk')
-            ->where('login_user.id', '=', $request->session()->get('data_user')[0]['id'])
+            ->where('login_user.id', '=', $user[0]['id'])
             ->get(['login_user.*', 'keranjang_belanja.*', 'produk.*']);
 
         // dd($belanja);
-        $total_harga = [];
-        foreach ($belanja as $item) {
-            array_push($total_harga, intval($item->harga) * intval($item->quantity));
-        }
-        $user = $request->session()->get('data_user');
-        if ($user != null) {
+            $total_harga = [];
+            foreach ($belanja as $item) {
+                array_push($total_harga, intval($item->harga) * intval($item->quantity));
+            }
             if (count($belanja) >= 1) {
                 return view('user.keranjang_belanja', ['belanja' => $belanja, 'user' => $user, 'total_harga' => array_sum($total_harga)], compact('couriers', 'provinces'));
             } else {
                 return view('user.keranjang_empty', ['belanja' => $belanja, 'user' => $user]);
             }
         } else {
-            if (count($belanja) >= 1) {
-                return view('user.keranjang_belanja', ['belanja' => $belanja, 'total_harga' => array_sum($total_harga)], compact('couriers', 'provinces'));
-            } else {
-                return redirect('/login')->with("gagal", "Anda harus login terlebih dahulu untuk melihat keranjang belanja");
-            }
+            return redirect('/login')->with("gagal", "Anda harus login terlebih dahulu untuk melihat keranjang belanja");
+            
         }
     }
 

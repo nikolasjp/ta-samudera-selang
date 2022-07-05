@@ -50,13 +50,13 @@
     <div class="body-produk-hose">
         <h1 class="tagline-down">List Produk {{$artikel[0]->header_produk}}</h1>
         <div class="container-xl">
-            <div id="example2" class="row">
+            <div id="card_page" class="row">
                 @foreach ($produk_hose as $produk_hose)
                 <div class="col-lg-3">
                     <div class="card_produk_hose mt-5">
                         <img width="100" src="{{ asset('/storage/'.$produk_hose->img_produk)}}" alt="{{$produk_hose->nama_produk}}">
                         <h5>{{$produk_hose->nama_produk}}</h5>
-                        <p>{{$produk_hose->harga}}</p>
+                        <p>Rp. {{number_format($produk_hose->harga,0,',','.')}}</p>
                         <div class="card-produk-hover text-center">
                             <h5>{{$produk_hose->nama_produk}}</h5>
                             <p class="mt-3">{{$produk_hose->detail_produk}}</p>
@@ -67,9 +67,9 @@
                 </div>
                 @endforeach
             </div>
-            <div style="margin-top:100px;" id="example2-pagination">
-                <a id="example2-previous" href="#">&laquo; Previous</a>
-                <a id="example2-next" href="#">Next &raquo;</a>
+            <div class="paging-card" id="card_page-pagination">
+                <a id="card_page-previous" href="#"><i class="left-paging fas fa-chevron-left"></i></a>
+                <a id="card_page-next" href="#"><i class="right-paging fas fa-chevron-right"></i></a>
             </div>
         </div>
     </div>
@@ -185,13 +185,13 @@
     </footer>
     <!-- Akhir Footer -->
         <!-- Pagination -->
-        <script
+    <script
       src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.3/jquery.min.js"
     ></script>
     <script type="text/javascript" src="{{ asset('/js/jquery.paginate.js') }}"></script>
     <script type="text/javascript">
       $(document).ready(function () {
-        $("#example2").paginate({ itemsPerPage: 8 });
+        $("#card_page").paginate({ itemsPerPage: 8 });
       });
     </script>
     <!-- Navbar Scroll -->

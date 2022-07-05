@@ -41,11 +41,6 @@
                                 @endforeach
                                 <tr>
                                     <td colspan="3"></td>
-                                    <td style="font-weight: bold;">Kode Unik :</td>
-                                    <td>Rp. {{number_format($item['random'],0,',','.')}}</td>
-                                </tr>
-                                <tr>
-                                    <td colspan="3"></td>
                                     <td style="font-weight: bold;">Total Harga Barang :</td>
                                     <td>Rp. {{number_format($pesanan['total_harga'],0,',','.')}}</td>
                                 </tr>
@@ -64,6 +59,7 @@
                             <p>Harga Pengiriman : Rp. {{number_format($item['harga_pengiriman'],0,',','.')}}</p>
                             <p>Jasa Pengiriman : <img width="60" src="{{ asset('/gambar/kurir/'.$kurir)}}" alt=""></p>
                             <p>Detail Alamat Pembeli : {{$item['detail_alamat']}}</p>
+                            <p style="font-weight: bold;">Kode Unik : Rp. {{number_format($item['random'],0,',','.')}}</p>
                             <p style="font-weight: bold;">Total Harga : Rp. {{number_format($total_harga_all,0,',','.')}}</p>
                             @if ($pesanan['status_bayar'] == 'Belum Terbayar')
                             <p style="font-weight: bold; color: red;">Pembayaran dapat dilakukan melalui QR yang terdapat pada gambar !! -----></p>
@@ -82,7 +78,7 @@
                     <div class="card card-keranjang">
                         <h5>Kirim Bukti Pembayaran Disini</h5>
                         <div class="form-group">
-                            <input class="form-control height" type="file" name="img_pembelian" required>
+                            <input class="form-control height" type="file" accept="image/*" name="img_pembelian" required>
                         </div>
                     </div>
                     <div class="d-flex align-items-center justify-content-right mb-2">

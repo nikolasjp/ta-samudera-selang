@@ -27,6 +27,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title text-center mb-4">Data Checkout</h4>
+                                <?php $pesanan = array_reverse($pesanan); ?>
                                 @foreach ($pesanan as $key => $item)
                                 <div id="accordion{{$key}}" class="mb-3">
                                     <div class="card-1">
@@ -50,8 +51,8 @@
                                             <p class="mt-2">Pesanan ID : {{$item['pesanan_id']}}</p>
                                             <p>Nama Pemesan : {{$item['nama']}}</p>
                                             @if ($item['status'] == 'Sedang Diproses' or $item['status'] == 'Terbayar')
-                                            <button type="button" class="btn btn-warning mb-3" data-toggle="modal" data-target=".bd-example-modal-sm">Bukti Pembayaran</button>
-                                            <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                                            <button type="button" class="btn btn-warning mb-3" data-toggle="modal" data-target=".bd-example-modal-sm{{$key}}">Bukti Pembayaran</button>
+                                            <div class="modal fade bd-example-modal-sm{{$key}}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog modal-sm">
                                                     <div class="modal-content">
                                                         <img src="{{ asset('/storage/'.$item['img_pembelian'])}}">
@@ -100,8 +101,8 @@
                                                             @endif
                                                             @if ($barang['status'] == 'Terbayar')
                                                             <td>
-                                                            <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target=".bd-example-modal-xl">Input Nomor Resi</button>
-                                                            <div style="top: 30%;" class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                                                            <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target=".bd-example-modal-xl{{$key}}">Input Nomor Resi</button>
+                                                            <div style="top: 30%;" class="modal fade bd-example-modal-xl{{$key}}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog modal-sm">
                                                                     <div style="width: max-content;padding: 20px;" class="modal-content">
                                                                         <form method="post" action="/add_pengiriman/{{$barang->pesanan_id}}" enctype="multipart/form-data">

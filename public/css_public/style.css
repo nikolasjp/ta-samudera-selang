@@ -33,6 +33,22 @@ p {
     color: white !important;
 }
 
+.paging-card {
+    text-align: right;
+    display: none;
+}
+
+.left-paging,
+.right-paging {
+    background-color: #0056b3;
+    color: white;
+    height: 40px;
+    width: 40px;
+    padding: 12px 15px;
+    border-radius: 50%;
+    margin: 10px;
+}
+
 .box {
     z-index: -9999;
     position: absolute;
